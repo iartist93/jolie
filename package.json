@@ -8,7 +8,7 @@
     "/lib"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --watch --host localhost",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "rollup -c && yarn publish"

@@ -3,7 +3,6 @@
     class="crafter-button"
     :style="{
       ...buttonStyle,
-      $props,
     }"
   >
     <slot>Button</slot>
