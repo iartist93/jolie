@@ -1,9 +1,10 @@
 <template>
   <button
-    class="crafter-button"
     :style="{
       ...buttonStyle,
     }"
+    class="crafter-button"
+    :class="{ disabled }"
   >
     <slot>Button</slot>
   </button>
@@ -21,6 +22,7 @@ interface PropsType extends Readonly<Data> {
   size: FontSize;
   border: number;
   isFullWidth: boolean;
+  disabled: boolean;
 }
 
 export default Vue.extend({
@@ -33,7 +35,7 @@ export default Vue.extend({
       type: String as () => FontSize,
       validator: (size: string): boolean =>
         typography.fontSizes[size] !== undefined,
-      default: 'lg',
+      default: 'md',
     },
     border: {
       type: Number,
@@ -43,16 +45,25 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
-    let { size, colorScheme, border, isFullWidth } = props as PropsType;
+    let { size, colorScheme, border, isFullWidth, disabled } =
+      props as PropsType;
 
     const hasSize = Boolean(size && ButtonTheme.sizes[size]);
 
     const buttonStyle = {
       width: isFullWidth ? '100%' : 'auto',
       'border-radius': border ? `${border}px` : '0',
-      'background-color': colorScheme ? colorScheme : 'blue',
+      'background-color': disabled
+        ? 'gray'
+        : colorScheme
+        ? colorScheme
+        : 'blue',
       'font-size': typography.fontSizes[size],
       height: hasSize ? spacing[ButtonTheme.sizes[size].h] : 'auto',
       'padding-right': hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0,
@@ -82,8 +93,12 @@ export default Vue.extend({
 
   cursor: pointer;
 
-  &:hover {
+  &:hover:not(.disabled) {
     filter: brightness(90%);
+  }
+
+  &.disabled {
+    color: rgb(216, 216, 216);
   }
 }
 </style>
