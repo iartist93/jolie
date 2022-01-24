@@ -1,0 +1,25 @@
+.blank-container,
+mark {
+  margin-right: 10px;
+}
+
+.blank-content {
+  background-color: white;
+  border: 1px solid $indigo-500;
+  padding: 5px 10px;
+  border-radius: 3px;
+  color: $indigo-500;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.blank-close {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 5px;
+  position: relative;
+  top: -1px;
+  filter: saturate(70%);
+  cursor: pointer;
+}

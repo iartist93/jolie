@@ -1,17 +1,21 @@
 <template>
   <div id="app">
     <sample-component />
+    <icon-button>Icon Button default</icon-button>
+    <icon-button :size="'xl'">Icon Button xl</icon-button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import IconButton from './components/buttons/IconButton.vue';
 import SampleComponent from './components/SampleComponent.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
     SampleComponent,
+    IconButton,
   },
 });
 </script>

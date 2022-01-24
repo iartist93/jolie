@@ -1,0 +1,58 @@
+button {
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+// The default loading animation
+// brighter version
+.loading-animation-r {
+  animation: loading 1.3s infinite;
+  background: rgb(241, 241, 241);
+  background: linear-gradient(90deg, $gray-100 5%, $gray-50 20%, $gray-100 33%);
+  background-size: 500px 200px;
+  position: relative;
+}
+
+// Secondary loading animation
+// darker version
+.loading-animation-2 {
+  animation: loading 1.3s infinite;
+  background: rgb(241, 241, 241);
+  background: linear-gradient(
+    90deg,
+    $gray-800 5%,
+    $gray-900 20%,
+    $gray-800 33%
+  );
+  background-size: 500px 200px;
+  position: relative;
+}
+
+@keyframes loading {
+  from {
+    background-position: -300px 0;
+  }
+  to {
+    background-position: 300px 0;
+  }
+}
+
+// Secondary loading animation
+// on top of gray background version
+.loading-animation-3 {
+  animation: loading 1.3s infinite;
+  background: rgb(207, 205, 205);
+  background: linear-gradient(90deg, #dedede 5%, $gray-100 20%, #dedede 33%);
+  background-size: 500px 200px;
+  position: relative;
+}
+
+@keyframes loading {
+  from {
+    background-position: -300px 0;
+  }
+  to {
+    background-position: 300px 0;
+  }
+}
