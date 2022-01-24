@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <icon-button>Icon Button default</icon-button>
+    <icon-button class="mt-4">Icon Button default</icon-button>
     <!-- <icon-button :size="'xl'">Icon Button xl</icon-button> -->
     <!-- <icon-button :size="'md'">Icon Button md</icon-button> -->
   </div>

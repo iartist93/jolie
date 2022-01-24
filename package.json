@@ -2,27 +2,26 @@
   "name": "crafter-ui",
   "version": "0.1.35",
   "private": false,
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "files": [
-    "/lib"
-  ],
+  "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
   "scripts": {
     "serve": "vue-cli-service serve --watch --host localhost",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "rollup -c && yarn publish"
   },
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "files": [
+    "/lib"
+  ],
   "dependencies": {
+    "@tailwindcss/postcss7-compat": "^2.2.17",
     "@vue/composition-api": "^1.4.4",
+    "autoprefixer": "^9",
     "core-js": "^3.6.5",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "vue": "^2.6.14"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "^1.4.4",
-    "vue": "^2.6.14",
-    "vue-class-component": "^7.2.6",
-    "vue-property-decorator": "^9.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
@@ -40,7 +39,6 @@
     "eslint-plugin-vue": "^6.2.2",
     "mini-css-extract-plugin": "^2.5.2",
     "node-sass": "^7.0.1",
-    "postcss": "^8.4.5",
     "rollup": "^2.23.1",
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-postcss": "^4.0.2",
@@ -51,17 +49,23 @@
     "style-loader": "^3.3.1",
     "typescript": "^3.9.7",
     "vue-class-component": "^7.2.6",
+    "vue-cli-plugin-tailwind": "~2.2.18",
     "vue-property-decorator": "^9.1.2",
     "vue-template-compiler": "^2.6.14"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iartist93/crafter-ui.git"
+  "peerDependencies": {
+    "@vue/composition-api": "^1.4.4",
+    "vue": "^2.6.14",
+    "vue-class-component": "^7.2.6",
+    "vue-property-decorator": "^9.1.2"
   },
-  "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/iartist93/crafter-ui/issues"
   },
-  "homepage": "https://github.com/iartist93/crafter-ui#readme"
+  "homepage": "https://github.com/iartist93/crafter-ui#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iartist93/crafter-ui.git"
+  }
 }
