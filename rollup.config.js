@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import vue from 'rollup-plugin-vue';
 import { babel } from '@rollup/plugin-babel';
+import postcss from 'rollup-plugin-postcss';
 
 import packageJson from './package.json';
 
@@ -26,6 +27,7 @@ export default {
     peerDepsExternal(),
     nodeResolve({ extensions: ['.js', '.vue', '.jsx', '.json'] }),
     vue(),
+    postcss(),
     typescript(),
     babel({
       babelHelpers: 'bundled',
