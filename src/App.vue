@@ -1,23 +1,38 @@
 <template>
   <div id="app">
-    <icon-button size="sm" class="mt-4">Button sm</icon-button>
-    <icon-button class="mt-4">Button default</icon-button>
-    <icon-button size="lg" class="mt-4">Button lg</icon-button>
-    <icon-button size="xl" class="mt-4" :colorScheme="'blue'">
-      Button xl
-    </icon-button>
-    <icon-button size="lg" class="mt-4" disabled>Button Disabled</icon-button>
+    <!-- buttons -->
+    <div v-if="false" class="buttons">
+      <icon-button size="sm" class="mt-4">Button sm</icon-button>
+      <icon-button class="mt-4">Button default</icon-button>
+      <icon-button size="lg" class="mt-4">Button lg</icon-button>
+      <icon-button size="xl" class="mt-4" :colorScheme="'blue'">
+        Button xl
+      </icon-button>
+      <icon-button size="lg" class="mt-4" disabled>Button Disabled</icon-button>
+    </div>
+
+    <!-- switch -->
+    <toggle v-model="toggleChecked" />
+
+    <!-- end -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import IconButton from './components/buttons/IconButton.vue';
+import Toggle from './components/checkboxes/Toggle.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
     IconButton,
+    Toggle,
+  },
+  data() {
+    return {
+      toggleChecked: false,
+    };
   },
 });
 </script>
