@@ -22,7 +22,7 @@
 
 <script>
 import ModalBase from './ModalBase.vue';
-import IconButton from '@/components/buttons/IconButton.vue';
+import IconButton from '@/components/IconButton.vue';
 
 export default {
   components: { ModalBase, IconButton },

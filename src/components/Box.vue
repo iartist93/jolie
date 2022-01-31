@@ -6,10 +6,8 @@
 </template>
 
 <script>
-// import Vue from 'vue';
-import useSytleSystem from '../composables/useSytleSystem';
+import useStyledSystem from '../composables/useStyledSystem';
 import StyledSystem from '../mixins/StyledSystem';
-// import mixins from 'vue-typed-mixins';
 import Vue from 'vue';
 
 export default Vue.extend({
@@ -18,7 +16,7 @@ export default Vue.extend({
   props: {},
   ...StyledSystem,
   setup(props) {
-    const elementStyle = useSytleSystem(props);
+    const elementStyle = useStyledSystem(props);
     return { elementStyle };
   },
 });

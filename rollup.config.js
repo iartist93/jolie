@@ -25,7 +25,7 @@ export default {
   ],
   plugins: [
     peerDepsExternal(),
-    nodeResolve({ extensions: ['.js', '.vue', '.jsx', '.json'] }),
+    nodeResolve({ extensions: ['.js', '.vue', '.jsx', '.json', '.ts'] }),
     vue(),
     postcss(),
     typescript(),
