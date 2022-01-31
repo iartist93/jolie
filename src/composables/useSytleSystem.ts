@@ -1,4 +1,4 @@
-export interface usePropsStyleType {
+export interface useStyleSystemType {
   // colors
   color: string;
   bg: string;
@@ -43,15 +43,15 @@ export interface usePropsStyleType {
   py: number;
   pt: number;
   pr: number;
-  pl: number;
   pb: number;
+  pl: number;
   m: number;
   mx: number;
   my: number;
-  ml: number;
-  mr: number;
   mt: number;
+  mr: number;
   mb: number;
+  ml: number;
 
   // typography
   fontSize: number;
@@ -78,7 +78,7 @@ function stringOrNumber(attribute) {
   return typeof attribute === 'string' ? attribute : attribute + 'px';
 }
 
-export default function usePropsStyle(props: usePropsStyleType) {
+export default function useStyleSystem(props: useStyleSystemType) {
   const style = {};
 
   // colors
@@ -126,36 +126,36 @@ export default function usePropsStyle(props: usePropsStyleType) {
   if (props.display) style['display'] = props.display;
 
   // spacing
-  if (props.p) style['padding'] = props.p;
+  if (props.p) style['padding'] = stringOrNumber(props.p);
   if (props.px) {
-    style['padding-left'] = props.px;
-    style['padding-right'] = props.px;
+    style['padding-left'] = stringOrNumber(props.px);
+    style['padding-right'] = stringOrNumber(props.px);
   }
   if (props.py) {
-    style['padding-top'] = props.py;
-    style['padding-bottom'] = props.py;
+    style['padding-top'] = stringOrNumber(props.py);
+    style['padding-bottom'] = stringOrNumber(props.py);
   }
-  if (props.pr) style['padding-right'] = props.pr;
-  if (props.pl) style['padding-left'] = props.pl;
-  if (props.pt) style['padding-top'] = props.pt;
-  if (props.pb) style['padding-bottom'] = props.pb;
+  if (props.pr) style['padding-right'] = stringOrNumber(props.pr);
+  if (props.pl) style['padding-left'] = stringOrNumber(props.pl);
+  if (props.pt) style['padding-top'] = stringOrNumber(props.pt);
+  if (props.pb) style['padding-bottom'] = stringOrNumber(props.pb);
 
-  if (props.m) style['margin'] = props.m;
+  if (props.m) style['margin'] = stringOrNumber(props.m);
   if (props.mx) {
-    style['margin-left'] = props.mx;
-    style['margin-right'] = props.mx;
+    style['margin-left'] = stringOrNumber(props.mx);
+    style['margin-right'] = stringOrNumber(props.mx);
   }
   if (props.my) {
-    style['margin-top'] = props.my;
-    style['margin-bottom'] = props.my;
+    style['margin-top'] = stringOrNumber(props.my);
+    style['margin-bottom'] = stringOrNumber(props.my);
   }
-  if (props.mr) style['margin-right'] = props.mr;
-  if (props.ml) style['margin-left'] = props.ml;
-  if (props.mt) style['margin-top'] = props.mt;
-  if (props.mb) style['margin-bottom'] = props.mb;
+  if (props.mr) style['margin-right'] = stringOrNumber(props.mr);
+  if (props.ml) style['margin-left'] = stringOrNumber(props.ml);
+  if (props.mt) style['margin-top'] = stringOrNumber(props.mt);
+  if (props.mb) style['margin-bottom'] = stringOrNumber(props.mb);
 
   //typography
-  if (props.fontSize) style['font-size'] = props.fontSize;
+  if (props.fontSize) style['font-size'] = stringOrNumber(props.fontSize);
   if (props.fontWeight) style['font-weight'] = stringOrNumber(props.fontWeight);
   if (props.fontFamily) style['font-family'] = props.fontFamily;
   if (props.textAlign) style['text-align'] = props.textAlign;

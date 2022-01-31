@@ -6,16 +6,22 @@
 </template>
 
 <script>
-import usePropsStyle from '../composables/usePropsStyle';
+// import Vue from 'vue';
+import useSytleSystem from '../composables/useSytleSystem';
+import StyledSystem from '../mixins/StyledSystem';
+// import mixins from 'vue-typed-mixins';
+import Vue from 'vue';
 
-export default {
+export default Vue.extend({
+  //   mixins: [StyledSystem],
   name: 'Box',
   props: {},
-  setup(props, { attrs }) {
-    const elementStyle = usePropsStyle(attrs);
+  ...StyledSystem,
+  setup(props) {
+    const elementStyle = useSytleSystem(props);
     return { elementStyle };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped></style>

@@ -17,7 +17,9 @@
     </div>
 
     <div class="boxes">
-      <box color="red" :borderRadius="12">Hello this is a default box</box>
+      <box :color="'red'" :borderRadius="12" :mt="120"
+        >Hello this is a default box</box
+      >
     </div>
 
     <!-- end -->
