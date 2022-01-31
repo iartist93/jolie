@@ -8,10 +8,9 @@
 <script>
 import useStyledSystem from '../composables/useStyledSystem';
 import StyledSystem from '../mixins/StyledSystem';
-import Vue from 'vue';
+import { defineComponent } from '@vue/composition-api';
 
-export default Vue.extend({
-  //   mixins: [StyledSystem],
+export default defineComponent({
   name: 'Box',
   props: {},
   ...StyledSystem,

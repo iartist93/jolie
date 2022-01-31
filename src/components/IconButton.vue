@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from '@vue/composition-api';
 import typography, { FontSize } from '@/foundation/typography';
 import { spacing } from '@/foundation/spacing';
 import ButtonTheme from '@/themes/button';
@@ -25,7 +25,7 @@ interface PropsType extends Readonly<Data> {
   disabled: boolean;
 }
 
-export default Vue.extend({
+export default defineComponent({
   props: {
     colorScheme: {
       type: String,
