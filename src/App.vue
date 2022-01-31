@@ -11,8 +11,14 @@
       <icon-button size="lg" class="mt-4" disabled>Button Disabled</icon-button>
     </div>
 
-    <!-- switch -->
-    <toggle v-model="toggleChecked" />
+    <div v-if="false" class="toggles">
+      <!-- switch -->
+      <toggle v-model="toggleChecked" />
+    </div>
+
+    <div class="boxes">
+      <box color="red" :borderRadius="12">Hello this is a default box</box>
+    </div>
 
     <!-- end -->
   </div>
@@ -20,6 +26,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Box from './components/Box.vue';
 import IconButton from './components/buttons/IconButton.vue';
 import Toggle from './components/checkboxes/Toggle.vue';
 
@@ -28,6 +35,7 @@ export default Vue.extend({
   components: {
     IconButton,
     Toggle,
+    Box,
   },
   data() {
     return {
