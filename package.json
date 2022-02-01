@@ -1,19 +1,20 @@
 {
   "name": "crafter-ui",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "private": false,
   "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
+  "description": "Crafter UI is a simple component library to build more complex Vue applications",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "files": [
+    "/lib"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve --watch --host localhost",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "lib": "rollup -c && yarn publish"
   },
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "files": [
-    "/lib"
-  ],
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@vue/composition-api": "^1.4.4",
@@ -51,6 +52,7 @@
     "typescript": "^4.5.5",
     "vue-class-component": "^7.2.6",
     "vue-cli-plugin-tailwind": "~2.2.18",
+    "vue-dts-generator": "^0.1.6",
     "vue-property-decorator": "^9.1.2",
     "vue-template-compiler": "^2.6.14"
   },
@@ -60,10 +62,17 @@
   "bugs": {
     "url": "https://github.com/iartist93/crafter-ui/issues"
   },
-  "homepage": "https://github.com/iartist93/crafter-ui#readme",
+  "homepage": "https://iartist93.github.io/crafter-ui",
   "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iartist93/crafter-ui.git"
-  }
+  },
+  "keywords": [
+    "vue",
+    "css",
+    "css-in-js",
+    "styled-system",
+    "styling"
+  ]
 }
