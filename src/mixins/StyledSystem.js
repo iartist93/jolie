@@ -92,7 +92,6 @@ const StyledSystem = {
     },
     p: {
       type: Number,
-      default: 10,
     },
     px: {
       type: Number,
