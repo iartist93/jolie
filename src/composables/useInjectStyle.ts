@@ -6,9 +6,11 @@ export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
   className?: string
 ): void {
   if (!className) {
-    //TODO: you can do better naming
-    className = 'el-gen-class-' + Math.floor(Math.random() * 100000);
+    className = 'el-class-gen-0' + Math.floor(Math.random() * 100000);
+  } else {
+    className += Math.floor(Math.random() * 100000);
   }
+
   const cssObj = Object.entries(style)
     .map(([key, value]) => `${key}:${value};`)
     .join('\n');
