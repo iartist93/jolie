@@ -48,6 +48,7 @@ const StyledSystem = {
     },
     borderColor: {
       type: String,
+      default: '#E1DCDC',
     },
     position: {
       type: String,

@@ -3,7 +3,7 @@
     <sample-component v-if="false" />
 
     <!-- buttons -->
-    <div v-if="true" class="buttons">
+    <div v-if="false" class="buttons">
       <icon-button size="sm" class="mt-4">Button sm</icon-button>
       <icon-button class="mt-4">Button default</icon-button>
       <icon-button size="lg" class="mt-4">Button lg</icon-button>
@@ -18,7 +18,7 @@
       <toggle v-model="toggleChecked" />
     </div>
 
-    <div v-if="false" class="boxes">
+    <div v-if="true" class="boxes">
       <box :color="'red'" :borderRadius="12" :mt="120"
         >Hello this is a default box</box
       >
