@@ -9,7 +9,12 @@ import useStyledSystem from '../composables/useStyledSystem';
 import useInjectStyle from '../composables/useInjectStyle';
 
 import StyledSystem from '../mixins/StyledSystem';
-import { defineComponent, onMounted, ref } from '@vue/composition-api';
+import {
+  defineComponent,
+  onMounted,
+  onUpdated,
+  ref,
+} from '@vue/composition-api';
 
 export default defineComponent({
   name: 'Box',
@@ -20,9 +25,7 @@ export default defineComponent({
 
     const elementStyle = useStyledSystem(props);
 
-    onMounted(() => {
-      useInjectStyle(rootRef, elementStyle, 'crafter-box');
-    });
+    useInjectStyle(rootRef, elementStyle);
 
     return { rootRef };
   },

@@ -19,10 +19,28 @@
     </div>
 
     <div v-if="true" class="boxes">
-      <box :color="'red'" :borderRadius="12" :mt="120"
-        >Hello this is a default box</box
+      <box
+        :color="'red'"
+        :borderRadius="12"
+        :mt="120"
+        :class="{ boxActive: boxActiveState }"
       >
+        Hello this is a default box
+      </box>
     </div>
+
+    <div :class="{ test2: boxActiveState }" class="test1">
+      This is a test div
+    </div>
+    <button
+      @click="
+        () => {
+          boxActiveState = !boxActiveState;
+        }
+      "
+    >
+      Toogle Active
+    </button>
 
     <!-- end -->
   </div>
@@ -46,6 +64,7 @@ export default Vue.extend({
   data() {
     return {
       toggleChecked: false,
+      boxActiveState: false,
     };
   },
 });
@@ -61,5 +80,23 @@ export default Vue.extend({
   margin-top: 60px;
   padding: 20px;
   background-color: rgb(228, 228, 228);
+}
+
+.boxActive {
+  height: 500px;
+  background-color: blue;
+  color: green;
+  position: relative;
+  top: -100px;
+}
+
+.test1 {
+  width: 500px;
+  height: 200px;
+  background-color: red;
+}
+
+.test2 {
+  background-color: green !important;
 }
 </style>
