@@ -1,5 +1,12 @@
 import { Ref } from '@vue/composition-api';
 
+function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
+  el: Ref<T>,
+  className: string
+) {
+  el.value.classList.value = `${className} ${el.value.classList.value}`;
+}
+
 export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
   style: any,
@@ -22,5 +29,6 @@ export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
   styleElement.type = 'text/css';
   styleElement.appendChild(document.createTextNode(css));
   headElement.appendChild(styleElement);
-  el.value.classList.add(className);
+
+  insertClassAtFirst(el, className);
 }
