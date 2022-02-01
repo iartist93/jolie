@@ -10,7 +10,6 @@ const StyledSystem = {
     },
     backgroundColor: {
       type: String,
-      default: 'white',
     },
     backgroundImage: {
       type: String,
