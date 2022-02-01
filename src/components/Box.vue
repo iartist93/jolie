@@ -1,7 +1,7 @@
 <template>
   <div class="crafter-box shadow-md" :style="{ ...elementStyle }">
     <slot></slot>
-    <div>elementStyle = {{ elementStyle }}</div>
+    <!-- <div>elementStyle = {{ elementStyle }}</div> -->
   </div>
 </template>
 

@@ -2,12 +2,15 @@ const StyledSystem = {
   props: {
     color: {
       type: String,
+      default: 'black',
     },
     bg: {
       type: String,
+      default: 'white',
     },
     backgroundColor: {
       type: String,
+      default: 'white',
     },
     backgroundImage: {
       type: String,
@@ -38,9 +41,11 @@ const StyledSystem = {
     },
     borderWidth: {
       type: [String, Number],
+      default: 2,
     },
     borderRadius: {
       type: [String, Number],
+      default: 10,
     },
     borderColor: {
       type: String,
@@ -65,6 +70,7 @@ const StyledSystem = {
     },
     h: {
       type: [String, Number],
+      default: 200,
     },
     maxW: {
       type: [String, Number],
@@ -86,6 +92,7 @@ const StyledSystem = {
     },
     p: {
       type: Number,
+      default: 10,
     },
     px: {
       type: Number,
