@@ -9,12 +9,7 @@ import useStyledSystem from '../composables/useStyledSystem';
 import useInjectStyle from '../composables/useInjectStyle';
 
 import StyledSystem from '../mixins/StyledSystem';
-import {
-  defineComponent,
-  onMounted,
-  onUpdated,
-  ref,
-} from '@vue/composition-api';
+import { defineComponent, ref } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'Box',

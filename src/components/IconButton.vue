@@ -5,6 +5,7 @@
     }"
     class="crafter-button"
     :class="{ disabled }"
+    @click="$emit('click')"
   >
     <slot>Button</slot>
   </button>

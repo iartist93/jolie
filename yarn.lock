@@ -1816,6 +1816,11 @@ bytes@3.1.1, bytes@^3.0.0:
   resolved "https://registry.npmmirror.com/bytes/download/bytes-3.1.1.tgz?cache=0&sync_timestamp=1637015217545&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fbytes%2Fdownload%2Fbytes-3.1.1.tgz#3f018291cb4cbad9accb6e6970bca9c8889e879a"
   integrity sha512-dWe4nWO/ruEOY7HkUJ5gFt1DCFV9zPRoJr8pV0/ASQermOZjtq8jMjOprC0Kd10GLN+l7xaUPvxzJFWtxGu8Fg==
 
+cac@^6.7.2:
+  version "6.7.12"
+  resolved "https://registry.yarnpkg.com/cac/-/cac-6.7.12.tgz#6fb5ea2ff50bd01490dbda497f4ae75a99415193"
+  integrity sha512-rM7E2ygtMkJqD9c7WnFU6fruFcN3xe4FM5yUmgxhZzIKJk4uHl9U/fhwdajGFQbQuv43FAUo1Fe8gX/oIKDeSA==
+
 cacache@^12.0.2, cacache@^12.0.3:
   version "12.0.4"
   resolved "https://registry.yarnpkg.com/cacache/-/cacache-12.0.4.tgz#668bcbd105aeb5f1d92fe25570ec9525c8faa40c"
@@ -9658,6 +9663,13 @@ vue-cli-plugin-tailwind@~2.2.18:
   version "2.2.18"
   resolved "https://registry.npmmirror.com/vue-cli-plugin-tailwind/download/vue-cli-plugin-tailwind-2.2.18.tgz#24608cad73c2bf87a561242814e17ab70a7b7e95"
   integrity sha512-aPGUDbBYDcZ2VzeKz/Orqk2qy3Gr90fkIVx796NWz+j8mpldtK3pqj2XbanbWVtrRLBg5cxRA6wHwPj3WuscQQ==
+
+vue-dts-generator@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/vue-dts-generator/-/vue-dts-generator-0.1.6.tgz#c4662ea083f4bdf0b4343bc8541b76665d101ec3"
+  integrity sha512-TVLfEx2pGfzvTJT8KVOkj35ACMNBmzdmdOQTq1GoAG6zI/Jia1G4nZmnysmEA5uMhN5FpMD05hiOe7ZpC3tddg==
+  dependencies:
+    cac "^6.7.2"
 
 vue-eslint-parser@^7.0.0:
   version "7.11.0"

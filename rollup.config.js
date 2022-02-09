@@ -9,7 +9,7 @@ import postcss from 'rollup-plugin-postcss';
 import packageJson from './package.json';
 
 export default {
-  input: 'src/install.js',
+  input: 'src/install.ts',
   output: [
     {
       format: 'cjs',
