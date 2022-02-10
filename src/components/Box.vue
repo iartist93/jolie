@@ -1,5 +1,5 @@
 <template>
-  <div class="crafter-box shadow-md" ref="rootRef">
+  <div class="crafter-box shadow-md" ref="rootRef" v-on="$listeners">
     <slot></slot>
   </div>
 </template>
