@@ -1,24 +1,11 @@
 # crafter-ui
 
-## Project setup
-```
-yarn install
-```
+Crafter UI is a simple component library to build more complex Vue applications
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+- Require Vue 2.x
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Install
 
-### Lints and fixes files
+```sh
+> yarn add crafter-ui
 ```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
