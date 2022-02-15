@@ -1,6 +1,6 @@
 {
   "name": "crafter-ui",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": false,
   "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
   "description": "Crafter UI is a simple component library to build more complex Vue applications",
