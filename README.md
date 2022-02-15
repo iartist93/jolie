@@ -8,4 +8,6 @@ Crafter UI is a simple component library to build more complex Vue applications
 
 ```sh
 > yarn add crafter-ui
+# or
+> npm install crafter-ui
 ```
