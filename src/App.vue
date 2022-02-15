@@ -14,6 +14,13 @@
       <icon-button size="lg" class="mt-4" :variant="'outline'"
         >Button Outlined</icon-button
       >
+      <icon-button
+        size="lg"
+        class="mt-4"
+        :variant="'ghost'"
+        :colorScheme="'green'"
+        >Button Ghost</icon-button
+      >
     </div>
 
     <div v-if="false" class="toggles">

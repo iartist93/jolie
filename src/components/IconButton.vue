@@ -66,7 +66,7 @@ export default defineComponent({
       'border-radius': border ? `${border}px` : '0',
       'background-color': disabled
         ? 'gray'
-        : variant === 'outline'
+        : variant === 'outline' || variant === 'ghost'
         ? 'transparent'
         : colorScheme
         ? colorScheme
@@ -78,13 +78,21 @@ export default defineComponent({
       width: isFullWidth ? '100%' : 'auto',
       height: hasSize ? spacing[ButtonTheme.sizes[size].h] : 'auto',
       border:
-        variant === 'outline'
+        variant === 'ghost'
+          ? 0
+          : variant === 'outline' || variant === 'ghost'
           ? colorScheme
             ? `1px solid ${colorScheme}`
             : 'black'
           : 0,
       color:
-        variant === 'outline' ? (colorScheme ? colorScheme : 'black') : 'white',
+        variant === 'outline' || variant === 'ghost'
+          ? colorScheme
+            ? colorScheme
+            : 'black'
+          : 'white',
+      'box-shadow':
+        variant === 'solid' ? 'box-shadow: 0px 3px 6px #00000029;' : 'none',
     };
 
     return { buttonStyle };
@@ -94,7 +102,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .crafter-button {
-  box-shadow: 0px 3px 6px #00000029;
   font-weight: 500;
   line-height: '1.2';
   color: white;
