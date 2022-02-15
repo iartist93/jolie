@@ -5,7 +5,7 @@
     }"
     class="crafter-button"
     :class="{ disabled }"
-    @click="$emit('click')"
+    v-on="$listeners"
   >
     <slot>Button</slot>
   </button>
@@ -20,6 +20,7 @@ import { Data } from '@vue/composition-api';
 
 interface PropsType extends Readonly<Data> {
   colorScheme: string;
+  variant: string;
   size: FontSize;
   border: number;
   isFullWidth: boolean;
@@ -50,26 +51,40 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    variant: {
+      type: String,
+      default: 'solid' /** solid, outline */,
+    },
   },
   setup(props) {
-    let { size, colorScheme, border, isFullWidth, disabled } =
+    let { size, colorScheme, variant, border, isFullWidth, disabled } =
       props as PropsType;
 
     const hasSize = Boolean(size && ButtonTheme.sizes[size]);
 
     const buttonStyle = {
-      width: isFullWidth ? '100%' : 'auto',
       'border-radius': border ? `${border}px` : '0',
       'background-color': disabled
         ? 'gray'
+        : variant === 'outline'
+        ? 'transparent'
         : colorScheme
         ? colorScheme
         : 'blue',
       'font-size': typography.fontSizes[size],
-      height: hasSize ? spacing[ButtonTheme.sizes[size].h] : 'auto',
       'padding-right': hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0,
       'padding-left': hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0,
       'min-width': hasSize ? spacing[ButtonTheme.sizes[size].minW] : 0,
+      width: isFullWidth ? '100%' : 'auto',
+      height: hasSize ? spacing[ButtonTheme.sizes[size].h] : 'auto',
+      border:
+        variant === 'outline'
+          ? colorScheme
+            ? `1px solid ${colorScheme}`
+            : 'black'
+          : 0,
+      color:
+        variant === 'outline' ? (colorScheme ? colorScheme : 'black') : 'white',
     };
 
     return { buttonStyle };
