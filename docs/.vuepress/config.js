@@ -12,6 +12,7 @@ module.exports = {
   base: '/jolie/',
   configureWebpack: {
     resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
         '@': path.resolve(__dirname, vueSrc),
       },
