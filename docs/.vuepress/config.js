@@ -11,6 +11,15 @@ module.exports = {
   title: 'jolie',
   base: '/jolie/',
   configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
+      ],
+    },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
@@ -25,4 +34,14 @@ module.exports = {
                      @import "@/assets/css/main.scss";
     `,
   },
+  plugins: [
+    [
+      'vuepress-plugin-typescript',
+      {
+        tsLoaderOptions: {
+          // All options of ts-loader
+        },
+      },
+    ],
+  ],
 };
