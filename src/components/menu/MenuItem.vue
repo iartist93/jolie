@@ -1,22 +1,26 @@
 <template>
-  <div>
-    <div class="menu-item" @click="onItemClicked">
-      <img
-        v-if="startIcon"
-        :src="startIcon"
-        alt="start-icon"
-        class="icon start-icon"
-        :style="{ width: maxIconSize }"
-      />
-      <slot></slot>
-      <img
-        v-if="endIcon"
-        :src="endIcon"
-        alt="end-icon"
-        class="icon end-icon"
-        :style="{ width: maxIconSize }"
-      />
-    </div>
+  <div
+    class="menu-item"
+    @click="onItemClicked"
+    :style="{
+      '--jolie-menu-item-hover-color': hoverColor,
+    }"
+  >
+    <img
+      v-if="startIcon"
+      :src="startIcon"
+      alt="start-icon"
+      class="icon start-icon"
+      :style="{ width: maxIconSize }"
+    />
+    <slot></slot>
+    <img
+      v-if="endIcon"
+      :src="endIcon"
+      alt="end-icon"
+      class="icon end-icon"
+      :style="{ width: maxIconSize }"
+    />
   </div>
 </template>
 
@@ -34,6 +38,10 @@ export default {
     iconSize: {
       type: [Number, String],
       default: 25,
+    },
+    hoverColor: {
+      type: String,
+      default: '#e2e2cb',
     },
   },
   setup(props, { emit }) {
@@ -66,7 +74,7 @@ export default {
   padding: 5px 0;
 
   &:hover {
-    background-color: rgb(226, 226, 203);
+    background-color: var(--jolie-menu-item-hover-color);
   }
 }
 

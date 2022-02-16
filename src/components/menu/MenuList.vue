@@ -1,18 +1,35 @@
 <template>
-  <div>
-    {{ isOpen }}
-    <div class="menu-list" v-if="isOpen">
-      <slot></slot>
-    </div>
+  <div
+    v-if="isOpen"
+    class="menu-list"
+    :style="{
+      width: `${width}px`,
+      'background-color': backgroundColor,
+      'border-radius': `${borderRadius}px`,
+    }"
+  >
+    <slot></slot>
   </div>
 </template>
 
 <script>
-import { inject } from '@vue/composition-api';
-
 import { useMenuList } from '@/composables/menu/useMenuList';
 
 export default {
+  props: {
+    backgroundColor: {
+      type: String,
+      default: 'beige',
+    },
+    width: {
+      type: Number,
+      default: 200,
+    },
+    borderRadius: {
+      type: Number,
+      default: 6,
+    },
+  },
   setup() {
     const { isOpen } = useMenuList();
     return { isOpen };
@@ -22,11 +39,8 @@ export default {
 
 <style lang="scss" scoped>
 .menu-list {
-  width: 200px;
   display: flex;
   flex-direction: column;
-  border-radius: 6px;
-  background-color: beige;
 }
 </style>
 

@@ -11,7 +11,7 @@
       <h1>Menu Component</h1>
       <menu-provider>
         <menu-button>MenuButton</menu-button>
-        <menu-list>
+        <menu-list :backgroundColor="'white'" :width="264" :borderRadius="6">
           <menu-item
             v-for="(item, index) in 10"
             :key="index"
@@ -19,6 +19,7 @@
             :startIcon="require('@/assets/icons/add.svg')"
             :endIcon="require('@/assets/icons/account.svg')"
             :iconSize="20"
+            :hoverColor="'#F0F0F0'"
             >Menu item {{ index + 1 }}
           </menu-item>
         </menu-list>
