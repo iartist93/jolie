@@ -29,3 +29,11 @@ export default {
   background-color: beige;
 }
 </style>
+
+<style lang="scss">
+.menu-list {
+  > div {
+    height: 40px;
+  }
+}
+</style>

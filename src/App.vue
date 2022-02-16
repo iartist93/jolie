@@ -12,9 +12,15 @@
       <menu-provider>
         <menu-button>MenuButton</menu-button>
         <menu-list>
-          <menu-item>Menu item 1 </menu-item>
-          <menu-item>Menu item 2 </menu-item>
-          <menu-item>Menu item 3 </menu-item>
+          <menu-item
+            v-for="(item, index) in 10"
+            :key="index"
+            @click="onMenuItemClicked(index)"
+            :startIcon="require('@/assets/icons/add.svg')"
+            :endIcon="require('@/assets/icons/account.svg')"
+            :iconSize="20"
+            >Menu item {{ index + 1 }}
+          </menu-item>
         </menu-list>
       </menu-provider>
     </section>
@@ -101,6 +107,11 @@ export default Vue.extend({
       toggleChecked: false,
       boxActiveState: false,
     };
+  },
+  methods: {
+    onMenuItemClicked(index) {
+      console.log('============> on Menu Item Clicked ', index);
+    },
   },
 });
 </script>
