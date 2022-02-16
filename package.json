@@ -2,19 +2,21 @@
   "name": "jolie",
   "version": "0.1.3",
   "private": false,
-  "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
   "description": "Jolie is a simple component library to build more complex Vue applications",
+  "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
+  "scripts": {
+    "serve": "vue-cli-service serve --watch --host localhost",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
+    "lib": "rollup -c && yarn publish"
+  },
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "files": [
     "/lib"
   ],
-  "scripts": {
-    "serve": "vue-cli-service serve --watch --host localhost",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "lib": "rollup -c && yarn publish"
-  },
   "dependencies": {
     "@tailwindcss/postcss7-compat": "^2.2.17",
     "@vue/composition-api": "^1.4.4",
@@ -40,6 +42,7 @@
     "@vue/eslint-config-typescript": "^10.0.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "loadash": "^1.0.0",
     "mini-css-extract-plugin": "^2.5.2",
     "node-sass": "^7.0.1",
     "rollup": "^2.23.1",
@@ -53,9 +56,11 @@
     "typescript": "^4.5.5",
     "vue-class-component": "^7.2.6",
     "vue-cli-plugin-tailwind": "~2.2.18",
+    "vue-cli-plugin-vuepress": "~0.1.1",
     "vue-dts-generator": "^0.1.6",
     "vue-property-decorator": "^9.1.2",
-    "vue-template-compiler": "^2.6.14"
+    "vue-template-compiler": "^2.6.14",
+    "vuepress": "^0.10.0"
   },
   "peerDependencies": {
     "@vue/composition-api": "^1.4.4"
@@ -64,16 +69,16 @@
     "url": "https://github.com/iartist93/jolie/issues"
   },
   "homepage": "https://github.com/iartist93/jolie",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iartist93/jolie.git"
-  },
   "keywords": [
     "vue",
     "css",
     "css-in-js",
     "styled-system",
     "styling"
-  ]
+  ],
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iartist93/jolie.git"
+  }
 }
