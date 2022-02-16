@@ -2,8 +2,21 @@ import Box from './components/Box.vue';
 import IconButton from './components/IconButton.vue';
 import Toggle from './components/Toggle.vue';
 import SampleComponent from './components/SampleComponent.vue';
+import MenuButton from './components/menu/MenuButton.vue';
+import MenuItem from './components/menu/MenuItem.vue';
+import MenuProvider from './components/menu/MenuProvider.vue';
+import MenuList from './components/menu/MenuList.vue';
 
-export { IconButton, SampleComponent, Box, Toggle };
+export {
+  IconButton,
+  SampleComponent,
+  Box,
+  Toggle,
+  MenuButton,
+  MenuItem,
+  MenuProvider,
+  MenuList,
+};
 
 // Declare install function executed by Vue.use()
 // export function install(Vue) {
