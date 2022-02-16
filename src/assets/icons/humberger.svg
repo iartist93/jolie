@@ -1,0 +1,32 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="39.668"
+  height="38.743"
+  viewBox="0 0 39.668 38.743"
+>
+  <defs>
+    <style>
+      .a {
+        fill: #bbbdc2;
+        opacity: 0.5;
+      }
+      .b {
+        fill: #88868f;
+      }
+    </style>
+  </defs>
+  <g transform="translate(-1510 -566)">
+    <rect
+      class="a"
+      width="38.743"
+      height="39.668"
+      rx="19.372"
+      transform="translate(1510 604.743) rotate(-90)"
+    />
+    <g transform="translate(1 -3)">
+      <circle class="b" cx="2" cy="2" r="2" transform="translate(1527 578)" />
+      <circle class="b" cx="2" cy="2" r="2" transform="translate(1527 586)" />
+      <circle class="b" cx="2" cy="2" r="2" transform="translate(1527 594)" />
+    </g>
+  </g>
+</svg>
