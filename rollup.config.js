@@ -5,6 +5,8 @@ import typescript from 'rollup-plugin-typescript2';
 import vue from 'rollup-plugin-vue';
 import { babel } from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
+import alias from '@rollup/plugin-alias';
+import path from 'path';
 
 import packageJson from './package.json';
 
@@ -32,6 +34,9 @@ export default {
     babel({
       babelHelpers: 'bundled',
       extensions: ['.js', '.jsx', '.es6', '.es', '.mjs', '.vue'],
+    }),
+    alias({
+      entries: [{ find: '@', replacement: path.join(__dirname, './src') }],
     }),
     commonjs(),
   ],
