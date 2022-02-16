@@ -1,6 +1,6 @@
 {
   "name": "jolie",
-  "version": "0.3.4",
+  "version": "0.1.0",
   "private": false,
   "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
   "description": "Jolie is a simple component library to build more complex Vue applications",
@@ -60,13 +60,13 @@
     "@vue/composition-api": "^1.4.4"
   },
   "bugs": {
-    "url": "https://github.com/iartist93/crafter-ui/issues"
+    "url": "https://github.com/iartist93/jolie/issues"
   },
-  "homepage": "https://iartist93.github.io/crafter-ui",
+  "homepage": "https://github.com/iartist93/jolie",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iartist93/crafter-ui.git"
+    "url": "git+https://github.com/iartist93/jolie.git"
   },
   "keywords": [
     "vue",
