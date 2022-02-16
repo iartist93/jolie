@@ -1,9 +1,26 @@
 <template>
-  <div id="app">
+  <div class="page">
+    <header>
+      <h1>Demo Components</h1>
+      <p>Please add any reusable component here</p>
+    </header>
+
     <sample-component v-if="false" />
 
+    <section v-if="true" class="section menu">
+      <h1>Menu Component</h1>
+      <menu-provider>
+        <menu-button>MenuButton</menu-button>
+        <menu-list>
+          <menu-item>Menu item 1 </menu-item>
+          <menu-item>Menu item 2 </menu-item>
+          <menu-item>Menu item 3 </menu-item>
+        </menu-list>
+      </menu-provider>
+    </section>
+
     <!-- buttons -->
-    <div v-if="true" class="buttons">
+    <div v-if="false" class="buttons">
       <icon-button size="sm" class="mt-4">Button sm</icon-button>
       <icon-button class="mt-4">Button default</icon-button>
       <icon-button size="lg" class="mt-4">Button lg</icon-button>
@@ -41,16 +58,16 @@
 
     <div v-if="false" :class="{ test2: boxActiveState }" class="test1">
       This is a test div
+      <button
+        @click="
+          () => {
+            boxActiveState = !boxActiveState;
+          }
+        "
+      >
+        Toogle Active
+      </button>
     </div>
-    <button
-      @click="
-        () => {
-          boxActiveState = !boxActiveState;
-        }
-      "
-    >
-      Toogle Active
-    </button>
 
     <!-- end -->
   </div>
@@ -62,6 +79,10 @@ import Box from './components/Box.vue';
 import IconButton from './components/IconButton.vue';
 import Toggle from './components/Toggle.vue';
 import SampleComponent from './components/SampleComponent.vue';
+import MenuButton from './components/menu/MenuButton.vue';
+import MenuItem from './components/menu/MenuItem.vue';
+import MenuList from './components/menu/MenuList.vue';
+import MenuProvider from './components/menu/MenuProvider.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -70,6 +91,10 @@ export default Vue.extend({
     Toggle,
     Box,
     SampleComponent,
+    MenuButton,
+    MenuItem,
+    MenuList,
+    MenuProvider,
   },
   data() {
     return {
@@ -80,33 +105,46 @@ export default Vue.extend({
 });
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss" scoped>
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.page {
+  width: 100vw;
+  min-height: 3000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(245, 245, 245);
+  padding-top: 30px;
+
+  h1 {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  header {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.section {
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: blueviolet;
+  }
+
+  width: 80%;
+  height: fit-content;
+  background-color: rgba(234, 232, 240, 0.582);
+  border-radius: 8px;
   padding: 20px;
-  background-color: rgb(228, 228, 228);
-}
-
-.boxActive {
-  height: 500px;
-  background-color: blue;
-  color: green;
-  position: relative;
-  top: -100px;
-}
-
-.test1 {
-  width: 500px;
-  height: 200px;
-  background-color: red;
-}
-
-.test2 {
-  background-color: green !important;
+  margin-bottom: 30px;
 }
 </style>
