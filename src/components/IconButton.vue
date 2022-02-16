@@ -3,7 +3,7 @@
     :style="{
       ...buttonStyle,
     }"
-    class="crafter-button"
+    class="jolie-button"
     :class="{ disabled }"
     v-on="$listeners"
   >
@@ -101,7 +101,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.crafter-button {
+.jolie-button {
   font-weight: 500;
   line-height: '1.2';
   color: white;

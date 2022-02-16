@@ -1,5 +1,5 @@
 <template>
-  <div ref="root" class="crafter-modal">
+  <div ref="root" class="jolie-modal">
     <span>isOpen === {{ isOpen }}</span>
     <slot></slot>
   </div>

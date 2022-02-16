@@ -47,7 +47,7 @@ export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
     styleElement.value = document.createElement('style');
 
     // styleElement.value.type = 'text/css';
-    styleElement.value.dataset.crafter = `css ${classId}`;
+    styleElement.value.dataset.jolie = `css ${classId}`;
 
     styleElement.value.appendChild(document.createTextNode(css));
     headElement.insertBefore(styleElement.value, firstStyleElement);

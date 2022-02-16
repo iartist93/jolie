@@ -1,13 +1,13 @@
-# crafter-ui
+# Jolie
 
-Crafter UI is a simple component library to build more complex Vue applications
+Jolie is a simple component library to build more complex Vue applications
 
 - Require Vue 2.x
 
 ## Install
 
 ```sh
-> yarn add crafter-ui
+> yarn add jolie
 # or
-> npm install crafter-ui
+> npm install jolie
 ```

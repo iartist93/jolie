@@ -4,6 +4,6 @@ export const spaceToCssVar = (space: number) => {
   const isFloat = space === spaceInt;
 
   return isFloat
-    ? `var(--crafter-space-${spaceInt}\.5)` /* eslint-disable-line */
-    : `var(--crafter-space-${space})`;
+    ? `var(--jolie-space-${spaceInt}\.5)` /* eslint-disable-line */
+    : `var(--jolie-space-${space})`;
 };

@@ -1,9 +1,9 @@
 {
-  "name": "crafter-ui",
+  "name": "jolie",
   "version": "0.3.4",
   "private": false,
   "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
-  "description": "Crafter UI is a simple component library to build more complex Vue applications",
+  "description": "Jolie is a simple component library to build more complex Vue applications",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "files": [

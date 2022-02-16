@@ -1,5 +1,5 @@
 <template>
-  <label class="crafter-toggle">
+  <label class="jolie-toggle">
     <input
       type="checkbox"
       @click="onToggle"
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.crafter-toggle {
+.jolie-toggle {
   position: relative;
   display: inline-block;
   width: 60px;

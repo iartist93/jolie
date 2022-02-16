@@ -1,6 +1,6 @@
 <template>
   <div class="sample-component-container">
-    <span>Crafter UI > SampleComponent</span>
+    <span>Jolie > SampleComponent</span>
     <span>default thing here</span>
     <h2>{{ headingText }}</h2>
     <h3>{{ bodyText }}</h3>
