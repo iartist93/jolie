@@ -44,7 +44,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 50px;
+  top: 60px;
 }
 </style>
 

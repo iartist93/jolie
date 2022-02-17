@@ -1,16 +1,37 @@
 <template>
-  <button class="jolie-menu-button" @click="onToggle">
+  <div ref="rootRef">
     <slot></slot>
-  </button>
+  </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useMenuButton } from '@/composables/menu/useMenuButton';
+import { onBeforeUnmount, onMounted, Ref, ref } from '@vue/composition-api';
 
 export default {
   setup() {
+    const rootRef = ref<HTMLElement | null>(null);
+    const buttonRef = ref<HTMLElement | null>(null);
+
     const { onToggle } = useMenuButton();
-    return { onToggle };
+
+    onMounted(() => {
+      console.log('=======>> Root Ref ', rootRef);
+
+      // get the first button child of div
+      buttonRef.value = (
+        rootRef as unknown as Ref<HTMLElement>
+      ).value.getElementsByTagName('button')[0];
+
+      // attach `onToggle` hanlder to it
+      buttonRef.value.addEventListener('click', onToggle);
+    });
+
+    onBeforeUnmount(() => {
+      buttonRef.value?.removeEventListener('click', onToggle);
+    });
+
+    return { onToggle, rootRef };
   },
 };
 </script>

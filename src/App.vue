@@ -10,7 +10,9 @@
     <section v-if="true" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider>
-        <menu-button>MenuButton</menu-button>
+        <menu-button>
+          <icon-button :size="'lg'">Menu Button</icon-button>
+        </menu-button>
         <menu-list :backgroundColor="'white'" :width="264" :borderRadius="6">
           <template #header>
             <menu-item
