@@ -6,8 +6,10 @@
       width: `${width}px`,
       'background-color': backgroundColor,
       'border-radius': `${borderRadius}px`,
+      '--jolie-menu-list-border-radius': `${borderRadius}px`,
     }"
   >
+    <slot name="header"></slot>
     <slot></slot>
   </div>
 </template>
@@ -47,9 +49,15 @@ export default {
 </style>
 
 <style lang="scss">
-// .jolie-menu-list {
-//   > div {
-//     height: 40px;
-//   }
-// }
+.jolie-menu-list {
+  // > div {
+  //   height: 40px;
+  // }
+
+  > #header {
+    border-top-left-radius: var(--jolie-menu-list-border-radius);
+    border-top-right-radius: var(--jolie-menu-list-border-radius);
+    margin-bottom: 10px;
+  }
+}
 </style>

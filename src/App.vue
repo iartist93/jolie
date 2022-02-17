@@ -12,6 +12,16 @@
       <menu-provider>
         <menu-button>MenuButton</menu-button>
         <menu-list :backgroundColor="'white'" :width="264" :borderRadius="6">
+          <template #header>
+            <menu-item
+              :pl="36"
+              :variant="'header'"
+              :h="48"
+              :backgroundColor="'#185A76'"
+              :color="'white'"
+              >This is the header</menu-item
+            >
+          </template>
           <menu-item
             v-for="(item, index) in 10"
             :key="index"

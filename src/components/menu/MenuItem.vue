@@ -1,14 +1,10 @@
 <template>
   <div
+    ref="rootRef"
     class="jolie-menu-item"
+    :class="{ header: variant === 'header' }"
+    :id="variant === 'header' ? 'header' : ''"
     @click="onItemClicked"
-    :style="{
-      '--jolie-menu-item-hover-color': hoverColor,
-      padding: `${p}px`,
-      'padding-left': `${pl}px`,
-      'padding-right': `${pr}px`,
-      height: `${h}px`,
-    }"
   >
     <img
       v-if="startIcon"
@@ -29,10 +25,15 @@
 </template>
 
 <script>
-import { inject } from '@vue/composition-api';
+import { inject, ref } from '@vue/composition-api';
+import useInjectStyle from '@/composables/useInjectStyle';
+import useStyleSystem from '@/composables/useStyledSystem';
 
 export default {
   props: {
+    variant: {
+      type: String, // header, default
+    },
     startIcon: {
       type: String,
     },
@@ -42,6 +43,14 @@ export default {
     iconSize: {
       type: [Number, String],
       default: 25,
+    },
+    backgroundColor: {
+      type: String,
+      default: 'white',
+    },
+    color: {
+      type: String,
+      default: 'black',
     },
     hoverColor: {
       type: String,
@@ -69,10 +78,18 @@ export default {
     },
   },
   setup(props, { emit }) {
+    const rootRef = ref(null);
+
     const menuContext = inject('menuContext');
     const { onClose } = menuContext;
 
+    const elementStyle = useStyleSystem(props);
+    elementStyle['--jolie-menu-item-hover-color'] = props.hoverColor;
+
+    useInjectStyle(rootRef, elementStyle);
+
     const onItemClicked = () => {
+      if (props.variant === 'header') return;
       emit('click');
       onClose();
     };
@@ -82,23 +99,26 @@ export default {
         ? props.iconSize + 'px'
         : props.iconSize;
 
-    return { onItemClicked, maxIconSize };
+    return { onItemClicked, maxIconSize, rootRef };
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .jolie-menu-item {
-  // height: 50px;
   width: 100%;
   display: flex;
-  // justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 5px 0;
 
-  &:hover {
-    background-color: var(--jolie-menu-item-hover-color);
+  &:not(.header) {
+    &:hover {
+      background-color: var(--jolie-menu-item-hover-color);
+    }
+  }
+
+  &.header {
+    cursor: default;
   }
 }
 
