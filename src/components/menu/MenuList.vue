@@ -36,7 +36,6 @@ export default {
   },
   setup() {
     const { isOpen } = useMenuList();
-
     return { isOpen };
   },
 };
@@ -50,7 +49,7 @@ export default {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   z-index: 1;
 
-  top: 60px;
+  top: calc(100% + 15px);
   opacity: 0;
   transform: scale(0.8) translateZ(0);
   transition: all 50ms cubic-bezier(0.4, 0, 1, 1);
