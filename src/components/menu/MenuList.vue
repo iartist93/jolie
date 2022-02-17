@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="isOpen"
-    class="menu-list"
+    class="jolie-menu-list"
     :style="{
       width: `${width}px`,
       'background-color': backgroundColor,
@@ -38,16 +38,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu-list {
+.jolie-menu-list {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: 50px;
 }
 </style>
 
 <style lang="scss">
-.menu-list {
-  > div {
-    height: 40px;
-  }
-}
+// .jolie-menu-list {
+//   > div {
+//     height: 40px;
+//   }
+// }
 </style>

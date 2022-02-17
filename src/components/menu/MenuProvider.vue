@@ -1,5 +1,5 @@
 <template>
-  <div class="craft-menu">
+  <div class="jolie-menu-provider">
     <slot></slot>
   </div>
 </template>
@@ -16,4 +16,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.jolie-menu-provider {
+  position: relative;
+}
+</style>

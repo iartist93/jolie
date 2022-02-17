@@ -1,9 +1,13 @@
 <template>
   <div
-    class="menu-item"
+    class="jolie-menu-item"
     @click="onItemClicked"
     :style="{
       '--jolie-menu-item-hover-color': hoverColor,
+      padding: `${p}px`,
+      'padding-left': `${pl}px`,
+      'padding-right': `${pr}px`,
+      height: `${h}px`,
     }"
   >
     <img
@@ -43,6 +47,26 @@ export default {
       type: String,
       default: '#e2e2cb',
     },
+    pl: {
+      type: Number,
+      default: 0,
+    },
+    pr: {
+      type: Number,
+      default: 0,
+    },
+    px: {
+      type: Number,
+      default: 0,
+    },
+    p: {
+      type: Number,
+      default: 0,
+    },
+    h: {
+      type: Number,
+      default: 40,
+    },
   },
   setup(props, { emit }) {
     const menuContext = inject('menuContext');
@@ -64,11 +88,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu-item {
+.jolie-menu-item {
   // height: 50px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  // justify-content: space-between;
   align-items: center;
   cursor: pointer;
   padding: 5px 0;

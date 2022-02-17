@@ -15,11 +15,12 @@
           <menu-item
             v-for="(item, index) in 10"
             :key="index"
-            @click="onMenuItemClicked(index)"
-            :startIcon="require('@/assets/icons/add.svg')"
-            :endIcon="require('@/assets/icons/account.svg')"
-            :iconSize="20"
+            :startIcon="require('@/assets/icons/description-icon.svg')"
+            :iconSize="28"
             :hoverColor="'#F0F0F0'"
+            :pl="25"
+            :h="46"
+            @click="onMenuItemClicked(index)"
             >Menu item {{ index + 1 }}
           </menu-item>
         </menu-list>
