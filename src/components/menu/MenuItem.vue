@@ -46,7 +46,7 @@ export default {
     },
     backgroundColor: {
       type: String,
-      default: 'white',
+      default: 'transparent',
     },
     color: {
       type: String,
