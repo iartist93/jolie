@@ -2,7 +2,7 @@
   <div
     ref="rootRef"
     class="jolie-menu-item"
-    :class="{ header: variant === 'header' }"
+    :class="{ header: variant === 'header', show: isOpen }"
     :id="variant === 'header' ? 'header' : ''"
     @click="onItemClicked"
   >
@@ -81,10 +81,12 @@ export default {
     const rootRef = ref(null);
 
     const menuContext = inject('menuContext');
-    const { onClose } = menuContext;
+    const { onClose, isOpen } = menuContext;
 
     const elementStyle = useStyleSystem(props);
     elementStyle['--jolie-menu-item-hover-color'] = props.hoverColor;
+    elementStyle['--jolie-transition-property-background'] =
+      'background-color, background-image, background-position';
 
     useInjectStyle(rootRef, elementStyle);
 
@@ -99,7 +101,7 @@ export default {
         ? props.iconSize + 'px'
         : props.iconSize;
 
-    return { onItemClicked, maxIconSize, rootRef };
+    return { onItemClicked, maxIconSize, rootRef, isOpen };
   },
 };
 </script>
@@ -110,6 +112,8 @@ export default {
   display: flex;
   align-items: center;
   cursor: pointer;
+  user-select: none;
+  transition: all 50ms cubic-bezier(0.4, 0, 1, 1);
 
   &:not(.header) {
     &:hover {

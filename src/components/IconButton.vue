@@ -113,8 +113,8 @@ export default defineComponent({
   white-space: nowrap;
   vertical-align: middle;
   outline: none;
-
   cursor: pointer;
+  user-select: none;
 
   &:hover:not(.disabled) {
     filter: brightness(90%);

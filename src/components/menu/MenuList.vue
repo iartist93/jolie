@@ -1,7 +1,7 @@
 <template>
   <div
-    v-if="isOpen"
     class="jolie-menu-list"
+    :class="{ show: isOpen }"
     :style="{
       width: `${width}px`,
       'background-color': backgroundColor,
@@ -16,6 +16,8 @@
 
 <script>
 import { useMenuList } from '@/composables/menu/useMenuList';
+import useInjectStyle from '@/composables/useInjectStyle';
+import { ref } from '@vue/composition-api';
 
 export default {
   props: {
@@ -34,6 +36,7 @@ export default {
   },
   setup() {
     const { isOpen } = useMenuList();
+
     return { isOpen };
   },
 };
@@ -44,7 +47,21 @@ export default {
   display: flex;
   flex-direction: column;
   position: absolute;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  z-index: 1;
+
   top: 60px;
+  opacity: 0;
+  transform: scale(0.8) translateZ(0);
+  transition: all 50ms cubic-bezier(0.4, 0, 1, 1);
+  transform-origin: top left;
+  visibility: hidden;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
 }
 </style>
 
