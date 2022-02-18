@@ -7,16 +7,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: vuepress-deploy
+      - name: checkout to gp-pages and merge master
         run: |
           git checkout gp-pages || git checkout -b gp-pages
           git branch -a
           git merge origin/docs
+
+      - name: vuepress-deploy
         uses: jenkey2011/vuepress-deploy@master
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           TARGET_REPO: iartist93/jolie
-          TARGET_BRANCH: docs
+          TARGET_BRANCH: gp-pages
           BUILD_SCRIPT: yarn && yarn docs:build
           BUILD_DIR: docs/.vuepress/dist
           CNAME: https://iartist93.github.io/jolie/
