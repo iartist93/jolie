@@ -7,18 +7,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Checkout gp-pages branch
-        uses: actions/checkout@v2
-        with:
-          ref: gp-pages
-
-      - name: merge master
-        uses: devmasx/merge-branch@master
-        with:
-          type: now
-          from_branch: master
-          target_branch: gp_pages
-          github_token: ${{ secrets.ACCESS_TOKEN }}
+      - name: checkout to gp-pages and merge master
+        run: |
+          git checkout gp-pages || git checkout -b gp-pages
+          git merge master
 
       - name: vuepress-deploy
         uses: jenkey2011/vuepress-deploy@master
