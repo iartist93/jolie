@@ -6,7 +6,14 @@ module.exports = {
   dest: 'vuepress',
   serviceWorker: true,
   themeConfig: {
-    sidebar: ['/', '/page1', '/page2', ['/page3', 'Custom link page']],
+    nav: [{ text: 'Toggle', link: '/toggle/' }],
+    sidebar: [
+      '/',
+      '/page1',
+      '/page2',
+      ['/page3', 'Custom link page'],
+      '/toggle/',
+    ],
   },
   title: 'jolie',
   base: '/jolie/',

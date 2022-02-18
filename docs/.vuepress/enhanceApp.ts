@@ -6,6 +6,7 @@ export default ({
   router, // the router instance for the app
   siteData, // site metadata
 }) => {
+  console.log('==========================> Have you ever enter here!!!');
   // ...apply enhancements to the app
 
   const requireComponent = require.context(
