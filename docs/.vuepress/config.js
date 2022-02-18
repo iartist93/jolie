@@ -3,7 +3,6 @@ const path = require('path');
 const vueSrc = '../../src';
 
 module.exports = {
-  dest: 'vuepress',
   serviceWorker: true,
   themeConfig: {
     nav: [{ text: 'Toggle', link: '/toggle/' }],
