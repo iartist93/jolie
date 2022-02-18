@@ -10,7 +10,7 @@ jobs:
       - name: checkout to gp-pages and merge master
         run: |
           git checkout gp-pages || git checkout -b gp-pages
-          git merge master
+          git merge origin/master
 
       - name: vuepress-deploy
         uses: jenkey2011/vuepress-deploy@master
