@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import useStyledSystem from '../composables/useStyledSystem';
-import useInjectStyle from '../composables/useInjectStyle';
+import useStyledSystem from '@/composables/useStyledSystem';
+import useInjectStyle from '@/composables/useInjectStyle';
 
 import StyledSystem from '../mixins/StyledSystem';
 import { defineComponent, ref } from '@vue/composition-api';

@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { provide, ref, Ref, watch } from '@vue/composition-api';
+import { provide, ref, watch, Ref } from '@vue/composition-api';
 import { useClickOutside } from '@/composables/useClickOutside';
 import { useMenu } from '@/composables/menu/useMenu';
 
