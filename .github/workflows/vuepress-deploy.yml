@@ -11,7 +11,7 @@ jobs:
         run: |
           git checkout gp-pages || git checkout -b gp-pages
           git branch -a
-          git merge origin/master
+          git merge origin/docs
 
       - name: vuepress-deploy
         uses: jenkey2011/vuepress-deploy@master
