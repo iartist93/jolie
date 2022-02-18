@@ -7,13 +7,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: checkout to gp-pages and merge master
+      - name: vuepress-deploy
         run: |
           git checkout gp-pages || git checkout -b gp-pages
           git branch -a
           git merge origin/docs
-
-      - name: vuepress-deploy
         uses: jenkey2011/vuepress-deploy@master
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
