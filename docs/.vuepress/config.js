@@ -34,14 +34,5 @@ module.exports = {
                      @import "@/assets/css/main.scss";
     `,
   },
-  plugins: [
-    [
-      'vuepress-plugin-typescript',
-      {
-        tsLoaderOptions: {
-          // All options of ts-loader
-        },
-      },
-    ],
-  ],
+  plugins: [['vuepress-plugin-typescript']],
 };
