@@ -4,25 +4,55 @@
   </div>
 </template>
 
-<script>
-import useStyledSystem from '@/composables/useStyledSystem';
+<script lang="ts">
+import useStyledSystem, {
+  useStyleSystemType,
+} from '@/composables/useStyledSystem';
 import useInjectStyle from '@/composables/useInjectStyle';
-
+// import useTestReactive from '@/composables/useTestReactive';
 import StyledSystem from '@/mixins/StyledSystem';
-import { defineComponent, ref } from '@vue/composition-api';
+
+import { defineComponent, ref, Ref, watch } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'Box',
-  props: {},
-  ...StyledSystem,
+  props: {
+    test: {
+      type: String,
+    },
+    ...StyledSystem.props,
+  },
+
   setup(props) {
-    const rootRef = ref(null);
+    const rootRef = ref<HTMLElement | null>(null);
+    // const isChecked = ref(false);
 
-    const elementStyle = useStyledSystem(props);
+    const { style } = useStyledSystem(props as useStyleSystemType);
 
-    useInjectStyle(rootRef, elementStyle);
+    watch(
+      style,
+      (newValue) => {
+        console.log('style new value ', newValue);
+      },
+      { deep: true, immediate: true }
+    );
 
-    return { rootRef };
+    // watch(
+    //   () => props.test,
+    //   (newValue) => {
+    //     // console.log(newValue);
+    //     isChecked.value = newValue === 'green';
+    //   }
+    // );
+    // const { returnValue } = useTestReactive(isChecked);
+
+    // watch(returnValue, (newValue) => {
+    //   console.log('==============> return value changed ', returnValue.value);
+    // });
+
+    useInjectStyle(rootRef as Ref<HTMLElement>, style);
+
+    return { rootRef, style };
   },
 });
 </script>
