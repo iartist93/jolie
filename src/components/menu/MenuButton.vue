@@ -1,14 +1,20 @@
 <template>
-  <div ref="rootRef">
+  <div ref="rootRef" class="jolie-menu-button">
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
 import { useMenuButton } from '@/composables/menu/useMenuButton';
-import { onBeforeUnmount, onMounted, Ref, ref } from '@vue/composition-api';
+import {
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  Ref,
+  ref,
+} from '@vue/composition-api';
 
-export default {
+export default defineComponent({
   setup() {
     const rootRef = ref<HTMLElement | null>(null);
     const buttonRef = ref<HTMLElement | null>(null);
@@ -33,22 +39,22 @@ export default {
 
     return { onToggle, rootRef };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
 .jolie-menu-button {
-  background-color: rgb(56, 47, 97);
-  width: fit-content;
-  height: 40px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  color: white;
-  cursor: pointer;
-  outline: 0;
-  border: none;
+  // background-color: rgb(56, 47, 97);
+  // width: fit-content;
+  // height: 40px;
+  // border-radius: 5px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // padding: 10px;
+  // color: white;
+  // cursor: pointer;
+  // outline: 0;
+  // border: none;
 }
 </style>

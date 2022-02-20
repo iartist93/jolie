@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ModalBase from './ModalBase.vue';
+import ModalBase from '@/components/modals/ModalBase.vue"';
 import IconButton from '@/components/IconButton.vue';
 
 export default {

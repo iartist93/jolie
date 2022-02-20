@@ -9,7 +9,7 @@ import { useMenu } from '@/composables/menu/useMenu';
 import { provide } from '@vue/composition-api';
 
 export default {
-  setup(props) {
+  setup() {
     const menuContext = useMenu();
     provide('menuContext', menuContext);
   },
@@ -19,5 +19,6 @@ export default {
 <style lang="scss" scoped>
 .jolie-menu-provider {
   position: relative;
+  display: flex;
 }
 </style>

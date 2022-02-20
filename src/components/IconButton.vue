@@ -28,6 +28,7 @@ interface PropsType extends Readonly<Data> {
 }
 
 export default defineComponent({
+  name: 'IconButton',
   props: {
     colorScheme: {
       type: String,

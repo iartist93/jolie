@@ -171,5 +171,7 @@ export default Vue.extend({
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 30px;
+
+  margin-top: 600px;
 }
 </style>

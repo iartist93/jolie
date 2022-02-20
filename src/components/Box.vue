@@ -8,7 +8,7 @@
 import useStyledSystem from '@/composables/useStyledSystem';
 import useInjectStyle from '@/composables/useInjectStyle';
 
-import StyledSystem from '../mixins/StyledSystem';
+import StyledSystem from '@/mixins/StyledSystem';
 import { defineComponent, ref } from '@vue/composition-api';
 
 export default defineComponent({

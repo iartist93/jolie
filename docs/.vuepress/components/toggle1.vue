@@ -1,35 +1,16 @@
 <template>
-  <section>
-    <span class="section-title">Try it out</span>
+  <wrapper>
     <toggle />
-  </section>
+  </wrapper>
 </template>
 
 <script>
 import Toggle from '@/components/Toggle.vue';
+import Wrapper from '@/components/wrapper.vue';
 
 export default {
-  components: { Toggle },
+  components: { Toggle, Wrapper },
 };
 </script>
 
-<style lang="scss" scoped>
-section {
-  margin-top: 30px;
-  border-radius: 6px;
-  border: 1px solid rgb(167, 134, 189);
-  box-shadow: 4px 4px 5px rgb(226, 226, 226);
-  padding: 30px 20px;
-  position: relative;
-
-  .section-title {
-    position: absolute;
-    top: -10px;
-    left: 30px;
-    background-color: white;
-    padding: 2px;
-    user-select: none;
-    color: rgb(56, 54, 54);
-  }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -3,6 +3,7 @@ const path = require('path');
 const vueSrc = '../../src';
 
 module.exports = {
+  plugins: [['vuepress-plugin-typescript']],
   serviceWorker: true,
   themeConfig: {
     nav: [{ text: 'Toggle', link: '/toggle/' }],
@@ -12,6 +13,7 @@ module.exports = {
       '/page2',
       ['/page3', 'Custom link page'],
       '/toggle/',
+      '/menu/',
     ],
   },
   title: 'jolie',
@@ -35,10 +37,9 @@ module.exports = {
   },
   scss: {
     additionalData: `@import "@/assets/css/colors.scss";
-                     @import "@/assets/css/fonts.scss";
-                     @import "@/assets/css/highlightableTextarea.scss";
+    @import "@/assets/css/fonts.scss";
+    @import "@/assets/css/highlightableTextarea.scss";
                      @import "@/assets/css/main.scss";
-    `,
+                     `,
   },
-  plugins: [['vuepress-plugin-typescript']],
 };
