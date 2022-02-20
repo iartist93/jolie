@@ -1,4 +1,4 @@
-import { onMounted, onUpdated, ref, Ref } from '@vue/composition-api';
+import { onMounted, onUpdated, ref, Ref, watch } from '@vue/composition-api';
 
 function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
@@ -20,19 +20,40 @@ function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
 
 export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
-  style: any
+  style: Ref
 ): void {
+  watch(
+    style,
+    () => {
+      recalculateStyle();
+    },
+    { deep: true }
+  );
+
   const className = ref('css-');
   const originalClassList = ref('');
   const styleElement = ref<null | HTMLElement>(null);
+  const textNode = ref<null | Text>(null);
+
+  const classId = ref(0);
+
+  const recalculateStyle = () => {
+    const cssObj = Object.entries(style.value)
+      .map(([key, value]) => `${key}:${value};`)
+      .join('\n');
+    const css = `.${className.value} { ${cssObj} } `;
+
+    textNode.value?.remove();
+    textNode.value = document.createTextNode(css);
+    styleElement.value?.appendChild(textNode.value);
+  };
 
   onMounted(() => {
     originalClassList.value = el.value.classList.value;
+    classId.value = Math.floor(Math.random() * 100000);
+    className.value = 'css-' + classId.value;
 
-    const classId = Math.floor(Math.random() * 100000);
-    className.value = 'css-' + classId;
-
-    const cssObj = Object.entries(style)
+    const cssObj = Object.entries(style.value)
       .map(([key, value]) => `${key}:${value};`)
       .join('\n');
 
@@ -47,13 +68,16 @@ export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
     styleElement.value = document.createElement('style');
 
     // styleElement.value.type = 'text/css';
-    styleElement.value.dataset.jolie = `css ${classId}`;
+    styleElement.value.dataset.jolie = `css ${classId.value}`;
 
-    styleElement.value.appendChild(document.createTextNode(css));
+    textNode.value = document.createTextNode(css);
+    styleElement.value.appendChild(textNode.value);
+
     headElement.insertBefore(styleElement.value, firstStyleElement);
 
     insertClassAtFirst(el, originalClassList.value, className.value);
   });
+
   onUpdated(() => {
     insertClassAtFirst(el, originalClassList.value, className.value);
   });

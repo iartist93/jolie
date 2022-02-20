@@ -7,7 +7,7 @@
 
     <sample-component v-if="false" />
 
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider>
         <menu-button>
@@ -60,19 +60,21 @@
       >
     </div>
 
-    <div v-if="false" class="toggles">
-      <!-- switch -->
+    <!-- switch -->
+    <div v-if="true" class="toggles">
       <toggle v-model="toggleChecked" />
     </div>
 
-    <div v-if="false" class="boxes">
+    <!-- boxes -->
+    <div v-if="true" class="boxes">
       <box
-        :color="'red'"
+        :color="!toggleChecked ? 'blue' : 'green'"
+        :borderColor="toggleChecked ? 'red' : 'yellow'"
         :borderRadius="12"
         :mt="120"
         :class="{ boxActive: boxActiveState }"
       >
-        Hello this is a default box
+        Hello this is a default box {{ toggleChecked }}
       </box>
     </div>
 
