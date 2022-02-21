@@ -1,4 +1,6 @@
 import { onMounted, onUpdated, ref, Ref, watch } from '@vue/composition-api';
+import _ from 'lodash';
+import { useStyleSystemType } from './useStyledSystem';
 
 function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
@@ -20,16 +22,8 @@ function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
 
 export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
-  style: Ref
+  style: useStyleSystemType
 ): void {
-  watch(
-    style,
-    () => {
-      recalculateStyle();
-    },
-    { deep: true }
-  );
-
   const className = ref('css-');
   const originalClassList = ref('');
   const styleElement = ref<null | HTMLElement>(null);
@@ -37,11 +31,15 @@ export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
 
   const classId = ref(0);
 
+  console.log('==============> use inject style ', style);
+
   const recalculateStyle = () => {
-    const cssObj = Object.entries(style.value)
+    const cssObj = Object.entries(style)
       .map(([key, value]) => `${key}:${value};`)
       .join('\n');
     const css = `.${className.value} { ${cssObj} } `;
+
+    console.log(css);
 
     textNode.value?.remove();
     textNode.value = document.createTextNode(css);
@@ -53,7 +51,7 @@ export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
     classId.value = Math.floor(Math.random() * 100000);
     className.value = 'css-' + classId.value;
 
-    const cssObj = Object.entries(style.value)
+    const cssObj = Object.entries(style)
       .map(([key, value]) => `${key}:${value};`)
       .join('\n');
 
@@ -80,5 +78,11 @@ export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
 
   onUpdated(() => {
     insertClassAtFirst(el, originalClassList.value, className.value);
+  });
+
+  watch(style, (newStyle, oldStyle) => {
+    console.log('🤘  Injecing new style ', newStyle);
+    console.log('🚀 removeing old style  ', oldStyle);
+    recalculateStyle();
   });
 }

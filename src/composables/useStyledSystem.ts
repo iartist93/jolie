@@ -1,4 +1,4 @@
-import { ref, Ref, ToRefs, watch } from '@vue/composition-api';
+import { ref, watch } from '@vue/composition-api';
 import Vue from 'vue';
 
 export interface useStyleSystemType {
@@ -204,12 +204,14 @@ export default function useStyleSystem(props: useStyleSystemType) {
     if (props.order) Vue.set(style.value, 'order', props.order);
   };
 
-  computeStyle();
-
-  watch(props, () => {
-    console.log('🥌🥌🥌🥌 =========> use styled system, ', props.color);
-    computeStyle();
-  });
+  watch(
+    props,
+    () => {
+      computeStyle();
+      console.log('🥌🥌🥌🥌 =========> use styled system, ', style.value);
+    },
+    { immediate: true }
+  );
 
   return { style };
 }
