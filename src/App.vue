@@ -7,9 +7,9 @@
 
     <sample-component v-if="false" />
 
-    <section v-if="false" class="section menu">
+    <section v-if="true" class="section menu">
       <h1>Menu Component</h1>
-      <menu-provider>
+      <menu-provider class="menu-provider">
         <menu-button>
           <icon-button :size="'lg'">Menu Button</icon-button>
         </menu-button>
@@ -61,12 +61,12 @@
     </div>
 
     <!-- switch -->
-    <div v-if="true" class="toggles">
+    <div v-if="false" class="toggles">
       <toggle v-model="toggleChecked" />
     </div>
 
     <!-- boxes -->
-    <div v-if="true" class="section boxes">
+    <div v-if="false" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
         :borderColor="toggleChecked ? 'red' : 'yellow'"
@@ -187,5 +187,9 @@ export default Vue.extend({
   margin-bottom: 30px;
 
   // margin-top: 600px;
+}
+
+.menu-provider {
+  margin-top: 50px;
 }
 </style>

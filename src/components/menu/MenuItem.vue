@@ -88,7 +88,7 @@ export default {
     elementStyle.value['--jolie-transition-property-background'] =
       'background-color, background-image, background-position';
 
-    useInjectStyle(rootRef, elementStyle);
+    useInjectStyle(rootRef, elementStyle.value);
 
     const onItemClicked = () => {
       if (props.variant === 'header') return;

@@ -52,7 +52,8 @@ export default {
     const updateMenuPosition = () => {
       menu.value = rootRef.value.parentElement;
 
-      const toggleButton = menu.value.getElementsByTagName('button')[0];
+      const toggleButton =
+        menu.value.getElementsByClassName('jolie-menu-button')[0];
       const offsetY = toggleButton.getBoundingClientRect().y;
       const totalViewportHeight = document.documentElement.clientHeight;
 

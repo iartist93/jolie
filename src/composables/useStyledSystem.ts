@@ -204,14 +204,12 @@ export default function useStyleSystem(props: useStyleSystemType) {
     if (props.order) Vue.set(style.value, 'order', props.order);
   };
 
-  watch(
-    props,
-    () => {
-      computeStyle();
-      console.log('🥌🥌🥌🥌 =========> use styled system, ', style.value);
-    },
-    { immediate: true }
-  );
+  computeStyle();
+
+  watch(props, () => {
+    computeStyle();
+    console.log('🥌🥌🥌🥌 =========> use styled system, ', style.value);
+  });
 
   return { style };
 }
