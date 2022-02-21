@@ -20,7 +20,6 @@
 <script>
 import { useMenuList } from '@/composables/menu/useMenuList';
 import { onMounted, onUnmounted, onUpdated, ref } from '@vue/composition-api';
-import { useClickOutside } from '@/composables/useClickOutside';
 
 export default {
   props: {

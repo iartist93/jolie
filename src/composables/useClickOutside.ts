@@ -6,7 +6,6 @@ function isDatePickerChild(node: ParentNode) {
   let parent: ParentNode | null = node;
 
   while (parent && (parent as HTMLElement).parentNode) {
-    console.log('----------> while 2');
     if ((parent as HTMLElement).classList.contains('mx-datepicker-main')) {
       return true;
     }
@@ -25,7 +24,6 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
     let targetParentNode = target.parentNode;
 
     while (targetParentNode) {
-      console.log('----------> while 1');
       if (root.contains(targetParentNode)) {
         return true;
       } else {
