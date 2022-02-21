@@ -9,8 +9,14 @@ import { useMenu } from '@/composables/menu/useMenu';
 import { provide } from '@vue/composition-api';
 
 export default {
-  setup() {
-    const menuContext = useMenu();
+  props: {
+    closeOnBlur: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  setup(props) {
+    const menuContext = useMenu(props);
     provide('menuContext', menuContext);
   },
 };

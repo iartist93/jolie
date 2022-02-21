@@ -20,6 +20,7 @@
 <script>
 import { useMenuList } from '@/composables/menu/useMenuList';
 import { onMounted, onUnmounted, onUpdated, ref } from '@vue/composition-api';
+import { useClickOutside } from '@/composables/useClickOutside';
 
 export default {
   props: {
@@ -47,7 +48,7 @@ export default {
     const menuListHeight = ref(0);
     const menuButtonHeight = ref(0);
 
-    const { isOpen } = useMenuList();
+    const { isOpen } = useMenuList(rootRef);
 
     const updateMenuPosition = () => {
       menu.value = rootRef.value.parentElement;
