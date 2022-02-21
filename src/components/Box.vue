@@ -21,8 +21,9 @@ export default defineComponent({
   setup(props) {
     const rootRef = ref<HTMLElement | null>(null);
     // const isChecked = ref(false);
+    let style = ref({});
 
-    const { style } = useStyledSystem(props as useStyleSystemType);
+    style = useStyledSystem(props as useStyleSystemType);
 
     // watch(style.value, (newVal, oldVal) => {
     //   console.log('🤘 style new value ', newVal);

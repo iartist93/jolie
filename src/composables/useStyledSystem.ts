@@ -211,5 +211,5 @@ export default function useStyleSystem(props: useStyleSystemType) {
     console.log('🥌🥌🥌🥌 =========> use styled system, ', style.value);
   });
 
-  return { style };
+  return style;
 }

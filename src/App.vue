@@ -7,7 +7,7 @@
 
     <sample-component v-if="false" />
 
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider class="menu-provider">
         <menu-button>
@@ -61,12 +61,12 @@
     </div>
 
     <!-- switch -->
-    <div v-if="false" class="toggles">
+    <div v-if="true" class="toggles">
       <toggle v-model="toggleChecked" />
     </div>
 
     <!-- boxes -->
-    <div v-if="false" class="section boxes">
+    <div v-if="true" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
         :borderColor="toggleChecked ? 'red' : 'yellow'"

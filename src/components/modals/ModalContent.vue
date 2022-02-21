@@ -36,7 +36,7 @@ export default {
     const modalRef = ref<null | Ref<HTMLElement>>(null);
     const modalContainerRef = ref<null | Ref<HTMLElement>>(null);
 
-    const { isOpen, onClose } = useMenuList();
+    const { isOpen, onClose } = useMenuList(modalRef as Ref<HTMLElement>);
 
     useClickOutside(modalRef as Ref<HTMLElement>, (event) => {
       if (isOpen.value) {

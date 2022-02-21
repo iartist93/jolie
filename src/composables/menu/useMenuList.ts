@@ -5,6 +5,7 @@ import { useClickOutside } from '../useClickOutside';
 
 interface UseMenuListType {
   isOpen: Ref<boolean>;
+  onClose(): void;
 }
 
 export function useMenuList(el: Ref<HTMLElement>): UseMenuListType {
@@ -17,5 +18,5 @@ export function useMenuList(el: Ref<HTMLElement>): UseMenuListType {
     }
   });
 
-  return { isOpen };
+  return { isOpen, onClose };
 }

@@ -26,8 +26,4 @@ https://iartist93.github.io/jolie/
 - Merge the master.
 - Push -> Github action will run to build and deploy to github pages
 
-```sh
-> git checkout docs
-```
-
 ---

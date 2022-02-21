@@ -16,7 +16,7 @@ export default {
 
     const { closeOnBlur = true } = props;
 
-    const menuContext = useMenu();
+    const menuContext = useMenu(props);
     const { onClose, isOpen } = menuContext;
     provide('menuContext', menuContext);
 
