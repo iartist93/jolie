@@ -26,8 +26,8 @@
 
 <script>
 import { inject, ref } from '@vue/composition-api';
-import useInjectStyle from '@/composables/useInjectStyle';
-import useStyleSystem from '@/composables/useStyledSystem';
+import { useInjectStyle } from '@/composables/useInjectStyle';
+import { useStyledSystem } from '@/composables/useStyledSystem';
 
 export default {
   props: {
@@ -83,7 +83,7 @@ export default {
     const menuContext = inject('menuContext');
     const { onClose, isOpen } = menuContext;
 
-    const elementStyle = useStyleSystem(props);
+    const elementStyle = useStyledSystem(props);
     elementStyle.value['--jolie-menu-item-hover-color'] = props.hoverColor;
     elementStyle.value['--jolie-transition-property-background'] =
       'background-color, background-image, background-position';

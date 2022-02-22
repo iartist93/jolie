@@ -5,14 +5,16 @@
 </template>
 
 <script lang="ts">
-import useStyledSystem, {
-  useStyleSystemType,
+import {
+  useStyledSystem,
+  useStyledSystemType,
 } from '@/composables/useStyledSystem';
-import useInjectStyle from '@/composables/useInjectStyle';
+
+import { useInjectStyle } from '@/composables/useInjectStyle';
 import StyledSystem from '@/mixins/StyledSystem';
 // import useTestReactive from '@/composables/useTestReactive';
 
-import { defineComponent, ref, Ref, watch } from '@vue/composition-api';
+import { defineComponent, ref, Ref } from '@vue/composition-api';
 // import _ from 'lodash';
 
 export default defineComponent({
@@ -23,7 +25,7 @@ export default defineComponent({
     // const isChecked = ref(false);
     let style = ref({});
 
-    style = useStyledSystem(props as useStyleSystemType);
+    style = useStyledSystem(props as useStyledSystemType);
 
     // watch(style.value, (newVal, oldVal) => {
     //   console.log('🤘 style new value ', newVal);
@@ -45,7 +47,7 @@ export default defineComponent({
 
     useInjectStyle(
       rootRef as Ref<HTMLElement>,
-      style.value as useStyleSystemType
+      style.value as useStyledSystemType
     );
 
     return { rootRef, style };

@@ -1,4 +1,4 @@
-export default function isDescendent<T extends HTMLElement = HTMLElement>(
+export function useIsDescendent<T extends HTMLElement = HTMLElement>(
   root: T,
   target: HTMLElement
 ): boolean {

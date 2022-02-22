@@ -1,6 +1,6 @@
 import { onMounted, onUpdated, ref, Ref, watch } from '@vue/composition-api';
 import _ from 'lodash';
-import { useStyleSystemType } from './useStyledSystem';
+import { useStyledSystemType } from './useStyledSystem';
 
 function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
@@ -20,9 +20,9 @@ function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
   el.value.classList.add(className);
 }
 
-export default function useInjectStyle<T extends HTMLElement = HTMLElement>(
+export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
-  style: useStyleSystemType
+  style: useStyledSystemType
 ): void {
   const className = ref('css-');
   const originalClassList = ref('');

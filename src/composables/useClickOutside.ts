@@ -1,5 +1,5 @@
 import { onMounted, onBeforeUnmount, Ref, ref } from '@vue/composition-api';
-import useIsDescendent from './useIsDescendent';
+import { useIsDescendent } from './useIsDescendent';
 
 type AnyEvent = MouseEvent | TouchEvent;
 

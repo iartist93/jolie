@@ -1,7 +1,7 @@
 import { ref, watch } from '@vue/composition-api';
 import Vue from 'vue';
 
-export interface useStyleSystemType {
+export interface useStyledSystemType {
   // colors
   color: string;
   bg: string;
@@ -81,8 +81,8 @@ function stringOrNumber(attribute) {
   return typeof attribute === 'string' ? attribute : attribute + 'px';
 }
 
-export default function useStyleSystem(props: useStyleSystemType) {
-  // const props = propsRef as useStyleSystemType;
+export function useStyledSystem(props: useStyledSystemType) {
+  // const props = propsRef as useStyledSystemType;
 
   const style = ref({});
 

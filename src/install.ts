@@ -1,3 +1,4 @@
+// Components
 import Box from './components/Box.vue';
 import IconButton from './components/IconButton.vue';
 import Toggle from './components/Toggle.vue';
@@ -6,6 +7,12 @@ import MenuButton from './components/menu/MenuButton.vue';
 import MenuItem from './components/menu/MenuItem.vue';
 import MenuProvider from './components/menu/MenuProvider.vue';
 import MenuList from './components/menu/MenuList.vue';
+
+// Composables
+import { useIsDescendent } from './composables/useIsDescendent';
+import { useClickOutside } from './composables/useClickOutside';
+import { useInjectStyle } from './composables/useInjectStyle';
+import { useStyledSystem } from './composables/useStyledSystem';
 
 export {
   IconButton,
@@ -16,6 +23,10 @@ export {
   MenuItem,
   MenuProvider,
   MenuList,
+  useIsDescendent,
+  useClickOutside,
+  useInjectStyle,
+  useStyledSystem,
 };
 
 // Declare install function executed by Vue.use()
