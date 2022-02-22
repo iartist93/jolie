@@ -1,4 +1,5 @@
 import { onMounted, onBeforeUnmount, Ref, ref } from '@vue/composition-api';
+import useIsDescendent from './useIsDescendent';
 
 type AnyEvent = MouseEvent | TouchEvent;
 
@@ -20,23 +21,8 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
 ): void {
   const root = ref<any>();
 
-  const isDescendent = (root: T, target: HTMLElement) => {
-    let targetParentNode = target.parentNode;
-
-    while (targetParentNode) {
-      if (root.contains(targetParentNode)) {
-        return true;
-      } else {
-        targetParentNode = (targetParentNode as HTMLElement).parentNode;
-      }
-    }
-
-    return false;
-  };
-
   const listener = (event: AnyEvent) => {
-    const isChild = isDescendent(root.value, event.target as HTMLElement);
-
+    const isChild = useIsDescendent(root.value, event.target as HTMLElement);
     if (!isChild && !isDatePickerChild(event.target as HTMLElement)) {
       handler(event);
     }
