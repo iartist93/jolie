@@ -86,8 +86,8 @@ export default {
       const offsetY = openOnHover ? 0 : props.offset;
 
       transformY.value = dropup.value
-        ? menuButtonHeight.value + offsetY
-        : -(menuListHeight.value + offsetY);
+        ? -(menuListHeight.value + offsetY)
+        : menuButtonHeight.value + offsetY;
     };
 
     onMounted(() => {
