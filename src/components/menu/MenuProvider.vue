@@ -14,6 +14,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    openOnHover: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const menuContext = useMenu(props);

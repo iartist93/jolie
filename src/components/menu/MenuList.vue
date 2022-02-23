@@ -42,7 +42,7 @@ export default {
     },
     anchor: {
       type: String,
-      default: 'left', // left, right
+      default: 'left', // left, right, middle
     },
   },
   setup(props) {
@@ -79,6 +79,8 @@ export default {
       offsetX.value =
         props.anchor === 'right'
           ? -(menuListWidth.value - menuButtonWidth.value)
+          : props.anchor === 'middle'
+          ? -menuListWidth.value / 2 + menuButtonWidth.value / 2
           : 0;
 
       dropup.value = totalMenuHeight + offsetY > totalViewportHeight;

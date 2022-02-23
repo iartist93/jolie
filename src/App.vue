@@ -57,7 +57,7 @@
         </menu-list>
       </menu-provider>
 
-      <menu-provider class="menu-provider menu-icon-right">
+      <menu-provider :openOnHover="true" class="menu-provider menu-icon-right">
         <menu-button>
           <button>
             <img src="@/assets/icons/add-black-icon.svg" />
@@ -68,6 +68,31 @@
           :width="264"
           :borderRadius="6"
           :anchor="'right'"
+        >
+          <menu-item
+            v-for="(item, index) in 10"
+            :key="index"
+            :hoverColor="'#F0F0F0'"
+            :pl="25"
+            :h="46"
+            @click="onMenuItemClicked(index)"
+            >Menu item {{ index + 1 }}
+          </menu-item>
+        </menu-list>
+      </menu-provider>
+
+      <menu-provider :openOnHover="true" class="menu-provider menu-icon-right">
+        <menu-button>
+          <button>
+            <img src="@/assets/icons/add-black-icon.svg" />
+          </button>
+          <!-- <icon-button :size="'lg'">Menu Button</icon-button> -->
+        </menu-button>
+        <menu-list
+          :backgroundColor="'white'"
+          :width="264"
+          :borderRadius="6"
+          :anchor="'middle'"
         >
           <menu-item
             v-for="(item, index) in 10"

@@ -19,22 +19,26 @@ export default defineComponent({
     const rootRef = ref<HTMLElement | null>(null);
     const buttonRef = ref<HTMLElement | null>(null);
 
-    const { onToggle } = useMenuButton();
+    const { onToggle, onOpen, onClose, openOnHover } = useMenuButton();
 
     onMounted(() => {
-      console.log('=======>> Root Ref ', rootRef);
-
-      // get the first button child of div
       buttonRef.value = (
         rootRef as unknown as Ref<HTMLElement>
       ).value.getElementsByTagName('button')[0];
 
-      // attach `onToggle` hanlder to it
       buttonRef.value.addEventListener('click', onToggle);
+      if (openOnHover) {
+        buttonRef.value.addEventListener('mouseover', onOpen);
+        buttonRef.value.addEventListener('mouseleave', onClose);
+      }
     });
 
     onBeforeUnmount(() => {
       buttonRef.value?.removeEventListener('click', onToggle);
+      if (openOnHover) {
+        buttonRef.value?.removeEventListener('mouseover', onOpen);
+        buttonRef.value?.removeEventListener('mouseleave', onClose);
+      }
     });
 
     return { onToggle, rootRef };
@@ -42,19 +46,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.jolie-menu-button {
-  // background-color: rgb(56, 47, 97);
-  // width: fit-content;
-  // height: 40px;
-  // border-radius: 5px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // padding: 10px;
-  // color: white;
-  // cursor: pointer;
-  // outline: 0;
-  // border: none;
-}
-</style>
+<style lang="scss" scoped></style>

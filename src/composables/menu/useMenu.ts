@@ -5,16 +5,17 @@ export interface UseMenuType {
   onOpen(): void;
   onClose(): void;
   onToggle(): void;
-  closeOnBlur: boolean;
+  closeOnBlur?: boolean;
+  openOnHover?: boolean;
 }
 
 export interface UseMenuProps {
   closeOnBlur?: boolean;
+  openOnHover?: boolean;
 }
 
-// TODO: setup to take arguments
-export function useMenu(props: UseMenuProps) {
-  const { closeOnBlur } = props;
+export function useMenu(props: UseMenuProps): UseMenuType {
+  const { closeOnBlur, openOnHover } = props;
 
   const isOpen = ref(false);
 
@@ -27,7 +28,6 @@ export function useMenu(props: UseMenuProps) {
   };
 
   const onToggle = () => {
-    console.log('on toggle');
     isOpen.value = !isOpen.value;
   };
 
@@ -37,5 +37,6 @@ export function useMenu(props: UseMenuProps) {
     onClose,
     onToggle,
     closeOnBlur,
+    openOnHover,
   };
 }
