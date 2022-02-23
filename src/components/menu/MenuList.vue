@@ -7,10 +7,9 @@
       width: `${width}px`,
       'background-color': backgroundColor,
       'border-radius': `${borderRadius}px`,
-      '--jolie-menu-list-border-radius': `${borderRadius}px`,
-      '--menu-list-height': `${menuListHeight + offset}px`,
-      '--menu-list-offset-x': `${offsetX}px`,
-      '--menu-button-height': `${menuButtonHeight + offset}px`,
+      '--menu-list-border-radius': `${borderRadius}px`,
+      '--menu-list-transform-x': `${transformX}px`,
+      '--menu-list-transform-y': `${transformY}px`,
     }"
   >
     <slot name="header"></slot>
@@ -54,16 +53,17 @@ export default {
 
     const menuButtonHeight = ref(0);
     const menuButtonWidth = ref(0);
-    const offsetX = ref(0);
+    const transformX = ref(0);
+    const transformY = ref(0);
 
-    const { isOpen } = useMenuList(rootRef);
+    const { isOpen, openOnHover } = useMenuList(rootRef);
 
     const updateMenuPosition = () => {
       menu.value = rootRef.value.parentElement;
 
       const toggleButton =
         menu.value.getElementsByClassName('jolie-menu-button')[0];
-      const offsetY = toggleButton.getBoundingClientRect().y;
+      const menuPositionY = toggleButton.getBoundingClientRect().y;
       const totalViewportHeight = document.documentElement.clientHeight;
 
       menuListHeight.value = rootRef.value.getBoundingClientRect().height;
@@ -74,16 +74,20 @@ export default {
 
       const totalMenuHeight = menuButtonHeight.value + menuListHeight.value;
 
-      console.log(menuListWidth, menuButtonWidth);
-
-      offsetX.value =
+      transformX.value =
         props.anchor === 'right'
           ? -(menuListWidth.value - menuButtonWidth.value)
           : props.anchor === 'middle'
           ? -menuListWidth.value / 2 + menuButtonWidth.value / 2
           : 0;
 
-      dropup.value = totalMenuHeight + offsetY > totalViewportHeight;
+      dropup.value = totalMenuHeight + menuPositionY > totalViewportHeight;
+
+      const offsetY = openOnHover ? 0 : props.offset;
+
+      transformY.value = dropup.value
+        ? menuButtonHeight.value + offsetY
+        : -(menuListHeight.value + offsetY);
     };
 
     onMounted(() => {
@@ -102,10 +106,10 @@ export default {
     return {
       rootRef,
       isOpen,
-      menuListHeight,
-      menuButtonHeight,
       dropup,
-      offsetX,
+      transformX,
+      transformY,
+      openOnHover,
     };
   },
 };
@@ -125,16 +129,16 @@ export default {
 
   // TODO: the height calculation get the height after the 0.8 scale
   transform: translate3d(
-      var(--menu-list-offset-x),
-      var(--menu-button-height),
+      var(--menu-list-transform-x),
+      var(--menu-list-transform-y),
       0px
     )
     scale(1);
 
   &.dropup {
     transform: translate3d(
-        var(--menu-list-offset-x),
-        calc(var(--menu-list-height) * -1),
+        var(--menu-list-transform-x),
+        var(--menu-list-transform-y),
         0px
       )
       scale(1);
@@ -145,16 +149,16 @@ export default {
     visibility: visible;
     will-change: transform;
     transform: translate3d(
-        var(--menu-list-offset-x),
-        var(--menu-button-height),
+        var(--menu-list-transform-x),
+        var(--menu-list-transform-y),
         0px
       )
       scale(1);
 
     &.dropup {
       transform: translate3d(
-          var(--menu-list-offset-x),
-          calc(var(--menu-list-height) * -1),
+          var(--menu-list-transform-x),
+          var(--menu-list-transform-y),
           0px
         )
         scale(1);
@@ -166,8 +170,8 @@ export default {
 <style lang="scss">
 .jolie-menu-list {
   > #header {
-    border-top-left-radius: var(--jolie-menu-list-border-radius);
-    border-top-right-radius: var(--jolie-menu-list-border-radius);
+    border-top-left-radius: var(--menu-list-border-radius);
+    border-top-right-radius: var(--menu-list-border-radius);
     margin-bottom: 10px;
   }
 }

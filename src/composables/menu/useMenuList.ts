@@ -6,11 +6,12 @@ import { useClickOutside } from '../useClickOutside';
 interface UseMenuListType {
   isOpen: Ref<boolean>;
   onClose(): void;
+  openOnHover?: boolean;
 }
 
 export function useMenuList(el: Ref<HTMLElement>): UseMenuListType {
   const menuContext = inject('menuContext') as UseMenuType;
-  const { isOpen, onClose, closeOnBlur } = menuContext;
+  const { isOpen, onClose, closeOnBlur, openOnHover } = menuContext;
 
   useClickOutside(el, () => {
     if (closeOnBlur) {
@@ -18,5 +19,5 @@ export function useMenuList(el: Ref<HTMLElement>): UseMenuListType {
     }
   });
 
-  return { isOpen, onClose };
+  return { isOpen, onClose, openOnHover };
 }

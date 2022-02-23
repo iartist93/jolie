@@ -19,7 +19,7 @@ export default defineComponent({
     const rootRef = ref<HTMLElement | null>(null);
     const buttonRef = ref<HTMLElement | null>(null);
 
-    const { onToggle, onOpen, onClose, openOnHover } = useMenuButton();
+    const { onToggle } = useMenuButton();
 
     onMounted(() => {
       buttonRef.value = (
@@ -27,18 +27,10 @@ export default defineComponent({
       ).value.getElementsByTagName('button')[0];
 
       buttonRef.value.addEventListener('click', onToggle);
-      if (openOnHover) {
-        buttonRef.value.addEventListener('mouseover', onOpen);
-        buttonRef.value.addEventListener('mouseleave', onClose);
-      }
     });
 
     onBeforeUnmount(() => {
       buttonRef.value?.removeEventListener('click', onToggle);
-      if (openOnHover) {
-        buttonRef.value?.removeEventListener('mouseover', onOpen);
-        buttonRef.value?.removeEventListener('mouseleave', onClose);
-      }
     });
 
     return { onToggle, rootRef };
