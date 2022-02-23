@@ -9,6 +9,7 @@
       'border-radius': `${borderRadius}px`,
       '--jolie-menu-list-border-radius': `${borderRadius}px`,
       '--menu-list-height': `${menuListHeight + offset}px`,
+      '--menu-list-offset-x': `${offsetX}px`,
       '--menu-button-height': `${menuButtonHeight + offset}px`,
     }"
   >
@@ -39,13 +40,21 @@ export default {
       type: Number,
       default: 10,
     },
+    anchor: {
+      type: String,
+      default: 'left', // left, right
+    },
   },
-  setup() {
+  setup(props) {
     const rootRef = ref(null);
     const menu = ref(null);
     const dropup = ref(false);
     const menuListHeight = ref(0);
+    const menuListWidth = ref(0);
+
     const menuButtonHeight = ref(0);
+    const menuButtonWidth = ref(0);
+    const offsetX = ref(0);
 
     const { isOpen } = useMenuList(rootRef);
 
@@ -58,9 +67,19 @@ export default {
       const totalViewportHeight = document.documentElement.clientHeight;
 
       menuListHeight.value = rootRef.value.getBoundingClientRect().height;
+      menuListWidth.value = rootRef.value.getBoundingClientRect().width;
+
       menuButtonHeight.value = toggleButton.getBoundingClientRect().height;
+      menuButtonWidth.value = toggleButton.getBoundingClientRect().width;
 
       const totalMenuHeight = menuButtonHeight.value + menuListHeight.value;
+
+      console.log(menuListWidth, menuButtonWidth);
+
+      offsetX.value =
+        props.anchor === 'right'
+          ? -(menuListWidth.value - menuButtonWidth.value)
+          : 0;
 
       dropup.value = totalMenuHeight + offsetY > totalViewportHeight;
     };
@@ -78,7 +97,14 @@ export default {
       document.removeEventListener('scroll', updateMenuPosition);
     });
 
-    return { rootRef, isOpen, menuListHeight, menuButtonHeight, dropup };
+    return {
+      rootRef,
+      isOpen,
+      menuListHeight,
+      menuButtonHeight,
+      dropup,
+      offsetX,
+    };
   },
 };
 </script>
@@ -96,10 +122,19 @@ export default {
   transition: all 50ms cubic-bezier(0.4, 0, 1, 1);
 
   // TODO: the height calculation get the height after the 0.8 scale
-  transform: translate3d(0px, var(--menu-button-height), 0px) scale(1);
+  transform: translate3d(
+      var(--menu-list-offset-x),
+      var(--menu-button-height),
+      0px
+    )
+    scale(1);
 
   &.dropup {
-    transform: translate3d(0px, calc(var(--menu-list-height) * -1), 0px)
+    transform: translate3d(
+        var(--menu-list-offset-x),
+        calc(var(--menu-list-height) * -1),
+        0px
+      )
       scale(1);
   }
 
@@ -107,10 +142,19 @@ export default {
     opacity: 1;
     visibility: visible;
     will-change: transform;
-    transform: translate3d(0px, var(--menu-button-height), 0px) scale(1);
+    transform: translate3d(
+        var(--menu-list-offset-x),
+        var(--menu-button-height),
+        0px
+      )
+      scale(1);
 
     &.dropup {
-      transform: translate3d(0px, calc(var(--menu-list-height) * -1), 0px)
+      transform: translate3d(
+          var(--menu-list-offset-x),
+          calc(var(--menu-list-height) * -1),
+          0px
+        )
         scale(1);
     }
   }

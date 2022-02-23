@@ -37,6 +37,49 @@
           </menu-item>
         </menu-list>
       </menu-provider>
+
+      <menu-provider class="menu-provider menu-icon-right">
+        <menu-button>
+          <button>
+            <img src="@/assets/icons/add-black-icon.svg" />
+          </button>
+        </menu-button>
+        <menu-list :backgroundColor="'white'" :width="264" :borderRadius="6">
+          <menu-item
+            v-for="(item, index) in 10"
+            :key="index"
+            :hoverColor="'#F0F0F0'"
+            :pl="25"
+            :h="46"
+            @click="onMenuItemClicked(index)"
+            >Menu item {{ index + 1 }}
+          </menu-item>
+        </menu-list>
+      </menu-provider>
+
+      <menu-provider class="menu-provider menu-icon-right">
+        <menu-button>
+          <button>
+            <img src="@/assets/icons/add-black-icon.svg" />
+          </button>
+        </menu-button>
+        <menu-list
+          :backgroundColor="'white'"
+          :width="264"
+          :borderRadius="6"
+          :anchor="'right'"
+        >
+          <menu-item
+            v-for="(item, index) in 10"
+            :key="index"
+            :hoverColor="'#F0F0F0'"
+            :pl="25"
+            :h="46"
+            @click="onMenuItemClicked(index)"
+            >Menu item {{ index + 1 }}
+          </menu-item>
+        </menu-list>
+      </menu-provider>
     </section>
 
     <!-- buttons -->
@@ -191,5 +234,12 @@ export default Vue.extend({
 
 .menu-provider {
   margin-top: 50px;
+}
+
+.menu-icon-left {
+}
+
+.menu-icon-right {
+  margin-left: 400px;
 }
 </style>
