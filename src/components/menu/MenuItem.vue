@@ -13,7 +13,13 @@
       class="icon start-icon"
       :style="{ width: maxIconSize }"
     />
-    <slot></slot>
+    <span
+      :style="{
+        '--menu-item-text-align': alignValue,
+      }"
+    >
+      <slot></slot>
+    </span>
     <img
       v-if="endIcon"
       :src="endIcon"
@@ -76,9 +82,14 @@ export default {
       type: Number,
       default: 40,
     },
+    textAlign: {
+      type: String,
+      default: 'start', // 'start', 'end', 'center'
+    },
   },
   setup(props, { emit }) {
     const rootRef = ref(null);
+    const alignValue = ref('flex-start');
 
     const menuContext = inject('menuContext');
     const { onClose, isOpen } = menuContext;
@@ -101,7 +112,14 @@ export default {
         ? props.iconSize + 'px'
         : props.iconSize;
 
-    return { onItemClicked, maxIconSize, rootRef, isOpen };
+    alignValue.value =
+      props.textAlign === 'center'
+        ? 'center'
+        : props.textAlign === 'end'
+        ? 'flex-end'
+        : 'flex-start';
+
+    return { onItemClicked, maxIconSize, rootRef, isOpen, alignValue };
   },
 };
 </script>
@@ -123,6 +141,11 @@ export default {
 
   &.header {
     cursor: default;
+  }
+
+  span {
+    flex: 1;
+    justify-content: var(--menu-item-text-align);
   }
 }
 

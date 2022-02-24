@@ -30,6 +30,7 @@
             :startIcon="require('@/assets/icons/description-icon.svg')"
             :iconSize="28"
             :hoverColor="'#F0F0F0'"
+            :textAlign="'center'"
             :pl="25"
             :h="46"
             @click="onMenuItemClicked(index)"
@@ -73,7 +74,7 @@
             v-for="(item, index) in 10"
             :key="index"
             :hoverColor="'#F0F0F0'"
-            :pl="25"
+            :textAlign="'end'"
             :h="46"
             @click="onMenuItemClicked(index)"
             >Menu item {{ index + 1 }}
@@ -98,7 +99,7 @@
             v-for="(item, index) in 10"
             :key="index"
             :hoverColor="'#F0F0F0'"
-            :pl="25"
+            :textAlign="'center'"
             :h="46"
             @click="onMenuItemClicked(index)"
             >Menu item {{ index + 1 }}
