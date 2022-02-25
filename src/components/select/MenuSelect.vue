@@ -66,15 +66,8 @@ export default {
           if (entry.borderBoxSize[0]) {
             const newSize = Math.round(entry.borderBoxSize[0].inlineSize);
             const threshold = Math.round((menuListWidth.value * 1) / 100);
-
-            console.log(threshold);
-
             if (Math.abs(newSize - menuListWidth.value) > threshold) {
               menuListWidth.value = newSize;
-              console.log(
-                '==========> un observe again!! ',
-                menuListWidth.value
-              );
             }
           }
         }

@@ -199,7 +199,7 @@ export function useStyledSystem(props: useStyledSystemType) {
     props,
     () => {
       computeStyle();
-      console.log('🥌🥌🥌🥌 =========> use styled system, ', style.value);
+      console.log('🥌 => use styled system, ', style.value);
     },
     { immediate: true }
   );
