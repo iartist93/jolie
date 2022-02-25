@@ -9,15 +9,23 @@ interface UseMenuListType {
   openOnHover?: boolean;
 }
 
-export function useMenuList(el: Ref<HTMLElement>): UseMenuListType {
+export function useMenuList(
+  el: Ref<HTMLElement>,
+  toggleEl: Ref<HTMLElement>
+): UseMenuListType {
   const menuContext = inject('menuContext') as UseMenuType;
   const { isOpen, onClose, closeOnBlur, openOnHover } = menuContext;
 
-  useClickOutside(el, () => {
-    if (closeOnBlur) {
-      onClose();
-    }
-  });
+  useClickOutside(
+    el,
+    () => {
+      if (closeOnBlur) {
+        console.log('😀😀😀😀 Close on Blur');
+        onClose();
+      }
+    },
+    toggleEl
+  );
 
   return { isOpen, onClose, openOnHover };
 }

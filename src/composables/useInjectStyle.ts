@@ -28,10 +28,7 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   const originalClassList = ref('');
   const styleElement = ref<null | HTMLElement>(null);
   const textNode = ref<null | Text>(null);
-
   const classId = ref(0);
-
-  console.log('==============> use inject style ', style);
 
   const recalculateStyle = () => {
     const cssObj = Object.entries(style)
@@ -47,6 +44,10 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   };
 
   onMounted(() => {
+    if (el) {
+      console.log('===> use inject style ', el.value, style);
+    }
+
     originalClassList.value = el.value.classList.value;
     classId.value = Math.floor(Math.random() * 100000);
     className.value = 'css-' + classId.value;

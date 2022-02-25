@@ -17,13 +17,27 @@ function isDatePickerChild(node: ParentNode) {
 
 export function useClickOutside<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
-  handler: (event: AnyEvent) => void
+  handler: (event: AnyEvent) => void,
+  ignoreEl?: Ref<T>
 ): void {
   const root = ref<any>();
 
   const listener = (event: AnyEvent) => {
     const isChild = useIsDescendent(root.value, event.target as HTMLElement);
-    if (!isChild && !isDatePickerChild(event.target as HTMLElement)) {
+
+    const isIgnored =
+      typeof ignoreEl === undefined
+        ? false
+        : useIsDescendent(
+            (ignoreEl as Ref<HTMLElement>).value,
+            event.target as HTMLElement
+          );
+
+    if (
+      !isChild &&
+      !isIgnored &&
+      !isDatePickerChild(event.target as HTMLElement)
+    ) {
       handler(event);
     }
   };

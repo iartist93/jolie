@@ -56,21 +56,25 @@ export default {
     const transformX = ref(0);
     const transformY = ref(0);
 
-    const { isOpen, openOnHover } = useMenuList(rootRef);
+    const toggleButton = ref(null);
+
+    const { isOpen, openOnHover } = useMenuList(rootRef, toggleButton);
 
     const updateMenuPosition = () => {
       menu.value = rootRef.value.parentElement;
 
-      const toggleButton =
+      toggleButton.value =
         menu.value.getElementsByClassName('jolie-menu-button')[0];
-      const menuPositionY = toggleButton.getBoundingClientRect().y;
+
+      const menuPositionY = toggleButton.value.getBoundingClientRect().y;
       const totalViewportHeight = document.documentElement.clientHeight;
 
       menuListHeight.value = rootRef.value.getBoundingClientRect().height;
       menuListWidth.value = rootRef.value.getBoundingClientRect().width;
 
-      menuButtonHeight.value = toggleButton.getBoundingClientRect().height;
-      menuButtonWidth.value = toggleButton.getBoundingClientRect().width;
+      menuButtonHeight.value =
+        toggleButton.value.getBoundingClientRect().height;
+      menuButtonWidth.value = toggleButton.value.getBoundingClientRect().width;
 
       const totalMenuHeight = menuButtonHeight.value + menuListHeight.value;
 

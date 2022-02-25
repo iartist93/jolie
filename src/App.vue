@@ -6,8 +6,27 @@
     </header>
 
     <sample-component v-if="false" />
+    <!-- ------------------------------------------------- -->
 
     <section v-if="true" class="section menu">
+      <menu-select>
+        <menu-item
+          v-for="(item, index) in 10"
+          :key="index"
+          :startIcon="require('@/assets/icons/description-icon.svg')"
+          :iconSize="28"
+          :hoverColor="'#F0F0F0'"
+          :textAlign="'center'"
+          :pl="25"
+          :h="46"
+          @click="onMenuItemClicked(index)"
+          >Menu item {{ index + 1 }}
+        </menu-item>
+      </menu-select>
+    </section>
+
+    <!-- ------------------------------------------------- -->
+    <section v-if="false" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider class="menu-provider">
         <menu-button>
@@ -186,6 +205,7 @@ import MenuButton from './components/menu/MenuButton.vue';
 import MenuItem from './components/menu/MenuItem.vue';
 import MenuList from './components/menu/MenuList.vue';
 import MenuProvider from './components/menu/MenuProvider.vue';
+import MenuSelect from './components/select/MenuSelect.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -198,6 +218,7 @@ export default Vue.extend({
     MenuItem,
     MenuList,
     MenuProvider,
+    MenuSelect,
   },
   data() {
     return {
