@@ -1,7 +1,7 @@
 <template>
   <div ref="rootRef" class="jolie-menu-select">
     <menu-button>
-      <button class="menu-select">
+      <button ref="selectButtonRef" class="menu-select-button">
         <span>Selected Option {{ isOpen }}</span>
         <img
           src="@/assets/icons/arrow-down.svg"
@@ -41,20 +41,20 @@ export default {
     },
     width: {
       type: Number,
-      default: 500,
+      default: 300,
     },
   },
   setup(props) {
     const rootRef = ref(null);
-    let elementStyle = ref({});
+    const selectButtonRef = ref(null);
+
+    const elementStyle = useStyledSystem(props);
+
+    useInjectStyle(selectButtonRef, elementStyle.value);
 
     const menuContext = useMenuSelect(props);
     provide('menuContext', menuContext);
     const { onOpen, onClose, isOpen } = menuContext;
-
-    elementStyle = useStyledSystem(props);
-
-    useInjectStyle(rootRef, elementStyle.value);
 
     onMounted(() => {
       if (props.openOnHover) {
@@ -70,7 +70,7 @@ export default {
       }
     });
 
-    return { rootRef, isOpen };
+    return { rootRef, selectButtonRef, isOpen };
   },
 };
 </script>
@@ -83,7 +83,7 @@ export default {
   width: fit-content;
 }
 
-.menu-select {
+.menu-select-button {
   display: flex;
   align-items: center;
   background-color: white;

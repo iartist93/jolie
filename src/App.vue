@@ -7,6 +7,8 @@
 
     <sample-component v-if="false" />
     <!-- ------------------------------------------------- -->
+    <!-- Menu Select -->
+    <!-- ------------------------------------------------- -->
 
     <section v-if="true" class="section menu">
       <menu-select>
@@ -26,6 +28,9 @@
     </section>
 
     <!-- ------------------------------------------------- -->
+    <!-- Menu -->
+    <!-- ------------------------------------------------- -->
+
     <section v-if="false" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider class="menu-provider">
@@ -127,7 +132,10 @@
       </menu-provider>
     </section>
 
+    <!-- ------------------------------------------------- -->
     <!-- buttons -->
+    <!-- ------------------------------------------------- -->
+
     <div v-if="false" class="buttons">
       <icon-button size="sm" class="mt-4">Button sm</icon-button>
       <icon-button class="mt-4">Button default</icon-button>
@@ -148,12 +156,18 @@
       >
     </div>
 
+    <!-- ------------------------------------------------- -->
     <!-- switch -->
+    <!-- ------------------------------------------------- -->
+
     <div v-if="false" class="toggles">
       <toggle v-model="toggleChecked" />
     </div>
 
+    <!-- ------------------------------------------------- -->
     <!-- boxes -->
+    <!-- ------------------------------------------------- -->
+
     <div v-if="false" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
@@ -178,6 +192,8 @@
       </box> -->
     </div>
 
+    <!-- ------------------------------------------------- -->
+
     <div v-if="false" :class="{ test2: boxActiveState }" class="test1">
       This is a test div
       <button
@@ -192,6 +208,7 @@
     </div>
 
     <!-- end -->
+    <!-- ------------------------------------------------- -->
   </div>
 </template>
 

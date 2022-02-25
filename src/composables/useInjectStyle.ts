@@ -44,10 +44,6 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   };
 
   onMounted(() => {
-    if (el) {
-      console.log('===> use inject style ', el.value, style);
-    }
-
     originalClassList.value = el.value.classList.value;
     classId.value = Math.floor(Math.random() * 100000);
     className.value = 'css-' + classId.value;
