@@ -1,4 +1,5 @@
 import { ref, watch } from '@vue/composition-api';
+import Vue from 'vue';
 
 export interface useStyledSystemType {
   // colors
@@ -85,115 +86,138 @@ function stringOrNumber(attribute: unknown) {
 export function useStyledSystem(props: useStyledSystemType) {
   // const props = propsRef as useStyledSystemType;
 
-  const style = ref({});
+  const style = ref<Record<string, unknown>>({});
 
   const computeStyle = () => {
     // colors
-    if (props.color) style.value['color'] = props.color;
-    if (props.bg) style.value['background-color'] = props.bg;
+    if (props.color) Vue.set(style.value, 'color', props.color);
+    if (props.bg) Vue.set(style.value, 'background-color', props.bg);
     if (props.backgroundColor)
-      style.value['background-color'] = props.backgroundColor;
+      Vue.set(style.value, 'background-color', props.backgroundColor);
 
     // background
     if (props.backgroundImage)
-      style.value['background-image'] = props.backgroundImage;
+      Vue.set(style.value, 'background-image', props.backgroundImage);
     if (props.backgroundSize)
-      style.value['background-size'] = props.backgroundSize;
+      Vue.set(style.value, 'background-size', props.backgroundSize);
     if (props.backgroundPosition)
-      style.value['background-position'] = props.backgroundPosition;
+      Vue.set(style.value, 'background-position', props.backgroundPosition);
     if (props.backgroundRepeat)
-      style.value['background-repeat'] = props.backgroundRepeat;
+      Vue.set(style.value, 'background-repeat', props.backgroundRepeat);
 
     // border
-    if (props.border) style.value['border'] = stringOrNumber(props.border);
+    if (props.border)
+      Vue.set(style.value, 'border', stringOrNumber(props.border));
     if (props.borderTop)
-      style.value['border-top'] = stringOrNumber(props.borderTop);
+      Vue.set(style.value, 'border-top', stringOrNumber(props.borderTop));
     if (props.borderRight)
-      style.value['border-right'] = stringOrNumber(props.borderRight);
+      Vue.set(style.value, 'border-right', stringOrNumber(props.borderRight));
     if (props.borderBottom)
-      style.value['border-bottom'] = stringOrNumber(props.borderBottom);
+      Vue.set(style.value, 'border-bottom', stringOrNumber(props.borderBottom));
     if (props.borderLeft)
-      style.value['border-left'] = stringOrNumber(props.borderLeft);
+      Vue.set(style.value, 'border-left', stringOrNumber(props.borderLeft));
     if (props.borderWidth)
-      style.value['border-width'] = stringOrNumber(props.borderWidth);
+      Vue.set(style.value, 'border-width', stringOrNumber(props.borderWidth));
     if (props.borderRadius)
-      style.value['border-radius'] = stringOrNumber(props.borderRadius);
-    if (props.borderColor) style.value['border-color'] = props.borderColor;
+      Vue.set(style.value, 'border-radius', stringOrNumber(props.borderRadius));
+    if (props.borderColor)
+      Vue.set(style.value, 'border-color', props.borderColor);
 
     // position
-    if (props.position) style.value['position'] = props.position;
-    if (props.top) style.value['top'] = stringOrNumber(props.top);
-    if (props.right) style.value['right'] = stringOrNumber(props.right);
-    if (props.left) style.value['left'] = stringOrNumber(props.left);
-    if (props.bottom) style.value['bottom'] = stringOrNumber(props.bottom);
+    if (props.position) Vue.set(style.value, 'position', props.position);
+    if (props.top) Vue.set(style.value, 'top', stringOrNumber(props.top));
+    if (props.right) Vue.set(style.value, 'right', stringOrNumber(props.right));
+    if (props.left) Vue.set(style.value, 'left', stringOrNumber(props.left));
+    if (props.bottom)
+      Vue.set(style.value, 'bottom', stringOrNumber(props.bottom));
 
     // layout
-    if (props.width) style.value['width'] = stringOrNumber(props.width);
-    if (props.height) style.value['height'] = stringOrNumber(props.height);
-    if (props.w) style.value['width'] = stringOrNumber(props.w);
-    if (props.h) style.value['height'] = stringOrNumber(props.h);
-    if (props.maxW) style.value['max-width'] = stringOrNumber(props.maxW);
-    if (props.maxH) style.value['max-height'] = stringOrNumber(props.maxH);
-    if (props.overflow) style.value['overflow'] = props.overflow;
-    if (props.overflowX) style.value['overflow-x'] = props.overflowX;
-    if (props.overflowY) style.value['overflow-y'] = props.overflowY;
-    if (props.display) style.value['display'] = props.display;
+    if (props.width) Vue.set(style.value, 'width', stringOrNumber(props.width));
+    if (props.height)
+      Vue.set(style.value, 'height', stringOrNumber(props.height));
+    if (props.w) Vue.set(style.value, 'width', stringOrNumber(props.w));
+    if (props.h) Vue.set(style.value, 'height', stringOrNumber(props.h));
+    if (props.maxW)
+      Vue.set(style.value, 'max-width', stringOrNumber(props.maxW));
+    if (props.maxH)
+      Vue.set(style.value, 'max-height', stringOrNumber(props.maxH));
+    if (props.overflow) Vue.set(style.value, 'overflow', props.overflow);
+    if (props.overflowX) Vue.set(style.value, 'overflow-x', props.overflowX);
+    if (props.overflowY) Vue.set(style.value, 'overflow-y', props.overflowY);
+    if (props.display) Vue.set(style.value, 'display', props.display);
 
     // spacing
-    if (props.p) style.value['padding'] = stringOrNumber(props.p);
+    if (props.p) Vue.set(style.value, 'padding', stringOrNumber(props.p));
     if (props.px) {
-      style.value['padding-left'] = stringOrNumber(props.px);
-      style.value['padding-right'] = stringOrNumber(props.px);
+      Vue.set(style.value, 'padding-left', stringOrNumber(props.px));
+      Vue.set(style.value, 'padding-right', stringOrNumber(props.px));
     }
     if (props.py) {
-      style.value['padding-top'] = stringOrNumber(props.py);
-      style.value['padding-bottom'] = stringOrNumber(props.py);
+      Vue.set(style.value, 'padding-top', stringOrNumber(props.py));
+      Vue.set(style.value, 'padding-bottom', stringOrNumber(props.py));
     }
-    if (props.pr) style.value['padding-right'] = stringOrNumber(props.pr);
-    if (props.pl) style.value['padding-left'] = stringOrNumber(props.pl);
-    if (props.pt) style.value['padding-top'] = stringOrNumber(props.pt);
-    if (props.pb) style.value['padding-bottom'] = stringOrNumber(props.pb);
+    if (props.pr)
+      Vue.set(style.value, 'padding-right', stringOrNumber(props.pr));
+    if (props.pl)
+      Vue.set(style.value, 'padding-left', stringOrNumber(props.pl));
+    if (props.pt) Vue.set(style.value, 'padding-top', stringOrNumber(props.pt));
+    if (props.pb)
+      Vue.set(style.value, 'padding-bottom', stringOrNumber(props.pb));
 
-    if (props.m) style.value['margin'] = stringOrNumber(props.m);
+    if (props.m) Vue.set(style.value, 'margin', stringOrNumber(props.m));
     if (props.mx) {
-      style.value['margin-left'] = stringOrNumber(props.mx);
-      style.value['margin-right'] = stringOrNumber(props.mx);
+      Vue.set(style.value, 'margin-left', stringOrNumber(props.mx));
+      Vue.set(style.value, 'margin-right', stringOrNumber(props.mx));
     }
     if (props.my) {
-      style.value['margin-top'] = stringOrNumber(props.my);
-      style.value['margin-bottom'] = stringOrNumber(props.my);
+      Vue.set(style.value, 'margin-top', stringOrNumber(props.my));
+      Vue.set(style.value, 'margin-bottom', stringOrNumber(props.my));
     }
-    if (props.mr) style.value['margin-right'] = stringOrNumber(props.mr);
-    if (props.ml) style.value['margin-left'] = stringOrNumber(props.ml);
-    if (props.mt) style.value['margin-top'] = stringOrNumber(props.mt);
-    if (props.mb) style.value['margin-bottom'] = stringOrNumber(props.mb);
+    if (props.mr)
+      Vue.set(style.value, 'margin-right', stringOrNumber(props.mr));
+    if (props.ml) Vue.set(style.value, 'margin-left', stringOrNumber(props.ml));
+    if (props.mt) Vue.set(style.value, 'margin-top', stringOrNumber(props.mt));
+    if (props.mb)
+      Vue.set(style.value, 'margin-bottom', stringOrNumber(props.mb));
 
     //typography
     if (props.fontSize)
-      style.value['font-size'] = stringOrNumber(props.fontSize);
+      Vue.set(style.value, 'font-size', stringOrNumber(props.fontSize));
     if (props.fontWeight)
-      style.value['font-weight'] = stringOrNumber(props.fontWeight);
-    if (props.fontFamily) style.value['font-family'] = props.fontFamily;
-    if (props.textAlign) style.value['text-align'] = props.textAlign;
+      Vue.set(style.value, 'font-weight', stringOrNumber(props.fontWeight));
+    if (props.fontFamily) Vue.set(style.value, 'font-family', props.fontFamily);
+    if (props.textAlign) Vue.set(style.value, 'text-align', props.textAlign);
     if (props.letterSpacing)
-      style.value['letter-spacing'] = props.letterSpacing;
-    if (props.lineHeight) style.value['line-height'] = props.lineHeight;
+      Vue.set(style.value, 'letter-spacing', props.letterSpacing);
+    if (props.lineHeight) Vue.set(style.value, 'line-height', props.lineHeight);
 
     // flexbox
-    if (props.alignItems) style.value['align-items'] = props.alignItems;
+    if (props.alignItems) Vue.set(style.value, 'align-items', props.alignItems);
     if (props.justifyContent)
-      style.value['justify-content'] = props.justifyContent;
-    if (props.alignContent) style.value['align-content'] = props.alignContent;
-    if (props.flexWrap) style.value['flex-wrap'] = props.flexWrap;
+      Vue.set(style.value, 'justify-content', props.justifyContent);
+    if (props.alignContent)
+      Vue.set(style.value, 'align-content', props.alignContent);
+    if (props.flexWrap) Vue.set(style.value, 'flex-wrap', props.flexWrap);
     if (props.flexBasis)
-      style.value['flex-basis'] = stringOrNumber(props.flexBasis);
+      Vue.set(style.value, 'flex-basis', stringOrNumber(props.flexBasis));
     if (props.flexDirection)
-      style.value['flex-direction'] = props.flexDirection;
-    if (props.flex) style.value['flex'] = props.flex;
-    if (props.justifySelf) style.value['justify-self'] = props.justifySelf;
-    if (props.alignSelf) style.value['align-self'] = props.alignSelf;
-    if (props.order) style.value['order'] = props.order;
+      Vue.set(style.value, 'flex-direction', props.flexDirection);
+    if (props.flex) Vue.set(style.value, 'flex', props.flex);
+    if (props.justifySelf)
+      Vue.set(style.value, 'justify-self', props.justifySelf);
+    if (props.alignSelf) Vue.set(style.value, 'align-self', props.alignSelf);
+    if (props.order) Vue.set(style.value, 'order', props.order);
   };
+
+  watch(
+    style.value,
+    (newStyle) => {
+      console.log('😂 =======> watching style ', newStyle);
+    },
+    {
+      immediate: true,
+    }
+  );
 
   watch(
     props,

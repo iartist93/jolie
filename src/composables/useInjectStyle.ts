@@ -22,8 +22,10 @@ function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
 
 export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
-  style: useStyledSystemType
+  style: Ref<Record<string, unknown>>
 ): void {
+  console.log('=== injec passed style = ', style);
+
   const className = ref('css-');
   const originalClassList = ref('');
   const styleElement = ref<null | HTMLElement>(null);
@@ -31,7 +33,7 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   const classId = ref(0);
 
   const recalculateStyle = () => {
-    const cssObj = Object.entries(style)
+    const cssObj = Object.entries(style.value)
       .map(([key, value]) => `${key}:${value};`)
       .join('\n');
     const css = `.${className.value} { ${cssObj} } `;
@@ -48,7 +50,7 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
     classId.value = Math.floor(Math.random() * 100000);
     className.value = 'css-' + classId.value;
 
-    const cssObj = Object.entries(style)
+    const cssObj = Object.entries(style.value)
       .map(([key, value]) => `${key}:${value};`)
       .join('\n');
 
@@ -77,7 +79,7 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
     insertClassAtFirst(el, originalClassList.value, className.value);
   });
 
-  watch(style, (newStyle, oldStyle) => {
+  watch(style.value, (newStyle, oldStyle) => {
     console.log('🤘  Injecing new style ', newStyle);
     console.log('🚀 removeing old style  ', oldStyle);
     recalculateStyle();

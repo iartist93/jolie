@@ -14,7 +14,7 @@ import { useInjectStyle } from '@/composables/useInjectStyle';
 import StyledSystem from '@/mixins/StyledSystem';
 // import useTestReactive from '@/composables/useTestReactive';
 
-import { defineComponent, ref, Ref } from '@vue/composition-api';
+import { defineComponent, ref, Ref, watch } from '@vue/composition-api';
 // import _ from 'lodash';
 
 export default defineComponent({
@@ -23,14 +23,13 @@ export default defineComponent({
   setup(props) {
     const rootRef = ref<HTMLElement | null>(null);
     // const isChecked = ref(false);
-    let style = ref({});
 
-    style = useStyledSystem(props as useStyledSystemType);
+    const style = useStyledSystem(props as useStyledSystemType);
 
-    // watch(style.value, (newVal, oldVal) => {
-    //   console.log('🤘 style new value ', newVal);
-    //   console.log('🌼 style old value ', oldVal);
-    // });
+    watch(style.value, (newVal, oldVal) => {
+      console.log('🤘 style new value ', newVal);
+      console.log('🌼 style old value ', oldVal);
+    });
 
     // watch(props, (newProps, oldProps) => {
     //   console.log('======> new props ', newProps);
@@ -45,10 +44,7 @@ export default defineComponent({
     //   console.log('======> old returnValue ', oldVal);
     // });
 
-    useInjectStyle(
-      rootRef as Ref<HTMLElement>,
-      style.value as useStyledSystemType
-    );
+    useInjectStyle(rootRef as Ref<HTMLElement>, style);
 
     return { rootRef, style };
   },

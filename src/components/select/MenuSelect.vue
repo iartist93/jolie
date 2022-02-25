@@ -18,11 +18,25 @@
   </div>
 </template>
 
-<script>
-import { onBeforeUnmount, onMounted, provide, ref } from '@vue/composition-api';
-import { useStyledSystem } from '@/composables/useStyledSystem';
+<script lang="ts">
+import {
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  Ref,
+  ComponentInstance,
+} from '@vue/composition-api';
+import {
+  useStyledSystem,
+  useStyledSystemType,
+} from '@/composables/useStyledSystem';
 import { useInjectStyle } from '@/composables/useInjectStyle';
-import { useMenuSelect } from '@/composables/select/useMenuSelect';
+import {
+  useMenuSelect,
+  UseMenuSelectProps,
+} from '@/composables/select/useMenuSelect';
+import { useResizeObserver } from '@/composables/useReszieObserver';
 import MenuList from '../menu/MenuList.vue';
 import MenuButton from '../menu/MenuButton.vue';
 
@@ -42,23 +56,26 @@ export default {
       default: () => [],
     },
     width: {
-      type: [Number, String],
+      type: Number,
       default: 300,
     },
   },
   setup(props) {
-    const rootRef = ref(null);
-    const selectButtonRef = ref(null);
-    const menuButtonRef = ref(null);
-    const menuListWidth = ref(props.width || 'auto');
-    const menuButtonObserver = ref(null);
+    const rootRef = ref<HTMLElement | null>(null);
+    const selectButtonRef = ref<HTMLElement | null>(null);
+    const menuButtonRef = ref<ComponentInstance | null>(null);
 
-    const menuContext = useMenuSelect(props);
+    const menuListWidth = ref<number>(props.width as number);
+
+    const menuContext = useMenuSelect(props as unknown as UseMenuSelectProps);
     provide('menuContext', menuContext);
     const { onOpen, onClose, isOpen } = menuContext;
 
-    const elementStyle = useStyledSystem(props);
-    useInjectStyle(selectButtonRef, elementStyle.value);
+    const elementStyle = useStyledSystem(
+      props as unknown as useStyledSystemType
+    );
+
+    useInjectStyle(selectButtonRef as Ref<HTMLElement>, elementStyle);
 
     const calcWidth = (entries) => {
       for (let entry of entries) {
@@ -74,27 +91,27 @@ export default {
       }
     };
 
+    useResizeObserver(menuButtonRef as Ref<ComponentInstance>, calcWidth);
+
     onMounted(() => {
-      menuListWidth.value =
-        menuButtonRef.value.$el.getBoundingClientRect().width;
+      menuListWidth.value = (
+        menuButtonRef.value as ComponentInstance
+      ).$el.getBoundingClientRect().width;
 
       if (props.openOnHover) {
-        rootRef.value.addEventListener('mouseover', onOpen);
-        rootRef.value.addEventListener('mouseleave', onClose);
+        (rootRef.value as HTMLElement).addEventListener('mouseover', onOpen);
+        (rootRef.value as HTMLElement).addEventListener('mouseleave', onClose);
       }
-
-      menuButtonObserver.value = new ResizeObserver(calcWidth).observe(
-        menuButtonRef.value.$el
-      );
     });
 
     onBeforeUnmount(() => {
       if (props.openOnHover) {
-        rootRef.value.removeEventListener('mouseover', onOpen);
-        rootRef.value.removeEventListener('mouseleave', onClose);
+        (rootRef.value as HTMLElement).removeEventListener('mouseover', onOpen);
+        (rootRef.value as HTMLElement).removeEventListener(
+          'mouseleave',
+          onClose
+        );
       }
-
-      menuButtonObserver.value.unobserve(menuButtonRef.value.$el);
     });
 
     return { rootRef, selectButtonRef, menuButtonRef, isOpen, menuListWidth };

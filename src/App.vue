@@ -11,7 +11,7 @@
     <!-- ------------------------------------------------- -->
 
     <section v-if="true" class="section menu">
-      <menu-select :width="'auto'">
+      <menu-select :width="toggleChecked ? 300 : 400">
         <menu-item
           v-for="(item, index) in 10"
           :key="index"
@@ -159,7 +159,7 @@
     <!-- switch -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="false" class="toggles">
+    <div v-if="true" class="toggles">
       <toggle v-model="toggleChecked" />
     </div>
 
@@ -167,7 +167,7 @@
     <!-- boxes -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="false" class="section boxes">
+    <div v-if="true" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
         :borderColor="toggleChecked ? 'red' : 'yellow'"
