@@ -28,7 +28,7 @@ export default {
       default: 'beige',
     },
     width: {
-      type: Number,
+      type: [Number, String],
       default: 200,
     },
     borderRadius: {

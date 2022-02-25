@@ -11,14 +11,13 @@
     <!-- ------------------------------------------------- -->
 
     <section v-if="true" class="section menu">
-      <menu-select>
+      <menu-select :width="'auto'">
         <menu-item
           v-for="(item, index) in 10"
           :key="index"
           :startIcon="require('@/assets/icons/description-icon.svg')"
           :iconSize="28"
           :hoverColor="'#F0F0F0'"
-          :textAlign="'center'"
           :pl="25"
           :h="46"
           @click="onMenuItemClicked(index)"
