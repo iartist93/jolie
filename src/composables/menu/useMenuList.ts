@@ -11,7 +11,7 @@ interface UseMenuListType {
 
 export function useMenuList(
   el: Ref<HTMLElement>,
-  toggleEl: Ref<HTMLElement>
+  toggleEl?: Ref<HTMLElement>
 ): UseMenuListType {
   const menuContext = inject('menuContext') as UseMenuType;
   const { isOpen, onClose, closeOnBlur, openOnHover } = menuContext;
