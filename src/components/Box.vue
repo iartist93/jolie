@@ -5,7 +5,10 @@
 </template>
 
 <script lang="ts">
-import { useStyledSystem } from '@/composables/useStyledSystem';
+import {
+  useStyledSystem,
+  useStyledSystemType,
+} from '@/composables/useStyledSystem';
 import { useInjectStyle } from '@/composables/useInjectStyle';
 import StyledSystem from '@/mixins/StyledSystem';
 
@@ -17,9 +20,10 @@ export default defineComponent({
   setup(props) {
     const rootRef = ref<HTMLElement | null>(null);
     const style = ref<Record<string, unknown>>({});
-    const propsRef = ref(props);
 
-    const elementStyle = useStyledSystem(propsRef);
+    const elementStyle = useStyledSystem(
+      props as unknown as useStyledSystemType
+    );
     useInjectStyle(rootRef as Ref<HTMLElement>, elementStyle);
 
     return { rootRef, style };

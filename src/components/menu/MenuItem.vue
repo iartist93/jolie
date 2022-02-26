@@ -98,9 +98,9 @@ export default {
     const menuContext = inject('menuContext') as UseMenuType;
     const { onClose, isOpen } = menuContext;
 
-    const propsRef = ref(props);
-
-    const elementStyle = useStyledSystem(propsRef);
+    const elementStyle = useStyledSystem(
+      props as unknown as useStyledSystemType
+    );
 
     elementStyle.value['--jolie-menu-item-hover-color'] = props.hoverColor;
     elementStyle.value['--jolie-transition-property-background'] =

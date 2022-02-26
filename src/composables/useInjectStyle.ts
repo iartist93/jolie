@@ -24,8 +24,6 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
   style: Ref<Record<string, unknown>>
 ): void {
-  console.log('=== injec passed style = ', style);
-
   const className = ref('css-');
   const originalClassList = ref('');
   const styleElement = ref<null | HTMLElement>(null);
@@ -37,8 +35,6 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
       .map(([key, value]) => `${key}:${value};`)
       .join('\n');
     const css = `.${className.value} { ${cssObj} } `;
-
-    console.log(css);
 
     textNode.value?.remove();
     textNode.value = document.createTextNode(css);
@@ -80,8 +76,6 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
   });
 
   watch(style, (newStyle, oldStyle) => {
-    console.log('🤘  Injecing new style ', newStyle);
-    console.log('🚀 removeing old style  ', oldStyle);
     recalculateStyle();
   });
 }

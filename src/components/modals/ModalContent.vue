@@ -41,7 +41,6 @@ export default {
     useClickOutside(modalRef as Ref<HTMLElement>, (event) => {
       if (isOpen.value) {
         onModalClose();
-        console.log('=======> Modal + useClickOutside + should close ');
       }
     });
 
@@ -63,8 +62,6 @@ export default {
     });
 
     const onModalOpen = () => {
-      console.log('on modal open called');
-
       const modalElement = (modalRef as Ref<HTMLElement>).value;
       const modalContainerElement = (modalContainerRef as Ref<HTMLElement>)
         .value;
@@ -80,8 +77,6 @@ export default {
     };
 
     const onModalClose = () => {
-      console.log('on modal close called');
-
       const modalElement = (modalRef as Ref<HTMLElement>).value;
       const modalContainerElement = (modalContainerRef as Ref<HTMLElement>)
         .value;
@@ -92,7 +87,6 @@ export default {
       modalContainerElement.classList.add('animate-reverse');
 
       setTimeout(() => {
-        console.log('set time out called');
         document.body.style.height = '';
         document.body.style.overflowY = '';
         document.body.style.top = '';

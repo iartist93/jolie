@@ -20,7 +20,6 @@ export function useMenuList(
     el,
     () => {
       if (closeOnBlur) {
-        console.log('😀😀😀😀 Close on Blur');
         onClose();
       }
     },

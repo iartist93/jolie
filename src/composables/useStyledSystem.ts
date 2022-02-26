@@ -83,13 +83,10 @@ function stringOrNumber(attribute: unknown) {
 }
 
 export function useStyledSystem(
-  propsRef
+  props: useStyledSystemType
 ): ComputedRef<Record<string, unknown>> {
   return computed(() => {
     const style: Record<string, unknown> = {};
-    console.log('computed called again ');
-
-    const props = propsRef.value;
 
     // colors
     if (props.color) style['color'] = props.color;
