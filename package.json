@@ -1,6 +1,6 @@
 {
   "name": "jolie",
-  "version": "0.1.37",
+  "version": "0.1.38",
   "private": false,
   "description": "Jolie is a simple component library to build more complex Vue applications",
   "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
@@ -33,6 +33,7 @@
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-image": "^2.1.1",
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
