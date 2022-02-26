@@ -71,9 +71,9 @@ export default {
     provide('menuContext', menuContext);
     const { onOpen, onClose, isOpen } = menuContext;
 
-    const elementStyle = useStyledSystem(
-      props as unknown as useStyledSystemType
-    );
+    const propsRef = ref(props);
+
+    const elementStyle = useStyledSystem(propsRef);
 
     useInjectStyle(selectButtonRef as Ref<HTMLElement>, elementStyle);
 

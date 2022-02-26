@@ -72,6 +72,13 @@ const StyledSystem = {
       type: [String, Number],
       default: 200,
     },
+    width: {
+      type: [String, Number],
+    },
+    height: {
+      type: [String, Number],
+      default: 200,
+    },
     maxW: {
       type: [String, Number],
     },

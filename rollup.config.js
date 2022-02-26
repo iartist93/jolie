@@ -7,6 +7,8 @@ import { babel } from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import alias from '@rollup/plugin-alias';
 import path from 'path';
+// import svg from 'rollup-plugin-svg';
+import image from '@rollup/plugin-image';
 
 import packageJson from './package.json';
 
@@ -29,6 +31,7 @@ export default {
     peerDepsExternal(),
     nodeResolve({ extensions: ['.js', '.vue', '.jsx', '.json', '.ts'] }),
     vue(),
+    image(),
     postcss(),
     typescript(),
     babel({

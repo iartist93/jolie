@@ -30,10 +30,14 @@
   </div>
 </template>
 
-<script>
-import { inject, ref } from '@vue/composition-api';
+<script lang="ts">
+import { inject, ref, Ref } from '@vue/composition-api';
 import { useInjectStyle } from '@/composables/useInjectStyle';
-import { useStyledSystem } from '@/composables/useStyledSystem';
+import {
+  useStyledSystem,
+  useStyledSystemType,
+} from '@/composables/useStyledSystem';
+import { UseMenuType } from '@/composables/menu/useMenu';
 
 export default {
   props: {
@@ -88,18 +92,21 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const rootRef = ref(null);
+    const rootRef = ref<HTMLElement | null>(null);
     const alignValue = ref('flex-start');
 
-    const menuContext = inject('menuContext');
+    const menuContext = inject('menuContext') as UseMenuType;
     const { onClose, isOpen } = menuContext;
 
-    const elementStyle = useStyledSystem(props);
+    const propsRef = ref(props);
+
+    const elementStyle = useStyledSystem(propsRef);
+
     elementStyle.value['--jolie-menu-item-hover-color'] = props.hoverColor;
     elementStyle.value['--jolie-transition-property-background'] =
       'background-color, background-image, background-position';
 
-    useInjectStyle(rootRef, elementStyle);
+    useInjectStyle(rootRef as Ref<HTMLElement>, elementStyle);
 
     const onItemClicked = () => {
       if (props.variant === 'header') return;

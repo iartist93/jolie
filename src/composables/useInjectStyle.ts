@@ -79,7 +79,7 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
     insertClassAtFirst(el, originalClassList.value, className.value);
   });
 
-  watch(style.value, (newStyle, oldStyle) => {
+  watch(style, (newStyle, oldStyle) => {
     console.log('🤘  Injecing new style ', newStyle);
     console.log('🚀 removeing old style  ', oldStyle);
     recalculateStyle();
