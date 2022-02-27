@@ -2,9 +2,7 @@
   <div ref="rootRef" class="jolie-menu-select">
     <menu-button ref="menuButtonRef">
       <button ref="selectButtonRef" class="menu-select-button">
-        <span
-          >Selected Option {{ isOpen }}, {{ Math.round(menuListWidth) }}</span
-        >
+        <span>{{ selectedtext }}</span>
         <img
           src="@/assets/icons/arrow-down.svg"
           alt="arrow-down"
@@ -26,6 +24,7 @@ import {
   ref,
   Ref,
   ComponentInstance,
+  watch,
 } from '@vue/composition-api';
 import {
   useStyledSystem,
@@ -33,6 +32,7 @@ import {
 } from '@/composables/useStyledSystem';
 import { useInjectStyle } from '@/composables/useInjectStyle';
 import {
+  optionValueType,
   useMenuSelect,
   UseMenuSelectProps,
 } from '@/composables/select/useMenuSelect';
@@ -51,25 +51,25 @@ export default {
       type: Boolean,
       default: false,
     },
-    options: {
-      type: Array,
-      default: () => [],
-    },
     width: {
       type: Number,
       default: 300,
     },
+    value: {
+      type: [Object, String, Number, Array],
+    },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const rootRef = ref<HTMLElement | null>(null);
     const selectButtonRef = ref<HTMLElement | null>(null);
     const menuButtonRef = ref<ComponentInstance | null>(null);
-
     const menuListWidth = ref<number>(props.width as number);
+    const selectedtext = ref<string>('');
 
     const menuContext = useMenuSelect(props as unknown as UseMenuSelectProps);
     provide('menuContext', menuContext);
-    const { onOpen, onClose, isOpen } = menuContext;
+
+    const { onOpen, onClose, isOpen, selected, onSelect } = menuContext;
 
     const elementStyle = useStyledSystem(
       props as unknown as useStyledSystemType
@@ -91,7 +91,20 @@ export default {
       }
     };
 
+    const setSelectedText = () => {
+      selectedtext.value = (rootRef.value as HTMLElement).querySelector(
+        '.jolie-select-option[data-selected="1"]>span'
+      )?.textContent as string;
+
+      emit('change', selected.value);
+      emit('input', selected.value);
+    };
+
     useResizeObserver(menuButtonRef as Ref<ComponentInstance>, calcWidth);
+
+    watch(selected, () => {
+      setSelectedText();
+    });
 
     onMounted(() => {
       menuListWidth.value = (
@@ -101,6 +114,22 @@ export default {
       if (props.openOnHover) {
         (rootRef.value as HTMLElement).addEventListener('mouseover', onOpen);
         (rootRef.value as HTMLElement).addEventListener('mouseleave', onClose);
+      }
+
+      if (!props.value) {
+        // set selected to the first item in the list or to the placeholder
+        const firstItem = (rootRef.value as HTMLElement).querySelector(
+          '.jolie-select-option'
+        ) as HTMLElement;
+
+        firstItem.dataset['selected'] = '1';
+        const textSpan = firstItem.querySelector('span');
+        selectedtext.value = textSpan?.textContent as string;
+
+        onSelect(JSON.parse(firstItem.dataset['value'] as string));
+      } else {
+        onSelect(props.value as optionValueType);
+        setSelectedText();
       }
     });
 
@@ -114,7 +143,14 @@ export default {
       }
     });
 
-    return { rootRef, selectButtonRef, menuButtonRef, isOpen, menuListWidth };
+    return {
+      rootRef,
+      selectButtonRef,
+      menuButtonRef,
+      isOpen,
+      menuListWidth,
+      selectedtext,
+    };
   },
 };
 </script>
@@ -132,12 +168,13 @@ export default {
   align-items: center;
   background-color: white;
   color: #a5a5a5;
+  font-size: 18px;
   padding: 15px 20px;
   border-radius: 6px;
   border: 1px solid #e1dcdc;
 
   img {
-    margin-left: 30px;
+    margin-left: auto;
   }
 }
 </style>

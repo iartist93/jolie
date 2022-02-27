@@ -8,6 +8,7 @@ import MenuItem from './components/menu/MenuItem.vue';
 import MenuProvider from './components/menu/MenuProvider.vue';
 import MenuList from './components/menu/MenuList.vue';
 import MenuSelect from './components/select/MenuSelect.vue';
+import SelectOption from './components/select/SelectOption.vue.vue';
 
 // Composables
 import { useIsDescendent } from './composables/useIsDescendent';
@@ -25,6 +26,7 @@ export {
   MenuProvider,
   MenuList,
   MenuSelect,
+  SelectOption,
   useIsDescendent,
   useClickOutside,
   useInjectStyle,

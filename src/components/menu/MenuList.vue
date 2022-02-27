@@ -25,7 +25,7 @@ export default {
   props: {
     backgroundColor: {
       type: String,
-      default: 'beige',
+      default: 'white',
     },
     width: {
       type: [Number, String],

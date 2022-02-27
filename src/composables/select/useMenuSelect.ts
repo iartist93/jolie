@@ -1,5 +1,16 @@
 import { ref, Ref } from '@vue/composition-api';
 
+export interface optionValueObjectType {
+  text: string;
+  [x: string]: unknown;
+}
+
+export type optionValueType =
+  | number
+  | string
+  | optionValueObjectType
+  | undefined;
+
 export interface UseMenuSelectType {
   isOpen: Ref<boolean>;
   onOpen(): void;
@@ -7,28 +18,21 @@ export interface UseMenuSelectType {
   onToggle(): void;
   closeOnBlur?: boolean;
   openOnHover?: boolean;
-  onSelect(value: any): void;
-  selected: Ref<any>;
+  onSelect(value: optionValueType): void;
+  selected: Ref<optionValueType>;
 }
-
-interface option {
-  text: string;
-  value: any;
-}
-
-type optionsType = string[] | option[];
 
 export interface UseMenuSelectProps {
   closeOnBlur?: boolean;
   openOnHover?: boolean;
-  options: optionsType[];
+  value?: optionValueType;
 }
 
 export function useMenuSelect(props: UseMenuSelectProps): UseMenuSelectType {
   const { closeOnBlur, openOnHover } = props;
 
   const isOpen = ref(false);
-  const selected = ref<any>(null);
+  const selected = ref<optionValueType>(props.value);
 
   const onOpen = () => {
     isOpen.value = true;
@@ -42,7 +46,7 @@ export function useMenuSelect(props: UseMenuSelectProps): UseMenuSelectType {
     isOpen.value = !isOpen.value;
   };
 
-  const onSelect = (value: unknown) => {
+  const onSelect = (value: optionValueType) => {
     selected.value = value;
   };
 

@@ -9,21 +9,47 @@
     <!-- ------------------------------------------------- -->
     <!-- Menu Select -->
     <!-- ------------------------------------------------- -->
-
     <section v-if="true" class="section menu">
-      <menu-select :width="toggleChecked ? 300 : 400">
-        <menu-item
-          v-for="(item, index) in 10"
-          :key="index"
-          :startIcon="require('@/assets/icons/description-icon.svg')"
-          :iconSize="28"
-          :hoverColor="'#F0F0F0'"
-          :pl="25"
-          :h="46"
-          @click="onMenuItemClicked(index)"
-          >Menu item {{ index + 1 }}
-        </menu-item>
-      </menu-select>
+      <div class="flex">
+        <div>
+          <span> Selected Option : {{ selectedOption }} </span>
+
+          <menu-select
+            :width="toggleChecked ? 300 : 400"
+            v-model="selectedOption"
+          >
+            <select-option
+              v-for="(item, index) in options"
+              :key="index"
+              :startIcon="item.startIcon"
+              :iconSize="28"
+              :hoverColor="'#F0F0F0'"
+              :pl="25"
+              :h="46"
+              :value="item"
+            >
+              {{ item.text }}
+            </select-option>
+          </menu-select>
+        </div>
+
+        <div class="mx-12">
+          <span> Selected Option 2: {{ selectedOption2 }} </span>
+          <menu-select v-model="selectedOption2">
+            <select-option
+              v-for="(item, index) in options2"
+              :key="index"
+              :iconSize="28"
+              :hoverColor="'#F0F0F0'"
+              :pl="25"
+              :h="46"
+              :value="item"
+            >
+              {{ item }}
+            </select-option>
+          </menu-select>
+        </div>
+      </div>
     </section>
 
     <!-- ------------------------------------------------- -->
@@ -222,6 +248,7 @@ import MenuItem from './components/menu/MenuItem.vue';
 import MenuList from './components/menu/MenuList.vue';
 import MenuProvider from './components/menu/MenuProvider.vue';
 import MenuSelect from './components/select/MenuSelect.vue';
+import SelectOption from './components/select/SelectOption.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -235,11 +262,33 @@ export default Vue.extend({
     MenuList,
     MenuProvider,
     MenuSelect,
+    SelectOption,
   },
   data() {
     return {
       toggleChecked: false,
       boxActiveState: false,
+      options: [
+        {
+          text: 'Option 1',
+          startIcon: require('@/assets/icons/description-icon.svg'),
+        },
+        {
+          text: 'Option 2',
+          startIcon: require('@/assets/icons/description-icon.svg'),
+        },
+        {
+          text: 'Option 3',
+        },
+        {
+          text: 'Option 4',
+        },
+      ],
+      options2: ['option 2.1', 'option 2.2', 'option 2.3', 'option 2.4'],
+      selectedOption: {
+        text: 'Option 4',
+      },
+      selectedOption2: null,
     };
   },
   methods: {
