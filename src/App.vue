@@ -35,7 +35,7 @@
 
         <div class="mx-12">
           <span> Selected Option 2: {{ selectedOption2 }} </span>
-          <menu-select v-model="selectedOption2">
+          <menu-select v-model="selectedOption2" :openOnHover="true">
             <select-option
               v-for="(item, index) in options2"
               :key="index"

@@ -2,7 +2,7 @@
   <div ref="rootRef" class="jolie-menu-select">
     <menu-button ref="menuButtonRef">
       <button ref="selectButtonRef" class="menu-select-button">
-        <span>{{ selectedtext }}</span>
+        <span v-html="selectedtext" class="flex" />
         <img
           src="@/assets/icons/arrow-down.svg"
           alt="arrow-down"
@@ -93,8 +93,8 @@ export default {
 
     const setSelectedText = () => {
       selectedtext.value = (rootRef.value as HTMLElement).querySelector(
-        '.jolie-select-option[data-selected="1"]>span'
-      )?.textContent as string;
+        '.jolie-select-option[data-selected="1"]'
+      )?.innerHTML as string;
 
       emit('change', selected.value);
       emit('input', selected.value);
@@ -123,8 +123,7 @@ export default {
         ) as HTMLElement;
 
         firstItem.dataset['selected'] = '1';
-        const textSpan = firstItem.querySelector('span');
-        selectedtext.value = textSpan?.textContent as string;
+        selectedtext.value = firstItem?.innerHTML as string;
 
         onSelect(JSON.parse(firstItem.dataset['value'] as string));
       } else {
