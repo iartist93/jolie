@@ -3,11 +3,13 @@
     <menu-button ref="menuButtonRef">
       <button ref="selectButtonRef" class="menu-select-button">
         <span v-html="selectedtext" class="flex" />
-        <img
-          src="@/assets/icons/arrow-down.svg"
-          alt="arrow-down"
-          class="arrow-down"
-        />
+        <div class="arrow-down-wrapper">
+          <img
+            src="@/assets/icons/arrow-down.svg"
+            alt="arrow-down"
+            class="arrow-down"
+          />
+        </div>
       </button>
     </menu-button>
     <menu-list :width="menuListWidth">
@@ -52,18 +54,20 @@ export default {
       default: false,
     },
     width: {
-      type: Number,
-      default: 300,
+      type: [Number, String],
+      default: 'auto',
     },
     value: {
       type: [Object, String, Number, Array],
     },
   },
   setup(props, { emit }) {
+    type widthType = number | string;
+
     const rootRef = ref<HTMLElement | null>(null);
     const selectButtonRef = ref<HTMLElement | null>(null);
     const menuButtonRef = ref<ComponentInstance | null>(null);
-    const menuListWidth = ref<number>(props.width as number);
+    const menuListWidth = ref<widthType>(props.width as widthType);
     const selectedtext = ref<string>('');
 
     const menuContext = useMenuSelect(props as unknown as UseMenuSelectProps);
@@ -82,9 +86,16 @@ export default {
         if (entry.borderBoxSize) {
           if (entry.borderBoxSize[0]) {
             const newSize = Math.round(entry.borderBoxSize[0].inlineSize);
-            const threshold = Math.round((menuListWidth.value * 1) / 100);
-            if (Math.abs(newSize - menuListWidth.value) > threshold) {
+            const oldSize =
+              (selectButtonRef.value as HTMLElement).getBoundingClientRect()
+                .width || 0;
+
+            const threshold = Math.round(oldSize * 0.01);
+
+            if (Math.abs(newSize - oldSize) > threshold) {
               menuListWidth.value = newSize;
+            } else {
+              menuListWidth.value = oldSize;
             }
           }
         }
@@ -172,8 +183,12 @@ export default {
   border-radius: 6px;
   border: 1px solid #e1dcdc;
 
-  img {
+  .arrow-down-wrapper {
     margin-left: auto;
+
+    img {
+      margin-left: 20px;
+    }
   }
 }
 </style>

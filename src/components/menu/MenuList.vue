@@ -29,7 +29,7 @@ export default {
     },
     width: {
       type: [Number, String],
-      default: 200,
+      default: 'auto',
     },
     borderRadius: {
       type: Number,
