@@ -124,7 +124,7 @@ export default {
   display: flex;
   flex-direction: column;
   position: absolute;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 15px 15px #04040423;
   z-index: 1;
   opacity: 0;
   transform-origin: top left;
