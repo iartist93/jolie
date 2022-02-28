@@ -45,6 +45,9 @@ import MenuButton from '../menu/MenuButton.vue';
 export default {
   components: { MenuList, MenuButton },
   props: {
+    value: {
+      type: [Object, String, Number, Array],
+    },
     closeOnBlur: {
       type: Boolean,
       default: true,
@@ -57,8 +60,29 @@ export default {
       type: [Number, String],
       default: 'auto',
     },
-    value: {
-      type: [Object, String, Number, Array],
+    height: {
+      type: [Number, String],
+      default: 'auto',
+    },
+    pl: {
+      type: Number,
+      default: 0,
+    },
+    pr: {
+      type: Number,
+      default: 0,
+    },
+    px: {
+      type: Number,
+      default: 20,
+    },
+    py: {
+      type: Number,
+      default: 15,
+    },
+    p: {
+      type: Number,
+      default: 0,
     },
   },
   setup(props, { emit }) {
@@ -179,7 +203,6 @@ export default {
   background-color: white;
   color: #a5a5a5;
   font-size: 18px;
-  padding: 15px 20px;
   border-radius: 6px;
   border: 1px solid #e1dcdc;
 
