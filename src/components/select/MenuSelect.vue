@@ -58,7 +58,7 @@ export default {
     },
     width: {
       type: [Number, String],
-      default: 'auto',
+      default: '100%',
     },
     height: {
       type: [Number, String],
@@ -194,7 +194,7 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  // width: fit-content;
 }
 
 .menu-select-button {
