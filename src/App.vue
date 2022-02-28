@@ -1,15 +1,15 @@
 <template>
-  <div class="page">
+  <div class="page" :class="{ dark: darkMode }">
     <header>
       <h1>Demo Components</h1>
-      <p>Please add any reusable component here</p>
+      <p>Built with ❤️ at Uniparticle</p>
     </header>
 
     <sample-component v-if="false" />
     <!-- ------------------------------------------------- -->
     <!-- Menu Select -->
     <!-- ------------------------------------------------- -->
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <div class="flex">
         <div>
           <span> Selected Option : {{ selectedOption }} </span>
@@ -185,15 +185,46 @@
     <!-- switch -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="toggles">
-      <toggle v-model="toggleChecked" />
+    <div v-if="true" class="section toggles">
+      <h1>Toggle Components</h1>
+
+      <toggle v-model="toggleChecked" :width="70" class="mx-10" />
+      <toggle
+        v-model="darkMode"
+        class="mx-10"
+        :color="'#423194'"
+        :offColor="'#B9E4F4'"
+        :sliderColor="'white'"
+        :sliderOffColor="'#FEF9B8'"
+      />
+
+      <toggle
+        v-model="toggleChecked4"
+        class="mx-10"
+        :color="'#46B781'"
+        :offColor="'transperent'"
+        :sliderColor="'white'"
+        :sliderOffColor="'#46B781'"
+        :borderColor="'#46B781'"
+        :showBorder="true"
+      />
+      <toggle
+        v-model="toggleChecked3"
+        class="mx-10"
+        :color="'#E68907'"
+        :offColor="'#F0F0F0'"
+        :sliderColor="'#333333'"
+        :sliderSize="39"
+        :opened="true"
+        :width="80"
+      />
     </div>
 
     <!-- ------------------------------------------------- -->
     <!-- boxes -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="section boxes">
+    <div v-if="false" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
         :borderColor="toggleChecked ? 'red' : 'yellow'"
@@ -267,6 +298,9 @@ export default Vue.extend({
   data() {
     return {
       toggleChecked: false,
+      toggleChecked2: false,
+      toggleChecked3: false,
+      toggleChecked4: false,
       boxActiveState: false,
       options: [
         {
@@ -289,7 +323,13 @@ export default Vue.extend({
         text: 'Option 4',
       },
       selectedOption2: null,
+      darkMode: false,
     };
+  },
+  computed: {
+    pageColor() {
+      return this.darkMode ? '#26282C' : '#f5f5f5';
+    },
   },
   methods: {
     onMenuItemClicked(index) {
@@ -324,6 +364,13 @@ export default Vue.extend({
     flex-direction: column;
     align-items: center;
   }
+
+  transition: all 0.1s linear;
+
+  &.dark {
+    background-color: #26282c;
+    color: white;
+  }
 }
 
 .section {
@@ -342,6 +389,9 @@ export default Vue.extend({
   margin-bottom: 30px;
 
   // margin-top: 600px;
+  &.toggles {
+    background-color: rgb(255, 255, 255);
+  }
 }
 
 .menu-provider {
