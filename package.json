@@ -1,6 +1,6 @@
 {
   "name": "jolie",
-  "version": "0.1.50",
+  "version": "0.1.51",
   "private": false,
   "description": "Jolie is a simple component library to build more complex Vue applications",
   "author": "Ahmad Ayman <mongez.me@gmail.com> (https://iartist93.github.io/)",
