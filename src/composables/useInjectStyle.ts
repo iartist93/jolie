@@ -1,6 +1,5 @@
 import { onMounted, onUpdated, ref, Ref, watch } from '@vue/composition-api';
 import _ from 'lodash';
-import { useStyledSystemType } from './useStyledSystem';
 
 function insertClassAtFirst<T extends HTMLElement = HTMLElement>(
   el: Ref<T>,
@@ -36,9 +35,15 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
       .join('\n');
     const css = `.${className.value} { ${cssObj} } `;
 
-    textNode.value?.remove();
-    textNode.value = document.createTextNode(css);
-    styleElement.value?.appendChild(textNode.value);
+    console.log('recalculateStyle for => ', el.value);
+    console.log('textNode =>  ', textNode.value);
+    console.log('styleElement =>  ', styleElement.value);
+
+    if (textNode.value && styleElement.value) {
+      textNode.value.remove();
+      textNode.value = document.createTextNode(css);
+      styleElement.value.appendChild(textNode.value);
+    }
   };
 
   onMounted(() => {
@@ -75,7 +80,7 @@ export function useInjectStyle<T extends HTMLElement = HTMLElement>(
     insertClassAtFirst(el, originalClassList.value, className.value);
   });
 
-  watch(style, (newStyle, oldStyle) => {
+  watch(style, () => {
     recalculateStyle();
   });
 }

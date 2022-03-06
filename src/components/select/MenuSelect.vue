@@ -141,6 +141,18 @@ export default {
       setSelectedText();
     });
 
+    watch(
+      () => props.value,
+      (newValue) => {
+        if (newValue) {
+          console.log('props value changed === ', newValue);
+          onSelect(newValue as optionValueType);
+        } else {
+          console.log('props value changed !== ', newValue);
+        }
+      }
+    );
+
     onMounted(() => {
       menuListWidth.value = (
         menuButtonRef.value as ComponentInstance

@@ -31,6 +31,10 @@
               {{ item.text }}
             </select-option>
           </menu-select>
+
+          <button @click="randomizeSelectedOption">
+            Randomize Selected Option
+          </button>
         </div>
 
         <div class="mx-12">
@@ -180,12 +184,11 @@
         >Button Ghost</icon-button
       >
     </div>
-
     <!-- ------------------------------------------------- -->
     <!-- switch -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="section toggles">
+    <div v-if="false" class="section toggles">
       <h1>Toggle Components</h1>
 
       <toggle v-model="toggleChecked" :width="70" class="mx-10" />
@@ -224,7 +227,7 @@
     <!-- boxes -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="false" class="section boxes">
+    <div v-if="true" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
         :borderColor="toggleChecked ? 'red' : 'yellow'"
@@ -246,6 +249,11 @@
       >
         Hello this is a default box {{ toggleChecked }}
       </box> -->
+
+      <box :mt="40" :boxShadow="'lg'" />
+      <box :mt="40" :boxShadow="'sm'" :borderWidth="1" />
+      <box :mt="40" :boxShadow="'md'" />
+      <box :mt="40" />
     </div>
 
     <!-- ------------------------------------------------- -->
@@ -334,6 +342,11 @@ export default Vue.extend({
   methods: {
     onMenuItemClicked(index) {
       console.log('============> on Menu Item Clicked ', index);
+    },
+    randomizeSelectedOption() {
+      const rand = Math.round(Math.random() * 3);
+      console.log('Rand ', rand);
+      this.selectedOption = this.options[rand];
     },
   },
 });
