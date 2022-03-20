@@ -1,8 +1,19 @@
 <template>
   <button
-    :style="{ ...buttonStyle }"
+    :style="{
+      ...buttonStyle,
+      '--jolie-icon-button-background-color': backgroundColor,
+      '--jolie-icon-button-color': color,
+      '--jolie-icon-button-border': border,
+      '--jolie-icon-button-hover-color': hoverColor,
+    }"
     class="jolie-button"
-    :class="{ disabled }"
+    :class="{
+      disabled,
+      outline: variant === 'outline',
+      solid: variant === 'solid',
+      ghost: variant === 'ghost',
+    }"
     v-on="$listeners"
   >
     <img
@@ -52,7 +63,7 @@ export default defineComponent({
         typography.fontSizes[size] !== undefined,
       default: 'md',
     },
-    border: {
+    borderRadius: {
       type: Number,
       default: 6,
     },
@@ -66,7 +77,7 @@ export default defineComponent({
     },
     variant: {
       type: String,
-      default: 'solid' /** solid, outline */,
+      default: 'solid' /** solid, outline, ghost */,
     },
     startIcon: {
       type: String,
@@ -76,47 +87,52 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let { size, colorScheme, variant, border, isFullWidth, disabled } =
+    let { size, colorScheme, variant, borderRadius, isFullWidth, disabled } =
       props as PropsType;
 
     const hasSize = Boolean(size && ButtonTheme.sizes[size]);
 
     const buttonStyle = {
-      'border-radius': border ? `${border}px` : '0',
-      'background-color': disabled
-        ? 'gray'
-        : variant === 'outline' || variant === 'ghost'
-        ? 'transparent'
-        : colorScheme
-        ? colorScheme
-        : 'blue',
+      'border-radius': borderRadius ? `${borderRadius}px` : '0',
       'font-size': typography.fontSizes[size],
       'padding-right': hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0,
       'padding-left': hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0,
       'min-width': hasSize ? spacing[ButtonTheme.sizes[size].minW] : 0,
       width: isFullWidth ? '100%' : 'auto',
       height: hasSize ? spacing[ButtonTheme.sizes[size].h] : 'auto',
-      border:
-        variant === 'ghost'
-          ? 0
-          : variant === 'outline' || variant === 'ghost'
-          ? colorScheme
-            ? `1px solid ${colorScheme}`
-            : 'black'
-          : 0,
-      color:
-        variant === 'outline' || variant === 'ghost'
-          ? colorScheme
-            ? colorScheme
-            : 'black'
-          : 'white',
       'box-shadow':
         variant === 'solid' ? 'box-shadow: 0px 3px 6px #00000029;' : 'none',
     };
 
     const ph = hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0;
 
-    return { buttonStyle, ph };
+    const backgroundColor = disabled
+      ? 'gray'
+      : variant === 'outline' || variant === 'ghost'
+      ? 'transparent'
+      : colorScheme
+      ? colorScheme
+      : 'blue';
+
+    const color =
+      variant === 'outline' || variant === 'ghost'
+        ? colorScheme
+          ? colorScheme
+          : 'black'
+        : 'white';
+
+    const hoverColor = variant === 'outline' ? colorScheme : 'white';
+
+    const border =
+      variant === 'ghost'
+        ? 0
+        : variant === 'outline' || variant === 'ghost'
+        ? colorScheme
+          ? `1px solid ${colorScheme}`
+          : 'black'
+        : 0;
+
+    return { buttonStyle, ph, backgroundColor, color, border, hoverColor };
   },
 });
 </script>
@@ -125,7 +141,6 @@ export default defineComponent({
 .jolie-button {
   font-weight: 500;
   line-height: '1.2';
-  color: white;
 
   display: flex;
   align-items: center;
@@ -137,8 +152,21 @@ export default defineComponent({
   cursor: pointer;
   user-select: none;
 
-  &:hover:not(.disabled) {
-    filter: brightness(90%);
+  background-color: var(--jolie-icon-button-background-color);
+  color: var(--jolie-icon-button-color);
+  border: var(--jolie-icon-button-border);
+
+  transition: all 0.1s linear;
+
+  &:hover {
+    &.outline {
+      background-color: var(--jolie-icon-button-hover-color);
+      color: white;
+    }
+
+    &.solid {
+      filter: brightness(90%);
+    }
   }
 
   &.disabled {
