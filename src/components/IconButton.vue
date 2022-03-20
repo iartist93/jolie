@@ -1,13 +1,25 @@
 <template>
   <button
-    :style="{
-      ...buttonStyle,
-    }"
+    :style="{ ...buttonStyle }"
     class="jolie-button"
     :class="{ disabled }"
     v-on="$listeners"
   >
+    <img
+      v-if="startIcon"
+      :src="startIcon"
+      alt="start-icon"
+      class="start-icon"
+      :style="{ '--jolie-icon-button-padding-h': ph }"
+    />
     <slot>Button</slot>
+    <img
+      v-if="endIcon"
+      :src="endIcon"
+      alt="end-icon"
+      class="end-icon"
+      :style="{ '--jolie-icon-button-padding-h': ph }"
+    />
   </button>
 </template>
 
@@ -56,6 +68,12 @@ export default defineComponent({
       type: String,
       default: 'solid' /** solid, outline */,
     },
+    startIcon: {
+      type: String,
+    },
+    endIcon: {
+      type: String,
+    },
   },
   setup(props) {
     let { size, colorScheme, variant, border, isFullWidth, disabled } =
@@ -96,7 +114,9 @@ export default defineComponent({
         variant === 'solid' ? 'box-shadow: 0px 3px 6px #00000029;' : 'none',
     };
 
-    return { buttonStyle };
+    const ph = hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0;
+
+    return { buttonStyle, ph };
   },
 });
 </script>
@@ -124,5 +144,15 @@ export default defineComponent({
   &.disabled {
     color: rgb(216, 216, 216);
   }
+}
+
+.start-icon {
+  height: 60%;
+  margin-right: var(--jolie-icon-button-padding-h);
+}
+
+.end-icon {
+  height: 60%;
+  margin-left: var(--jolie-icon-button-padding-h);
 }
 </style>
