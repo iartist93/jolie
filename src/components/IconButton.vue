@@ -45,7 +45,7 @@ interface PropsType extends Readonly<Data> {
   colorScheme: string;
   variant: string;
   size: FontSize;
-  border: number;
+  borderRadius: number;
   isFullWidth: boolean;
   disabled: boolean;
 }
