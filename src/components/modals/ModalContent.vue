@@ -5,8 +5,6 @@
       :style="{ width: `${width}px` }"
       ref="modalRef"
     >
-      <div>{{ isOpen }}</div>
-
       <slot></slot>
     </main>
   </div>
