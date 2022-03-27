@@ -6,10 +6,7 @@
       ref="modalRef"
     >
       <div>{{ isOpen }}</div>
-      <div>Modal Content 1</div>
-      <div>Modal Content 2</div>
-      <div>Modal Content 3</div>
-      <div>Modal Content 4</div>
+
       <slot></slot>
     </main>
   </div>
@@ -17,8 +14,7 @@
 
 <script lang="ts">
 import { onMounted, Ref, ref, watch } from '@vue/composition-api';
-import { useMenuList } from '@/composables/menu/useMenuList';
-import { useClickOutside } from '@/composables/useClickOutside';
+import { useModalContent } from '@/composables/modal/useModalContent';
 
 export default {
   props: {
@@ -35,31 +31,6 @@ export default {
   setup(props) {
     const modalRef = ref<null | Ref<HTMLElement>>(null);
     const modalContainerRef = ref<null | Ref<HTMLElement>>(null);
-
-    const { isOpen, onClose } = useMenuList(modalRef as Ref<HTMLElement>);
-
-    useClickOutside(modalRef as Ref<HTMLElement>, (event) => {
-      if (isOpen.value) {
-        onModalClose();
-      }
-    });
-
-    watch(isOpen, (openValue) => {
-      if (openValue) {
-        // document.body.style.height = "100vh";
-        // document.body.style.overflowY = "hidden";
-        // document.body.style.paddingRight = "16px"; /* scrollbar width */
-        onModalOpen();
-      }
-      //   else {
-      // document.body.style.height = "";
-      // document.body.style.overflowY = "";
-      // document.body.style.top = "";
-      // document.body.style.position = "";
-      // document.body.style.paddingRight = "0px";
-      // onModalClose();
-      //   }
-    });
 
     const onModalOpen = () => {
       const modalElement = (modalRef as Ref<HTMLElement>).value;
@@ -96,6 +67,17 @@ export default {
       }, 300);
     };
 
+    const { isOpen, onClose } = useModalContent(
+      modalRef as Ref<HTMLElement>,
+      onModalClose
+    );
+
+    watch(isOpen, (openValue) => {
+      if (openValue) {
+        onModalOpen();
+      }
+    });
+
     onMounted(() => {
       document.addEventListener('keyup', (e) => {
         if (e.code === 'Escape') {
@@ -104,7 +86,7 @@ export default {
       });
     });
 
-    return { onModalClose, isOpen, modalRef, modalContainerRef };
+    return { isOpen, modalRef, modalContainerRef };
   },
 };
 </script>

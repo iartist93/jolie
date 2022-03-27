@@ -17,7 +17,12 @@
         <modal-button>
           <icon-button>Toggle Menu</icon-button>
         </modal-button>
-        <modal-content> This is modal content </modal-content>
+        <modal-content>
+          <div>Modal Content 1</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 3</div>
+          <div>Modal Content 4</div>
+        </modal-content>
       </modal>
     </section>
 
