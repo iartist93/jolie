@@ -146,7 +146,7 @@ $end-bgcolor: rgba(
       height: 111px;
       width: 100%;
       border-radius: 10px 10px 0px 0px;
-      background-color: $gray-900;
+      background-color: gray;
       color: white;
       font-size: 20px;
       font-weight: 500;
@@ -171,7 +171,8 @@ $end-bgcolor: rgba(
       overflow-y: auto;
     }
     &__footer {
-      background-color: $gray-100;
+      // background-color: $gray-100;
+      background-color: gray;
       height: 94px;
       border-radius: 0px 0px 10px 10px;
       display: flex;
