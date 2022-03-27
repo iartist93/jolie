@@ -1,5 +1,5 @@
 <template>
-  <button class="modal-button" @click="onToggle">
+  <button class="jolie-modal-button" @click="onToggle">
     <slot>Toggle Modal</slot>
   </button>
 </template>
@@ -15,9 +15,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.modal-button {
-  width: 300px;
-  background-color: red;
-}
-</style>
+<style lang="scss" scoped></style>

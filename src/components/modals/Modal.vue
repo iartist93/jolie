@@ -1,7 +1,7 @@
 <template>
-  <div ref="root" class="jolie-modal">
-    <span>isOpen === {{ isOpen }}</span>
+  <div ref="rootRef" class="jolie-modal">
     <slot></slot>
+    <span>isOpen === {{ isOpen }}</span>
   </div>
 </template>
 
@@ -17,16 +17,14 @@ export default {
     },
   },
   setup(props) {
-    const root = ref<null | Ref<HTMLElement>>(null);
-
-    const { closeOnBlur = true } = props;
+    const rootRef = ref<null | Ref<HTMLElement>>(null);
 
     const menuContext = useMenu(props);
-    const { onClose, isOpen } = menuContext;
+    const { isOpen } = menuContext;
 
     //TODO: Implement `useEscape` here
 
-    return { root, isOpen };
+    return { rootRef, isOpen };
   },
 };
 </script>

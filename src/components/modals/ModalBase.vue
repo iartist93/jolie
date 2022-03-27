@@ -1,27 +1,24 @@
 <template>
-  <div
-    v-show="show"
-    @keyup.esc="onCloseClicked"
-    class="container-modal animate"
-    ref="modalContainer"
-  >
+  <div class="container-modal animate" ref="modalContainer">
     <main
       class="modal-custom animate"
       :style="{ width: `${width}px` }"
       ref="modalRef"
     >
-      <section v-if="showHeader" class="modal-custom__header">
+      <!-- <section v-if="showHeader" class="modal-custom__header">
         <slot name="header"></slot>
         <button @click="onCloseClicked" class="close-btn">
           <img src="@/assets/icons/close.svg" alt="close button" height="40" />
         </button>
-      </section>
+      </section> -->
+
       <section class="modal-custom__body" ref="modalBody">
         <slot name="body"></slot>
       </section>
-      <section v-if="$slots.footer" class="modal-custom__footer">
+
+      <!-- <section v-if="$slots.footer" class="modal-custom__footer">
         <slot name="footer"></slot>
-      </section>
+      </section> -->
     </main>
   </div>
 </template>
@@ -33,10 +30,6 @@ import { useClickOutside } from '@/composables/useClickOutside';
 export default {
   emits: ['blurtest', 'blur'],
   props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
     width: {
       type: Number,
       default: 1614,
@@ -103,13 +96,7 @@ export default {
       }
     },
   },
-  mounted() {
-    document.addEventListener('keyup', (e) => {
-      if (e.code === 'Escape') {
-        this.onCloseClicked();
-      }
-    });
-  },
+
   watch: {
     show(newValue, oldValue) {
       if (newValue) {

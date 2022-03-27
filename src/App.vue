@@ -10,10 +10,15 @@
     <!-- ------------------------------------------------- -->
     <!-- Modal  -->
     <!-- ------------------------------------------------- -->
-    <section v-if="false" class="section menu">
+    <section v-if="true" class="section menu">
       <h1>Modal Components</h1>
 
-      <modal> </modal>
+      <modal>
+        <modal-button>
+          <icon-button>Toggle Menu</icon-button>
+        </modal-button>
+        <modal-content> This is modal content </modal-content>
+      </modal>
     </section>
 
     <!-- ------------------------------------------------- -->
@@ -333,6 +338,8 @@ import MenuProvider from './components/menu/MenuProvider.vue';
 import MenuSelect from './components/select/MenuSelect.vue';
 import SelectOption from './components/select/SelectOption.vue';
 import Modal from './components/modals/Modal.vue';
+import ModalContent from './components/modals/ModalContent.vue';
+import ModalButton from './components/modals/ModalButton.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -348,6 +355,8 @@ export default Vue.extend({
     MenuSelect,
     SelectOption,
     Modal,
+    ModalContent,
+    ModalButton,
   },
   data() {
     return {
