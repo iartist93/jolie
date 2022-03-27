@@ -1,5 +1,5 @@
 import { inject } from '@vue/composition-api';
-import { UseMenuType } from '@/composables/menu/useMenu';
+import { UseDisclosureType } from '@/composables/useDisclosure';
 
 export interface UseMenuButtonType {
   onOpen(): void;
@@ -9,7 +9,7 @@ export interface UseMenuButtonType {
 }
 
 export function useMenuButton(): UseMenuButtonType {
-  const menuContext = inject('menuContext') as UseMenuType;
+  const menuContext = inject('menuContext') as UseDisclosureType;
   const { onToggle, onOpen, onClose, openOnHover } = menuContext;
   return { onToggle, onOpen, onClose, openOnHover };
 }
