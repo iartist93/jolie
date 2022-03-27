@@ -37,7 +37,7 @@ import {
   useStyledSystem,
   useStyledSystemType,
 } from '@/composables/useStyledSystem';
-import { UseMenuType } from '@/composables/menu/useMenu';
+import { UseDisclosureType } from '@/composables/useDisclosure';
 
 export default {
   props: {
@@ -96,7 +96,7 @@ export default {
     const alignValue = ref('flex-start');
 
     // TODO: Create a seperate composable for this
-    const menuContext = inject('menuContext') as UseMenuType;
+    const menuContext = inject('menuContext') as UseDisclosureType;
     const { onClose, isOpen } = menuContext;
 
     const elementStyle = useStyledSystem(
