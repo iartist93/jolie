@@ -95,6 +95,7 @@ export default {
     const rootRef = ref<HTMLElement | null>(null);
     const alignValue = ref('flex-start');
 
+    // TODO: Create a seperate composable for this
     const menuContext = inject('menuContext') as UseMenuType;
     const { onClose, isOpen } = menuContext;
 

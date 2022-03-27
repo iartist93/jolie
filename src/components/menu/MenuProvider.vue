@@ -6,7 +6,7 @@
 
 <script>
 import { useMenu } from '@/composables/menu/useMenu';
-import { onBeforeUnmount, onMounted, provide, ref } from '@vue/composition-api';
+import { onBeforeUnmount, onMounted, ref } from '@vue/composition-api';
 
 export default {
   props: {
@@ -23,8 +23,6 @@ export default {
     const rootRef = ref(null);
 
     const menuContext = useMenu(props);
-    provide('menuContext', menuContext);
-
     const { onOpen, onClose } = menuContext;
 
     onMounted(() => {

@@ -6,6 +6,16 @@
     </header>
 
     <sample-component v-if="false" />
+
+    <!-- ------------------------------------------------- -->
+    <!-- Modal  -->
+    <!-- ------------------------------------------------- -->
+    <section v-if="false" class="section menu">
+      <h1>Modal Components</h1>
+
+      <modal> </modal>
+    </section>
+
     <!-- ------------------------------------------------- -->
     <!-- Menu Select -->
     <!-- ------------------------------------------------- -->
@@ -165,7 +175,7 @@
     <!-- buttons -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="buttons">
+    <div v-if="false" class="buttons">
       <icon-button size="sm" class="mt-4">Button sm</icon-button>
       <icon-button class="mt-4">Button default</icon-button>
       <icon-button size="lg" class="mt-4">Button lg</icon-button>
@@ -217,6 +227,7 @@
         Icon Button
       </icon-button>
     </div>
+
     <!-- ------------------------------------------------- -->
     <!-- switch -->
     <!-- ------------------------------------------------- -->
@@ -321,6 +332,7 @@ import MenuList from './components/menu/MenuList.vue';
 import MenuProvider from './components/menu/MenuProvider.vue';
 import MenuSelect from './components/select/MenuSelect.vue';
 import SelectOption from './components/select/SelectOption.vue';
+import Modal from './components/modals/Modal.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -335,6 +347,7 @@ export default Vue.extend({
     MenuProvider,
     MenuSelect,
     SelectOption,
+    Modal,
   },
   data() {
     return {
