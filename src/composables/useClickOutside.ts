@@ -26,7 +26,7 @@ export function useClickOutside<T extends HTMLElement = HTMLElement>(
     const isChild = useIsDescendent(root.value, event.target as HTMLElement);
 
     const isIgnored =
-      typeof ignoreEl === undefined
+      typeof ignoreEl === 'undefined' || ignoreEl === null
         ? false
         : useIsDescendent(
             (ignoreEl as Ref<HTMLElement>).value,
