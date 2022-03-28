@@ -128,14 +128,14 @@ export default defineComponent({
       ) as unknown as HTMLElement[];
 
       for (const button of cancelButtons.value) {
-        button.addEventListener('click', onClose);
+        button.addEventListener('click', onModalClose);
       }
     });
 
     onBeforeUnmount(() => {
       if (cancelButtons.value) {
         for (const button of cancelButtons.value) {
-          button.removeEventListener('click', onClose);
+          button.removeEventListener('click', onModalClose);
         }
       }
     });
