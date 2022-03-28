@@ -25,6 +25,7 @@
       @keydown.space.prevent="onToggle"
       :checked="value"
       :aria-checked="value.toString()"
+      :disabled="disabled"
     />
     <span class="slider"></span>
   </label>
@@ -35,6 +36,10 @@ export default {
   name: 'Toggle',
   props: {
     value: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },

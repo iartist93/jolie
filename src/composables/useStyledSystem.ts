@@ -88,6 +88,8 @@ export function useStyledSystem(
   return computed(() => {
     const style: Record<string, unknown> = {};
 
+    console.log('==========> useStyledSystem > props ', props);
+
     // colors
     if (props.color) style['color'] = props.color;
     if (props.bg) style['background-color'] = props.bg;

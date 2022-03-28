@@ -242,7 +242,7 @@
     <!-- switch -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="false" class="section toggles">
+    <div v-if="true" class="section toggles">
       <h1>Toggle Components</h1>
 
       <toggle v-model="toggleChecked" :width="70" class="mx-10" />
@@ -267,6 +267,16 @@
       />
       <toggle
         v-model="toggleChecked3"
+        class="mx-10"
+        :color="'#E68907'"
+        :offColor="'#F0F0F0'"
+        :sliderColor="'#333333'"
+        :sliderSize="39"
+        :opened="true"
+        :width="80"
+      />
+      <toggle
+        value="true"
         class="mx-10"
         :color="'#E68907'"
         :offColor="'#F0F0F0'"
