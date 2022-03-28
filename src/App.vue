@@ -17,10 +17,29 @@
         <modal-button>
           <icon-button>Toggle Menu</icon-button>
         </modal-button>
-        <modal-content :width="800" :p="20" :boxShadow="'md'" :borderWidth="0">
+        <modal-content
+          :width="800"
+          :height="500"
+          :p="20"
+          :boxShadow="'md'"
+          :borderWidth="0"
+        >
           <div>Modal Content 1</div>
           <div>Modal Content 2</div>
           <div>Modal Content 3</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
+          <div>Modal Content 4</div>
           <div>Modal Content 4</div>
         </modal-content>
       </modal>
@@ -276,7 +295,8 @@
         :width="80"
       />
       <toggle
-        value="true"
+        :value="true"
+        :disabled="true"
         class="mx-10"
         :color="'#E68907'"
         :offColor="'#F0F0F0'"

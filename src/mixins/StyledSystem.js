@@ -70,7 +70,6 @@ const StyledSystem = {
     },
     h: {
       type: [String, Number],
-      default: 200,
     },
     width: {
       type: [String, Number],
