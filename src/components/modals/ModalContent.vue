@@ -13,6 +13,7 @@ import {
   ref,
   watch,
   defineComponent,
+  onBeforeUnmount,
 } from '@vue/composition-api';
 import { useModalContent } from '@/composables/modal/useModalContent';
 
@@ -25,7 +26,6 @@ import StyledSystem from '@/mixins/StyledSystem';
 
 export default defineComponent({
   name: 'ModalContent',
-
   props: {
     id: {
       type: String,
@@ -40,6 +40,8 @@ export default defineComponent({
   setup(props) {
     const modalContainerRef = ref<null | Ref<HTMLElement>>(null);
     const modalRef = ref<null | Ref<HTMLElement>>(null);
+
+    const cancelButtons = ref<null | HTMLElement[]>(null);
 
     let shadowClass = ref('');
 
@@ -120,6 +122,22 @@ export default defineComponent({
           onModalClose();
         }
       });
+
+      cancelButtons.value = modalRef.value?.querySelectorAll(
+        '.modal-close'
+      ) as unknown as HTMLElement[];
+
+      for (const button of cancelButtons.value) {
+        button.addEventListener('click', onClose);
+      }
+    });
+
+    onBeforeUnmount(() => {
+      if (cancelButtons.value) {
+        for (const button of cancelButtons.value) {
+          button.removeEventListener('click', onClose);
+        }
+      }
     });
 
     return { isOpen, modalRef, modalContainerRef, shadowClass };

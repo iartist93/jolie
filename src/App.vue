@@ -41,6 +41,10 @@
           <div>Modal Content 4</div>
           <div>Modal Content 4</div>
           <div>Modal Content 4</div>
+
+          <icon-button class="modal-close">Cancel 1</icon-button>
+          <icon-button class="modal-close">Cancel 2</icon-button>
+          <icon-button>Don't Cancel</icon-button>
         </modal-content>
       </modal>
     </section>

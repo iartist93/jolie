@@ -1,7 +1,6 @@
 <template>
   <div ref="rootRef" class="jolie-modal">
     <slot></slot>
-    <span>isOpen === {{ isOpen }}</span>
   </div>
 </template>
 
