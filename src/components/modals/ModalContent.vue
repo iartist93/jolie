@@ -1,8 +1,8 @@
 <template>
-  <div v-show="isOpen" class="container-modal" ref="modalContainerRef">
-    <main :class="`modal-custom animate ${shadowClass}`" ref="modalRef">
+  <div v-show="isOpen" ref="modalContainerRef" class="container-modal">
+    <div ref="modalRef" :class="`modal-custom animate ${shadowClass}`">
       <slot></slot>
-    </main>
+    </div>
   </div>
 </template>
 
