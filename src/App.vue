@@ -17,7 +17,7 @@
         <modal-button>
           <icon-button>Toggle Menu</icon-button>
         </modal-button>
-        <modal-content>
+        <modal-content :width="800" :p="20" :boxShadow="'md'" :borderWidth="0">
           <div>Modal Content 1</div>
           <div>Modal Content 2</div>
           <div>Modal Content 3</div>

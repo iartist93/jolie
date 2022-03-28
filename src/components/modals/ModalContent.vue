@@ -1,34 +1,72 @@
 <template>
   <div v-show="isOpen" class="container-modal" ref="modalContainerRef">
-    <main
-      class="modal-custom animate"
-      :style="{ width: `${width}px` }"
-      ref="modalRef"
-    >
+    <main :class="`modal-custom animate ${shadowClass}`" ref="modalRef">
       <slot></slot>
     </main>
   </div>
 </template>
 
 <script lang="ts">
-import { onMounted, Ref, ref, watch } from '@vue/composition-api';
+import {
+  onMounted,
+  Ref,
+  ref,
+  watch,
+  defineComponent,
+} from '@vue/composition-api';
 import { useModalContent } from '@/composables/modal/useModalContent';
 
-export default {
+import {
+  useStyledSystem,
+  useStyledSystemType,
+} from '@/composables/useStyledSystem';
+import { useInjectStyle } from '@/composables/useInjectStyle';
+import StyledSystem from '@/mixins/StyledSystem';
+
+export default defineComponent({
+  name: 'ModalContent',
+
   props: {
-    width: {
-      type: Number,
-      default: 1614,
-    },
     id: {
       type: String,
       default: 'modal-base-id',
     },
+    boxShadow: {
+      type: String,
+    },
+    ...StyledSystem.props,
   },
 
   setup(props) {
-    const modalRef = ref<null | Ref<HTMLElement>>(null);
     const modalContainerRef = ref<null | Ref<HTMLElement>>(null);
+    const modalRef = ref<null | Ref<HTMLElement>>(null);
+
+    let shadowClass = ref('');
+
+    if (props.boxShadow) {
+      shadowClass.value =
+        props.boxShadow === 'sm'
+          ? 'shadow-sm'
+          : props.boxShadow === 'md'
+          ? 'shadow-md'
+          : props.boxShadow === 'lg'
+          ? 'shadow-lg'
+          : props.boxShadow === 'xl'
+          ? 'shadow-xl'
+          : props.boxShadow === '2xl'
+          ? 'shadow-2xl'
+          : props.boxShadow === 'inner'
+          ? 'shadow-inner'
+          : props.boxShadow === 'none'
+          ? 'shadow-none'
+          : 'shadow';
+    }
+
+    const elementStyle = useStyledSystem(
+      props as unknown as useStyledSystemType
+    );
+
+    useInjectStyle(modalRef as Ref<HTMLElement>, elementStyle);
 
     const onModalOpen = () => {
       const modalElement = (modalRef as Ref<HTMLElement>).value;
@@ -84,9 +122,9 @@ export default {
       });
     });
 
-    return { isOpen, modalRef, modalContainerRef };
+    return { isOpen, modalRef, modalContainerRef, shadowClass };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -123,6 +161,7 @@ $end-bgcolor: rgba(
     animation: disapear 0.2s cubic-bezier(0.62, 0.6, 0.83, 0.67);
     animation-fill-mode: forwards;
   }
+
   .modal-custom {
     background-color: white;
     margin: 0 auto;
