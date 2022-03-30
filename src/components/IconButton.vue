@@ -106,13 +106,14 @@ export default defineComponent({
 
     const ph = hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0;
 
-    const backgroundColor = disabled
-      ? 'gray'
-      : variant === 'outline' || variant === 'ghost'
-      ? 'transparent'
-      : colorScheme
-      ? colorScheme
-      : 'blue';
+    const backgroundColor =
+      variant === 'outline' || variant === 'ghost'
+        ? 'transparent'
+        : disabled
+        ? 'gray'
+        : colorScheme
+        ? colorScheme
+        : 'blue';
 
     const color =
       variant === 'outline' || variant === 'ghost'
@@ -121,11 +122,17 @@ export default defineComponent({
           : 'black'
         : 'white';
 
-    const hoverColor = variant === 'outline' ? colorScheme : 'white';
+    const hoverColor = disabled
+      ? 'gray'
+      : variant === 'outline'
+      ? colorScheme
+      : 'white';
 
     const border =
       variant === 'ghost'
         ? 0
+        : disabled
+        ? '1px solid gray'
         : variant === 'outline' || variant === 'ghost'
         ? colorScheme
           ? `1px solid ${colorScheme}`
@@ -158,7 +165,7 @@ export default defineComponent({
 
   transition: all 0.1s linear;
 
-  &:hover {
+  &:hover:not(.disabled) {
     &.outline {
       background-color: var(--jolie-icon-button-hover-color);
       color: white;

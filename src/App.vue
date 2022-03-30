@@ -208,7 +208,7 @@
     <!-- buttons -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="false" class="buttons">
+    <div v-if="true" class="buttons">
       <icon-button size="sm" class="mt-4">Button sm</icon-button>
       <icon-button class="mt-4">Button default</icon-button>
       <icon-button size="lg" class="mt-4">Button lg</icon-button>
@@ -216,6 +216,9 @@
         Button xl
       </icon-button>
       <icon-button size="lg" class="mt-4" disabled>Button Disabled</icon-button>
+      <icon-button size="lg" class="mt-4" :variant="'outline'" disabled
+        >Button Disabled</icon-button
+      >
       <icon-button size="lg" class="mt-4" :variant="'outline'"
         >Button Outlined</icon-button
       >
