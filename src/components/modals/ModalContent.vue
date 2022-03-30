@@ -85,7 +85,10 @@ export default defineComponent({
       document.body.style.paddingRight = '16px'; /* scrollbar width */
     };
 
-    const onModalClose = () => {
+    const onModalClose = (event?: Event) => {
+      if (event) {
+        event.stopPropagation();
+      }
       const modalElement = (modalRef as Ref<HTMLElement>).value;
       const modalContainerElement = (modalContainerRef as Ref<HTMLElement>)
         .value;
@@ -119,7 +122,7 @@ export default defineComponent({
     onMounted(() => {
       document.addEventListener('keyup', (e) => {
         if (e.code === 'Escape') {
-          onModalClose();
+          onModalClose(e);
         }
       });
 
