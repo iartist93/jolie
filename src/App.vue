@@ -216,7 +216,12 @@
         Button xl
       </icon-button>
       <icon-button size="lg" class="mt-4" disabled>Button Disabled</icon-button>
-      <icon-button size="lg" class="mt-4" :variant="'outline'" disabled
+      <icon-button
+        size="lg"
+        class="mt-4"
+        :variant="'outline'"
+        disabled
+        @click="onDisabledClicked"
         >Button Disabled</icon-button
       >
       <icon-button size="lg" class="mt-4" :variant="'outline'"
@@ -444,6 +449,9 @@ export default Vue.extend({
       const rand = Math.round(Math.random() * 3);
       console.log('Rand ', rand);
       this.selectedOption = this.options[rand];
+    },
+    onDisabledClicked() {
+      console.log('on disabled clicked');
     },
   },
 });

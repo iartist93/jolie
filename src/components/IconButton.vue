@@ -14,7 +14,7 @@
       solid: variant === 'solid',
       ghost: variant === 'ghost',
     }"
-    v-on="$listeners"
+    v-on="{ ...$listeners, click: onClick }"
   >
     <img
       v-if="startIcon"
@@ -86,7 +86,7 @@ export default defineComponent({
       type: String,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     let { size, colorScheme, variant, borderRadius, isFullWidth, disabled } =
       props as PropsType;
 
@@ -139,7 +139,20 @@ export default defineComponent({
           : 'black'
         : 0;
 
-    return { buttonStyle, ph, backgroundColor, color, border, hoverColor };
+    const onClick = () => {
+      if (!disabled) emit('click');
+      else console.log('the button is disabled ', disabled);
+    };
+
+    return {
+      buttonStyle,
+      ph,
+      backgroundColor,
+      color,
+      border,
+      hoverColor,
+      onClick,
+    };
   },
 });
 </script>
