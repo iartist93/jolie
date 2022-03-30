@@ -267,6 +267,16 @@
       >
         Icon Button
       </icon-button>
+
+      <icon-button
+        :size="'md'"
+        class="mt-4"
+        :startIcon="require('@/assets/icons/back.svg')"
+        :endIcon="require('@/assets/icons/lock.svg')"
+        disabled
+      >
+        Icon Button
+      </icon-button>
     </div>
 
     <!-- ------------------------------------------------- -->

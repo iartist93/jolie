@@ -21,6 +21,7 @@
       :src="startIcon"
       alt="start-icon"
       class="start-icon"
+      :class="{ disabled }"
       :style="{ '--jolie-icon-button-padding-h': ph }"
     />
     <slot>Button</slot>
@@ -29,6 +30,7 @@
       :src="endIcon"
       alt="end-icon"
       class="end-icon"
+      :class="{ disabled }"
       :style="{ '--jolie-icon-button-padding-h': ph }"
     />
   </button>
@@ -197,10 +199,17 @@ export default defineComponent({
 .start-icon {
   height: 60%;
   margin-right: var(--jolie-icon-button-padding-h);
+
+  &.disabled {
+    filter: saturate(0);
+  }
 }
 
 .end-icon {
   height: 60%;
   margin-left: var(--jolie-icon-button-padding-h);
+  &.disabled {
+    filter: saturate(0);
+  }
 }
 </style>
