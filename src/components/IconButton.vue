@@ -89,7 +89,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    let { size, colorScheme, variant, borderRadius, isFullWidth, disabled } =
+    let { size, colorScheme, variant, borderRadius, isFullWidth } =
       props as PropsType;
 
     const hasSize = Boolean(size && ButtonTheme.sizes[size]);
@@ -111,7 +111,7 @@ export default defineComponent({
     const backgroundColor =
       variant === 'outline' || variant === 'ghost'
         ? 'transparent'
-        : disabled
+        : props.disabled
         ? 'gray'
         : colorScheme
         ? colorScheme
@@ -124,7 +124,7 @@ export default defineComponent({
           : 'black'
         : 'white';
 
-    const hoverColor = disabled
+    const hoverColor = props.disabled
       ? 'gray'
       : variant === 'outline'
       ? colorScheme
@@ -133,7 +133,7 @@ export default defineComponent({
     const border =
       variant === 'ghost'
         ? 0
-        : disabled
+        : props.disabled
         ? '1px solid gray'
         : variant === 'outline' || variant === 'ghost'
         ? colorScheme
@@ -142,8 +142,8 @@ export default defineComponent({
         : 0;
 
     const onClick = () => {
-      if (!disabled) emit('click');
-      else console.log('the button is disabled ', disabled);
+      if (!props.disabled) emit('click');
+      else console.log('the button is props.disabled ', props.disabled);
     };
 
     return {
@@ -202,6 +202,7 @@ export default defineComponent({
 
   &.disabled {
     filter: saturate(0);
+    opacity: 0.2;
   }
 }
 
@@ -210,6 +211,7 @@ export default defineComponent({
   margin-left: var(--jolie-icon-button-padding-h);
   &.disabled {
     filter: saturate(0);
+    opacity: 0.2;
   }
 }
 </style>
