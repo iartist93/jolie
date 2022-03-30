@@ -89,55 +89,54 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    let { size, colorScheme, variant, borderRadius, isFullWidth } =
-      props as PropsType;
-
-    const hasSize = Boolean(size && ButtonTheme.sizes[size]);
+    const hasSize = Boolean(props.size && ButtonTheme.sizes[props.size]);
 
     const buttonStyle = {
-      'border-radius': borderRadius ? `${borderRadius}px` : '0',
-      'font-size': typography.fontSizes[size],
-      'padding-right': hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0,
-      'padding-left': hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0,
-      'min-width': hasSize ? spacing[ButtonTheme.sizes[size].minW] : 0,
-      width: isFullWidth ? '100%' : 'auto',
-      height: hasSize ? spacing[ButtonTheme.sizes[size].h] : 'auto',
+      'border-radius': props.borderRadius ? `${props.borderRadius}px` : '0',
+      'font-size': typography.fontSizes[props.size],
+      'padding-right': hasSize ? spacing[ButtonTheme.sizes[props.size].ph] : 0,
+      'padding-left': hasSize ? spacing[ButtonTheme.sizes[props.size].ph] : 0,
+      'min-width': hasSize ? spacing[ButtonTheme.sizes[props.size].minW] : 0,
+      width: props.isFullWidth ? '100%' : 'auto',
+      height: hasSize ? spacing[ButtonTheme.sizes[props.size].h] : 'auto',
       'box-shadow':
-        variant === 'solid' ? 'box-shadow: 0px 3px 6px #00000029;' : 'none',
+        props.variant === 'solid'
+          ? 'box-shadow: 0px 3px 6px #00000029;'
+          : 'none',
     };
 
-    const ph = hasSize ? spacing[ButtonTheme.sizes[size].ph] : 0;
+    const ph = hasSize ? spacing[ButtonTheme.sizes[props.size].ph] : 0;
 
     const backgroundColor =
-      variant === 'outline' || variant === 'ghost'
+      props.variant === 'outline' || props.variant === 'ghost'
         ? 'transparent'
         : props.disabled
         ? 'gray'
-        : colorScheme
-        ? colorScheme
+        : props.colorScheme
+        ? props.colorScheme
         : 'blue';
 
     const color =
-      variant === 'outline' || variant === 'ghost'
-        ? colorScheme
-          ? colorScheme
+      props.variant === 'outline' || props.variant === 'ghost'
+        ? props.colorScheme
+          ? props.colorScheme
           : 'black'
         : 'white';
 
     const hoverColor = props.disabled
       ? 'gray'
-      : variant === 'outline'
-      ? colorScheme
+      : props.variant === 'outline'
+      ? props.colorScheme
       : 'white';
 
     const border =
-      variant === 'ghost'
+      props.variant === 'ghost'
         ? 0
         : props.disabled
         ? '1px solid gray'
-        : variant === 'outline' || variant === 'ghost'
-        ? colorScheme
-          ? `1px solid ${colorScheme}`
+        : props.variant === 'outline' || props.variant === 'ghost'
+        ? props.colorScheme
+          ? `1px solid ${props.colorScheme}`
           : 'black'
         : 0;
 
