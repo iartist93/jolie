@@ -10,7 +10,7 @@
     <!-- ------------------------------------------------- -->
     <!-- Modal  -->
     <!-- ------------------------------------------------- -->
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <h1>Modal Components</h1>
 
       <modal>
@@ -280,10 +280,10 @@
     </div>
 
     <!-- ------------------------------------------------- -->
-    <!-- switch -->
+    <!-- toggle -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="section toggles">
+    <div v-if="false" class="section toggles">
       <h1>Toggle Components</h1>
 
       <toggle v-model="toggleChecked" :width="70" class="mx-10" />
@@ -327,6 +327,45 @@
         :opened="true"
         :width="80"
       />
+    </div>
+    <!-- ------------------------------------------------- -->
+    <!-- toggle -->
+    <!-- ------------------------------------------------- -->
+
+    <div v-if="true" class="section toggles">
+      <h1>Checkbox Components</h1>
+
+      <div class="flex">
+        <checkbox v-model="isChecked1" :border-radius="5" />
+        <checkbox
+          v-model="isChecked2"
+          :background-color="'black'"
+          :color="'white'"
+          class="ml-5"
+        />
+        <checkbox
+          v-model="isChecked3"
+          :border-radius="0"
+          :color="'blue'"
+          :background-color="'green'"
+          :border-color="'red'"
+          class="ml-5"
+        />
+        <checkbox
+          v-model="isChecked2"
+          :background-color="'black'"
+          :color="'white'"
+          class="ml-5"
+          :size="40"
+        />
+        <checkbox
+          v-model="isChecked2"
+          :background-color="'black'"
+          :color="'white'"
+          class="ml-5"
+          :size="15"
+        />
+      </div>
     </div>
 
     <!-- ------------------------------------------------- -->
@@ -397,6 +436,7 @@ import SelectOption from './components/select/SelectOption.vue';
 import Modal from './components/modals/Modal.vue';
 import ModalContent from './components/modals/ModalContent.vue';
 import ModalButton from './components/modals/ModalButton.vue';
+import Checkbox from './components/Checkbox.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -414,6 +454,7 @@ export default Vue.extend({
     Modal,
     ModalContent,
     ModalButton,
+    Checkbox,
   },
   data() {
     return {
@@ -422,6 +463,9 @@ export default Vue.extend({
       toggleChecked3: false,
       toggleChecked4: false,
       boxActiveState: false,
+      isChecked1: false,
+      isChecked2: false,
+      isChecked3: false,
       options: [
         {
           text: 'Option 1',

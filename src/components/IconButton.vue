@@ -140,8 +140,8 @@ export default defineComponent({
           : 'black'
         : 0;
 
-    const onClick = () => {
-      if (!props.disabled) emit('click');
+    const onClick = (event) => {
+      if (!props.disabled) emit('click', event);
       else console.log('the button is props.disabled ', props.disabled);
     };
 
