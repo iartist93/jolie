@@ -10,7 +10,7 @@
     <!-- ------------------------------------------------- -->
     <!-- Modal  -->
     <!-- ------------------------------------------------- -->
-    <section v-if="false" class="section menu">
+    <section v-if="true" class="section menu">
       <h1>Modal Components</h1>
 
       <modal>
@@ -23,6 +23,7 @@
           :p="20"
           :boxShadow="'md'"
           :borderWidth="0"
+          :borderRadius="30"
         >
           <div>Modal Content 1</div>
           <div>Modal Content 2</div>
@@ -208,7 +209,7 @@
     <!-- buttons -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="buttons">
+    <div v-if="false" class="buttons">
       <icon-button size="sm" class="mt-4">Button sm</icon-button>
       <icon-button class="mt-4">Button default</icon-button>
       <icon-button size="lg" class="mt-4">Button lg</icon-button>
@@ -332,7 +333,7 @@
     <!-- toggle -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="section toggles">
+    <div v-if="false" class="section toggles">
       <h1>Checkbox Components</h1>
 
       <div class="flex">

@@ -68,6 +68,8 @@ export default defineComponent({
       props as unknown as useStyledSystemType
     );
 
+    console.log('elementStyle ==> ', elementStyle);
+
     useInjectStyle(modalRef as Ref<HTMLElement>, elementStyle);
 
     const onModalOpen = () => {
@@ -189,7 +191,7 @@ $end-bgcolor: rgba(
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-radius: 10px;
+    // border-radius: 10px;
     position: relative;
 
     &.animate {
