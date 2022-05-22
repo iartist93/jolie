@@ -10,7 +10,7 @@
     <!-- ------------------------------------------------- -->
     <!-- Modal  -->
     <!-- ------------------------------------------------- -->
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <h1>Modal Components</h1>
 
       <modal>
@@ -333,38 +333,42 @@
     <!-- toggle -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="false" class="section toggles">
+    <div v-if="true" class="section toggles">
       <h1>Checkbox Components</h1>
 
       <div class="flex">
         <checkbox v-model="isChecked1" :border-radius="5" />
         <checkbox
           v-model="isChecked2"
-          :background-color="'black'"
+          :background-color="'#6323F5'"
           :color="'white'"
           class="ml-5"
         />
         <checkbox
           v-model="isChecked3"
           :border-radius="0"
-          :color="'blue'"
-          :background-color="'green'"
-          :border-color="'red'"
+          :color="'#6CE682'"
+          :background-color="'#7A3EE6'"
+          :border-color="'#573199'"
           class="ml-5"
         />
         <checkbox
-          v-model="isChecked2"
-          :background-color="'black'"
-          :color="'white'"
+          v-model="isChecked4"
+          :background-color="'#f3a7'"
+          :color="'black'"
+          :show-checkmark="false"
           class="ml-5"
           :size="40"
         />
         <checkbox
-          v-model="isChecked2"
-          :background-color="'black'"
+          v-model="isChecked5"
+          :background-color="'green'"
           :color="'white'"
+          :show-checkmark="false"
           class="ml-5"
           :size="15"
+          :border-width="1"
+          :border-radius="3"
         />
       </div>
     </div>
@@ -467,6 +471,8 @@ export default Vue.extend({
       isChecked1: false,
       isChecked2: false,
       isChecked3: false,
+      isChecked4: false,
+      isChecked5: false,
       options: [
         {
           text: 'Option 1',

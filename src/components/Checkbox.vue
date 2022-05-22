@@ -8,13 +8,18 @@
     <input type="checkbox" :checked="checked" @change.stop="onInputChange" />
     <div
       class="checkmark"
-      :class="{ hover: isHover, checked }"
+      :class="{
+        hover: isHover,
+        checked,
+        'no-checkmark': !showCheckmark,
+      }"
       :style="{
-        'border-radius': borderRadius + 'px',
+        '--border-radius': borderRadius + 'px',
         '--jolie-checkbox-active-background-color': backgroundColor,
         '--jolie-checkbox-border-color': borderColor,
         '--jolie-checkbox-checkmark-color': color,
         '--jolie-checkbox-size': size + 'px',
+        '--jolie-checkbox-border-width': borderWidth + 'px',
       }"
     />
   </label>
@@ -45,7 +50,7 @@ export default {
     },
     backgroundColor: {
       type: String,
-      default: '#B3DEE1',
+      default: '#E9E9F3',
     },
     color: {
       type: String,
@@ -54,6 +59,10 @@ export default {
     size: {
       type: Number,
       default: 23,
+    },
+    showCheckmark: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -113,7 +122,9 @@ span {
   height: var(--jolie-checkbox-size);
   width: var(--jolie-checkbox-size);
   background-color: white;
-  border: 2px solid var(--jolie-checkbox-border-color);
+  border: var(--jolie-checkbox-border-width) solid
+    var(--jolie-checkbox-border-color);
+  border-radius: var(--border-radius);
   box-sizing: content-box;
 
   &.hover {
@@ -124,40 +135,54 @@ span {
   }
 
   &.checked {
-    // background-color: #b3dee1;
     background-color: var(--jolie-checkbox-active-background-color);
-  }
-}
+    // background-color: #b3dee1;
 
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: '';
-  position: absolute;
-  display: none;
+    &.no-checkmark {
+      background-color: unset;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: none;
+  }
+
+  &:not(.no-checkmark) {
+    &::after {
+      left: calc(var(--jolie-checkbox-size) / 3);
+      top: calc(var(--jolie-checkbox-size) / 8);
+
+      width: calc(var(--jolie-checkbox-size) / 3);
+      height: calc(var(--jolie-checkbox-size) / 1.7);
+
+      //   border: solid #333333;
+      border: solid var(--jolie-checkbox-checkmark-color);
+
+      border-width: 0 calc(var(--jolie-checkbox-size) / 6)
+        calc(var(--jolie-checkbox-size) / 6) 0;
+
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+
+  &.no-checkmark {
+    &::after {
+      width: 85%;
+      height: 85%;
+      left: 7.5%;
+      top: 7.5%;
+      background-color: var(--jolie-checkbox-active-background-color);
+      border-radius: calc(var(--border-radius) / 2);
+    }
+  }
 }
 
 /* Show the checkmark when checked */
 .jolie-checkbox input:checked ~ .checkmark:after {
   display: block;
 }
-
-/* Style the checkmark/indicator */
-.jolie-checkbox .checkmark:after {
-  left: calc(var(--jolie-checkbox-size) / 3);
-  top: calc(var(--jolie-checkbox-size) / 8);
-
-  width: calc(var(--jolie-checkbox-size) / 3);
-  height: calc(var(--jolie-checkbox-size) / 1.7);
-
-  //   border: solid #333333;
-  border: solid var(--jolie-checkbox-checkmark-color);
-
-  border-width: 0 calc(var(--jolie-checkbox-size) / 6)
-    calc(var(--jolie-checkbox-size) / 6) 0;
-
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
 </style>
-s
