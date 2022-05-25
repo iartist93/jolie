@@ -16,6 +16,19 @@ The `Toggle` component allows users to **Switch** some boolean value on/off.
 <toggle v-model="isOpen" />
 ```
 
+```html
+<toggle
+  v-model="toggleChecked4"
+  class="mx-10"
+  :color="'#46B781'"
+  :offColor="'transperent'"
+  :sliderColor="'white'"
+  :sliderOffColor="'#46B781'"
+  :borderColor="'#46B781'"
+  :showBorder="true"
+/>
+```
+
 ### Props
 
 | Prop    | Type      | Default   |
