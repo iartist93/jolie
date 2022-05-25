@@ -36,6 +36,12 @@ export interface useStyledSystemType {
   height: string | number;
   maxW: string | number;
   maxH: string | number;
+  minW: string | number;
+  minH: string | number;
+  maxWidth: string | number;
+  maxHeight: string | number;
+  minWidth: string | number;
+  minHeight: string | number;
   overflow: string;
   overflowX: string;
   overflowY: string;
@@ -130,8 +136,17 @@ export function useStyledSystem(
     if (props.height) style['height'] = stringOrNumber(props.height);
     if (props.w) style['width'] = stringOrNumber(props.w);
     if (props.h) style['height'] = stringOrNumber(props.h);
+
+    if (props.maxWidth) style['max-width'] = stringOrNumber(props.maxWidth);
+    if (props.maxHeight) style['max-height'] = stringOrNumber(props.maxHeight);
+    if (props.minWidth) style['min-width'] = stringOrNumber(props.minWidth);
+    if (props.minHeight) style['min-height'] = stringOrNumber(props.minHeight);
+
     if (props.maxW) style['max-width'] = stringOrNumber(props.maxW);
     if (props.maxH) style['max-height'] = stringOrNumber(props.maxH);
+    if (props.minW) style['min-width'] = stringOrNumber(props.minW);
+    if (props.minH) style['min-height'] = stringOrNumber(props.minH);
+
     if (props.overflow) style['overflow'] = props.overflow;
     if (props.overflowX) style['overflow-x'] = props.overflowX;
     if (props.overflowY) style['overflow-y'] = props.overflowY;

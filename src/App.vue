@@ -333,7 +333,7 @@
     <!-- toggle -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="section toggles">
+    <div v-if="false" class="section toggles">
       <h1>Checkbox Components</h1>
 
       <div class="flex">
@@ -377,7 +377,7 @@
     <!-- boxes -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="false" class="section boxes">
+    <div v-if="true" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
         :borderColor="toggleChecked ? 'red' : 'yellow'"
@@ -404,6 +404,17 @@
       <box :mt="40" :boxShadow="'sm'" :borderWidth="1" />
       <box :mt="40" :boxShadow="'md'" />
       <box :mt="40" />
+
+      <box
+        :backgroundColor="'green'"
+        :borderWidth="6"
+        :borderColor="'black'"
+        :p="20"
+        :w="'100%'"
+        :minW="800"
+      >
+        Hello this is a default box
+      </box>
     </div>
 
     <!-- ------------------------------------------------- -->

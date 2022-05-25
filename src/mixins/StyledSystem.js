@@ -84,6 +84,24 @@ const StyledSystem = {
     maxH: {
       type: [String, Number],
     },
+    minW: {
+      type: [String, Number],
+    },
+    minH: {
+      type: [String, Number],
+    },
+    maxWidth: {
+      type: [String, Number],
+    },
+    maxHeight: {
+      type: [String, Number],
+    },
+    minWidth: {
+      type: [String, Number],
+    },
+    minHeight: {
+      type: [String, Number],
+    },
     overflow: {
       type: String,
     },
