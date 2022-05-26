@@ -14,6 +14,8 @@ export function useIsDescendent<T extends HTMLElement = HTMLElement>(
 ): boolean {
   let targetParentNode = target.parentNode;
 
+  if (root === target) return true;
+
   while (targetParentNode) {
     if (root.contains(targetParentNode)) {
       return true;

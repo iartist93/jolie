@@ -1,4 +1,4 @@
-import { ref, Ref } from '@vue/composition-api';
+import { ref, Ref, watch } from '@vue/composition-api';
 
 export interface UseDisclosureType {
   isOpen: Ref<boolean>;
@@ -12,14 +12,23 @@ export interface UseDisclosureType {
 export interface UseDisclosureProps {
   closeOnBlur?: boolean;
   openOnHover?: boolean;
+  isOpen?: boolean;
 }
 
 export function useDisclosure(props: UseDisclosureProps): UseDisclosureType {
   const { closeOnBlur, openOnHover } = props;
 
-  const isOpen = ref(false);
+  const isOpen = ref(props.isOpen as boolean);
+
+  watch(
+    () => props.isOpen,
+    (newIsOpen) => {
+      isOpen.value = newIsOpen as boolean;
+    }
+  );
 
   const onOpen = () => {
+    if (props.isOpen !== undefined) return;
     isOpen.value = true;
   };
 
@@ -28,6 +37,7 @@ export function useDisclosure(props: UseDisclosureProps): UseDisclosureType {
   };
 
   const onToggle = () => {
+    if (props.isOpen !== undefined) return;
     isOpen.value = !isOpen.value;
   };
 

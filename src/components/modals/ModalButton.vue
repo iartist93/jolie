@@ -1,5 +1,5 @@
 <template>
-  <button class="jolie-modal-button" @click="onToggle">
+  <button class="jolie-modal-button" @click="onToggleClicked">
     <slot>Toggle Modal</slot>
   </button>
 </template>
@@ -8,9 +8,15 @@
 import { useMenuButton } from '@/composables/menu/useMenuButton';
 
 export default {
-  setup(props) {
+  setup(props, { emit }) {
     const { onToggle } = useMenuButton();
-    return { onToggle };
+
+    const onToggleClicked = () => {
+      emit('click');
+      onToggle();
+    };
+
+    return { onToggleClicked };
   },
 };
 </script>

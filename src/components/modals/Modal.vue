@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { ref, Ref } from '@vue/composition-api';
+import { ref, Ref, watch } from '@vue/composition-api';
 import { useMenu } from '@/composables/menu/useMenu';
 
 export default {
@@ -14,16 +14,24 @@ export default {
       type: Boolean,
       default: true,
     },
+    isOpen: {
+      type: Boolean,
+      default: undefined,
+    },
   },
-  setup(props) {
+  setup(props, { emit }) {
+    //TODO: Implement `useEscape`
     const rootRef = ref<null | Ref<HTMLElement>>(null);
 
-    const menuContext = useMenu(props);
-    const { isOpen } = menuContext;
+    const { isOpen } = useMenu(props);
 
-    //TODO: Implement `useEscape` here
+    watch(isOpen, (newValue) => {
+      if (newValue === false) {
+        emit('onClose');
+      }
+    });
 
-    return { rootRef, isOpen };
+    return { rootRef };
   },
 };
 </script>

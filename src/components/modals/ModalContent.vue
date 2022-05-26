@@ -37,7 +37,7 @@ export default defineComponent({
     ...StyledSystem.props,
   },
 
-  setup(props) {
+  setup(props, { emit }) {
     const modalContainerRef = ref<null | Ref<HTMLElement>>(null);
     const modalRef = ref<null | Ref<HTMLElement>>(null);
 
@@ -67,8 +67,6 @@ export default defineComponent({
     const elementStyle = useStyledSystem(
       props as unknown as useStyledSystemType
     );
-
-    console.log('elementStyle ==> ', elementStyle);
 
     useInjectStyle(modalRef as Ref<HTMLElement>, elementStyle);
 
@@ -118,10 +116,16 @@ export default defineComponent({
     watch(isOpen, (openValue) => {
       if (openValue) {
         onModalOpen();
+      } else {
+        emit('onClose');
       }
     });
 
     onMounted(() => {
+      if (isOpen) {
+        onModalOpen();
+      }
+
       document.addEventListener('keyup', (e) => {
         if (e.code === 'Escape') {
           onModalClose(e);
@@ -155,6 +159,7 @@ $start-bgcolor: rgba(
   $color: #000000,
   $alpha: 0,
 );
+
 $end-bgcolor: rgba(
   $color: #000000,
   $alpha: 0.65,
@@ -202,45 +207,6 @@ $end-bgcolor: rgba(
     &.animate-reverse {
       animation: movedown 0.1s cubic-bezier(0.83, 0.85, 0.83, 0.67);
       animation-fill-mode: forwards;
-    }
-
-    &__header {
-      height: 111px;
-      width: 100%;
-      border-radius: 10px 10px 0px 0px;
-      background-color: gray;
-      color: white;
-      font-size: 20px;
-      font-weight: 500;
-      padding: 23px 35px;
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .close-btn {
-        outline: none;
-        border: 0;
-        background: transparent;
-      }
-    }
-    &__body {
-      background-color: white;
-      flex: 1;
-      border-radius: 10px;
-      max-height: 70vh;
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-    &__footer {
-      // background-color: $gray-100;
-      background-color: gray;
-      height: 94px;
-      border-radius: 0px 0px 10px 10px;
-      display: flex;
-      align-items: center;
-      // justify-content: center;
-      z-index: 10;
     }
   }
 }

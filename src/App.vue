@@ -10,12 +10,46 @@
     <!-- ------------------------------------------------- -->
     <!-- Modal  -->
     <!-- ------------------------------------------------- -->
-    <section v-if="false" class="section menu">
+    <section v-if="true" class="section menu">
       <h1>Modal Components</h1>
 
-      <modal>
+      <p>IS Opened {1} {{ isOpen }}</p>
+
+      <!-- Uncontrolled Modal Component -->
+      <!-- <modal>
         <modal-button>
-          <icon-button>Toggle Menu</icon-button>
+          <icon-button>Toggle Menu 1</icon-button>
+        </modal-button>
+        <modal-content
+          :width="800"
+          :height="500"
+          :p="20"
+          :boxShadow="'md'"
+          :borderWidth="4"
+          :borderColor="'black'"
+          :borderRadius="30"
+          class="modal-content"
+        >
+          <div>Modal Content 1</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 3</div>
+
+          <icon-button class="modal-close">Cancel 1</icon-button>
+          <icon-button class="modal-close">Cancel 2</icon-button>
+          <icon-button>Don't Cancel</icon-button>
+        </modal-content>
+      </modal> -->
+
+      <!-- Controlled Modal Component -->
+      <modal :isOpen="isOpen" @onClose="onModalClose">
+        <modal-button @click="onModalOpen">
+          <icon-button>Toggle Menu 2</icon-button>
         </modal-button>
         <modal-content
           :width="800"
@@ -24,24 +58,17 @@
           :boxShadow="'md'"
           :borderWidth="0"
           :borderRadius="30"
+          class="modal-content"
         >
           <div>Modal Content 1</div>
           <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
+          <div>Modal Content 2</div>
           <div>Modal Content 3</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
-          <div>Modal Content 4</div>
 
           <icon-button class="modal-close">Cancel 1</icon-button>
           <icon-button class="modal-close">Cancel 2</icon-button>
@@ -377,7 +404,7 @@
     <!-- boxes -->
     <!-- ------------------------------------------------- -->
 
-    <div v-if="true" class="section boxes">
+    <div v-if="false" class="section boxes">
       <box
         :color="!toggleChecked ? 'blue' : 'green'"
         :borderColor="toggleChecked ? 'red' : 'yellow'"
@@ -453,6 +480,7 @@ import Modal from './components/modals/Modal.vue';
 import ModalContent from './components/modals/ModalContent.vue';
 import ModalButton from './components/modals/ModalButton.vue';
 import Checkbox from './components/Checkbox.vue';
+import { useDisclosure } from './composables/useDisclosure';
 
 export default Vue.extend({
   name: 'App',
@@ -506,14 +534,22 @@ export default Vue.extend({
       },
       selectedOption2: null,
       darkMode: false,
+      isOpen: false,
     };
   },
+
   computed: {
     pageColor() {
       return this.darkMode ? '#26282C' : '#f5f5f5';
     },
   },
   methods: {
+    onModalOpen() {
+      this.isOpen = true;
+    },
+    onModalClose() {
+      this.isOpen = false;
+    },
     onMenuItemClicked(index) {
       console.log('============> on Menu Item Clicked ', index);
     },

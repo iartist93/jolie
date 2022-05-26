@@ -6,7 +6,6 @@ const StyledSystem = {
     },
     bg: {
       type: String,
-      default: 'white',
     },
     backgroundColor: {
       type: String,
