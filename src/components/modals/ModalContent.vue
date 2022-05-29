@@ -71,6 +71,8 @@ export default defineComponent({
     useInjectStyle(modalRef as Ref<HTMLElement>, elementStyle);
 
     const onModalOpen = () => {
+      console.log('=========> on modal open ');
+
       const modalElement = (modalRef as Ref<HTMLElement>).value;
       const modalContainerElement = (modalContainerRef as Ref<HTMLElement>)
         .value;
@@ -122,7 +124,7 @@ export default defineComponent({
     });
 
     onMounted(() => {
-      if (isOpen) {
+      if (isOpen.value) {
         onModalOpen();
       }
 
