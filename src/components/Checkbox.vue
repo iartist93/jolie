@@ -5,12 +5,12 @@
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
-    <input type="checkbox" :checked="checked" @change.stop="onInputChange" />
+    <input type="checkbox" :checked="value" @change.stop="onInputChange" />
     <div
       class="checkmark"
       :class="{
         hover: isHover,
-        checked,
+        checked: value,
         'no-checkmark': !showCheckmark,
       }"
       :style="{
@@ -28,11 +28,11 @@
 <script>
 export default {
   model: {
-    prop: 'checked',
+    prop: 'value',
     event: 'input',
   },
   props: {
-    checked: {
+    value: {
       type: Boolean,
       default: false,
     },
