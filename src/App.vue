@@ -10,7 +10,7 @@
     <!-- ------------------------------------------------- -->
     <!-- Modal  -->
     <!-- ------------------------------------------------- -->
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section modal">
       <h1>Modal Components</h1>
 
       <p>IS Opened {1} {{ isOpen }}</p>
@@ -49,7 +49,7 @@
       <!-- Controlled Modal Component -->
       <modal :isOpen="isOpen" @onClose="onModalClose">
         <modal-button @click="onModalOpen">
-          <icon-button>Toggle Menu 2</icon-button>
+          <icon-button>Toggle Modal 2</icon-button>
         </modal-button>
         <modal-content
           :width="800"
@@ -131,9 +131,13 @@
     <!-- Menu -->
     <!-- ------------------------------------------------- -->
 
-    <section v-if="false" class="section menu">
+    <section v-if="true" class="section menu">
       <h1>Menu Component</h1>
-      <menu-provider class="menu-provider">
+      <menu-provider
+        class="menu-provider"
+        @onOpen="onMenuOpen"
+        @onClose="onMenuClose"
+      >
         <menu-button>
           <icon-button :size="'lg'">Menu Button</icon-button>
         </menu-button>
@@ -549,6 +553,12 @@ export default Vue.extend({
     },
     onModalClose() {
       this.isOpen = false;
+    },
+    onMenuOpen() {
+      console.log('---------> on menu open >>>>>> ');
+    },
+    onMenuClose() {
+      console.log('---------> on menu close >>>>>> ');
     },
     onMenuItemClicked(index) {
       console.log('============> on Menu Item Clicked ', index);

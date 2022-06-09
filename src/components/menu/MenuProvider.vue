@@ -6,7 +6,7 @@
 
 <script>
 import { useMenu } from '@/composables/menu/useMenu';
-import { onBeforeUnmount, onMounted, ref } from '@vue/composition-api';
+import { onBeforeUnmount, onMounted, ref, watch } from '@vue/composition-api';
 
 export default {
   props: {
@@ -19,11 +19,19 @@ export default {
       default: false,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const rootRef = ref(null);
 
     const menuContext = useMenu(props);
-    const { onOpen, onClose } = menuContext;
+    const { onOpen, onClose, isOpen } = menuContext;
+
+    watch(isOpen, (openValue) => {
+      if (openValue) {
+        emit('onOpen');
+      } else {
+        emit('onClose');
+      }
+    });
 
     onMounted(() => {
       if (props.openOnHover) {
