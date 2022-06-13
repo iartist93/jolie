@@ -10,7 +10,7 @@
         ref="input"
         @input="onInput"
         @change="onChange"
-        @blur="$event => $emit('blur', $event)"
+        @blur="($event) => $emit('blur', $event)"
       />
       <div class="input-btns" :style="{ width: '20px', height: `${height}px` }">
         <button
@@ -56,37 +56,37 @@ export default {
   props: {
     id: {
       type: String,
-      default: "input-number"
+      default: 'input-number',
     },
     name: {
       type: String,
-      required: true
+      required: true,
     },
     value: {
       type: Number,
-      default: 1
+      default: 1,
     },
     max: {
-      type: Number
+      type: Number,
     },
     min: {
-      type: Number
+      type: Number,
     },
     width: {
       type: Number,
-      default: 130
+      default: 130,
     },
     height: {
       type: Number,
       default: 49,
-      validator: function(value) {
+      validator: function (value) {
         return value > 30;
-      }
+      },
     },
     autoFocus: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     isInvalid() {
@@ -97,21 +97,21 @@ export default {
     },
     nameCapitalized() {
       return this.name.charAt(0).toUpperCase() + this.name.slice(1);
-    }
+    },
   },
   methods: {
     onIncrment() {
-      this.$emit("input", parseInt(this.value + 1));
+      this.$emit('input', parseInt(this.value + 1));
     },
     onDecrement() {
-      this.$emit("input", parseInt(this.value - 1));
+      this.$emit('input', parseInt(this.value - 1));
     },
     onInput(event) {
-      this.$emit("input", parseInt(event.target.value));
+      this.$emit('input', parseInt(event.target.value));
     },
     onChange(event) {
-      this.$emit("change", parseInt(event.target.value));
-    }
+      this.$emit('change', parseInt(event.target.value));
+    },
   },
   mounted() {
     if (this.autoFocus) {
@@ -120,7 +120,7 @@ export default {
     // allow only nunbers from 0..9
     // keycode for 0 = 48
     // keycode for 9 = 57
-    this.$refs.input.addEventListener("keypress", evt => {
+    this.$refs.input.addEventListener('keypress', (evt) => {
       if (
         (evt.which != 8 && evt.which != 0 && evt.which < 48) ||
         evt.which > 57
@@ -128,7 +128,7 @@ export default {
         evt.preventDefault();
       }
     });
-  }
+  },
 };
 </script>
 
@@ -151,10 +151,10 @@ export default {
   // width: 130px;
   // height: 49px;
   border-radius: 4px;
-  border: 1px solid $gray-200;
+  border: 1px solid #bfc6d9;
   outline: none;
   // background-color: $gray-100;
-  color: $gray-800;
+  color: #363c49;
   padding-left: 10px;
   box-sizing: border-box;
   font-weight: 600;
@@ -199,7 +199,7 @@ export default {
 .message {
   margin-top: 5px;
   font-size: 14px;
-  color: $gray-500;
+  color: #707070;
 
   &.error {
     color: red;

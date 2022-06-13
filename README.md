@@ -1,10 +1,10 @@
 # Jolie
 
-Jolie is a simple component library to build more complex Vue applications
+Jolie is a component based UI library built using Vue.js and Typescript to build scalable web applications.
 
 - Require Vue 2.x
 
-## Documentation
+## Documentation (WIP)
 
 https://iartist93.github.io/jolie/
 
