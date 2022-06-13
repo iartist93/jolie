@@ -29,7 +29,7 @@
         </button>
       </div>
     </div>
-    <div class="validation">
+    <div v-if="showValidation" class="validation">
       <p v-if="max !== undefined && value > max" class="message error">
         {{ nameCapitalized }} must be lower than {{ max }}
       </p>
@@ -61,6 +61,10 @@ export default {
     name: {
       type: String,
       required: true,
+    },
+    showValidation: {
+      type: Boolean,
+      default: false,
     },
     value: {
       type: Number,
