@@ -168,7 +168,7 @@ export default {
   // width: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   position: relative;
   right: 20px;
   background-color: #b9bdd162;
@@ -183,8 +183,10 @@ export default {
   position: relative;
   // right: 2px;
   filter: invert(0);
+  flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .input-number-btn:hover > img {
