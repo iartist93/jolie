@@ -179,6 +179,8 @@ export default {
   position: relative;
   // right: 2px;
   filter: invert(0);
+  display: flex;
+  justify-content: center;
 }
 
 .input-number-btn:hover > img {

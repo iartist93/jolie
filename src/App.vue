@@ -361,7 +361,7 @@
       />
     </div>
     <!-- ------------------------------------------------- -->
-    <!-- toggle -->
+    <!-- Checkbox -->
     <!-- ------------------------------------------------- -->
 
     <div v-if="false" class="section toggles">
@@ -403,6 +403,18 @@
         />
       </div>
     </div>
+
+    <!-- ------------------------------------------------- -->
+    <!-- Input Number -->
+    <!-- ------------------------------------------------- -->
+
+    <input-number
+      :min="1"
+      :max="10"
+      :name="'score'"
+      :width="130"
+      :height="49"
+    />
 
     <!-- ------------------------------------------------- -->
     <!-- boxes -->
@@ -484,6 +496,7 @@ import Modal from './components/modals/Modal.vue';
 import ModalContent from './components/modals/ModalContent.vue';
 import ModalButton from './components/modals/ModalButton.vue';
 import Checkbox from './components/Checkbox.vue';
+import InputNumber from './components/InputNumber.vue';
 import { useDisclosure } from './composables/useDisclosure';
 
 export default Vue.extend({
@@ -503,6 +516,7 @@ export default Vue.extend({
     ModalContent,
     ModalButton,
     Checkbox,
+    InputNumber,
   },
   data() {
     return {
