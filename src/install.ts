@@ -13,6 +13,7 @@ import Modal from './components/modals/Modal.vue';
 import ModalButton from './components/modals/ModalButton.vue';
 import ModalContent from './components/modals/ModalContent.vue';
 import Checkbox from './components/Checkbox.vue';
+import InputNumber from './components/InputNumber.vue';
 
 // Composables
 import { useIsDescendent } from './composables/useIsDescendent';
@@ -35,6 +36,7 @@ export {
   ModalButton,
   ModalContent,
   Checkbox,
+  InputNumber,
   useIsDescendent,
   useClickOutside,
   useInjectStyle,
