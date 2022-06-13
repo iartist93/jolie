@@ -2,12 +2,12 @@
   <div class="">
     <div class="input-container">
       <input
+        ref="input"
         :style="{ width: `${width}px`, height: `${height}px` }"
         :id="id"
         :value="value"
         type="number"
         class="custom-input"
-        ref="input"
         @input="onInput"
         @change="onChange"
         @blur="($event) => $emit('blur', $event)"
@@ -105,16 +105,36 @@ export default {
   },
   methods: {
     onIncrment() {
-      this.$emit('input', parseInt(this.value + 1));
+      this.$emit('input', Math.min(parseInt(this.value + 1), this.max));
     },
     onDecrement() {
-      this.$emit('input', parseInt(this.value - 1));
+      this.$emit('input', Math.max(parseInt(this.value - 1), this.min));
     },
     onInput(event) {
-      this.$emit('input', parseInt(event.target.value));
+      const newValue = Math.max(
+        Math.min(parseInt(event.target.value), this.max),
+        this.min
+      );
+
+      this.$refs.input.value = newValue;
+
+      this.$emit(
+        'input',
+        Math.max(Math.min(parseInt(event.target.value), this.max), this.min)
+      );
     },
     onChange(event) {
-      this.$emit('change', parseInt(event.target.value));
+      const newValue = Math.max(
+        Math.min(parseInt(event.target.value), this.max),
+        this.min
+      );
+
+      this.$refs.input.value = newValue;
+
+      this.$emit(
+        'change',
+        Math.max(Math.min(parseInt(event.target.value), this.max), this.min)
+      );
     },
   },
   mounted() {

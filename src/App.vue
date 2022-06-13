@@ -414,6 +414,7 @@
       :name="'score'"
       :width="130"
       :height="49"
+      v-model="inputNumber1"
     />
 
     <!-- ------------------------------------------------- -->
@@ -530,6 +531,8 @@ export default Vue.extend({
       isChecked3: false,
       isChecked4: false,
       isChecked5: false,
+      inputNumber1: 1,
+
       options: [
         {
           text: 'Option 1',
