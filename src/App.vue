@@ -161,6 +161,7 @@
             :textAlign="'center'"
             :pl="25"
             :h="46"
+            :disabled="index === 1"
             @click="onMenuItemClicked(index)"
             >Menu item {{ index + 1 }}
           </menu-item>

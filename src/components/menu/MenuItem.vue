@@ -2,7 +2,7 @@
   <div
     ref="rootRef"
     class="jolie-menu-item"
-    :class="{ header: variant === 'header', show: isOpen }"
+    :class="{ header: variant === 'header', show: isOpen, disabled }"
     :id="variant === 'header' ? 'header' : ''"
     @click="onItemClicked"
   >
@@ -43,6 +43,10 @@ export default {
   props: {
     variant: {
       type: String, // header, default
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
     startIcon: {
       type: String,
@@ -110,7 +114,7 @@ export default {
     useInjectStyle(rootRef as Ref<HTMLElement>, elementStyle);
 
     const onItemClicked = () => {
-      if (props.variant === 'header') return;
+      if (props.variant === 'header' || props.disabled) return;
       emit('click');
       onClose();
     };
@@ -141,19 +145,28 @@ export default {
   user-select: none;
   transition: all 50ms cubic-bezier(0.4, 0, 1, 1);
 
-  &:not(.header) {
+  &:not(.header):not(.disabled) {
     &:hover {
       background-color: var(--jolie-menu-item-hover-color);
     }
   }
 
-  &.header {
+  &.header,
+  &.disabled {
     cursor: default;
   }
 
   span {
     flex: 1;
     justify-content: var(--menu-item-text-align);
+  }
+
+  &.disabled {
+    color: rgb(145, 144, 144);
+
+    img {
+      filter: grayscale(1) saturate(0.1);
+    }
   }
 }
 
