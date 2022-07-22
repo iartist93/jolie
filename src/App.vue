@@ -80,6 +80,7 @@
     <!-- ------------------------------------------------- -->
     <!-- Menu Select -->
     <!-- ------------------------------------------------- -->
+
     <section v-if="false" class="section menu">
       <div class="flex">
         <div>
@@ -128,10 +129,63 @@
     </section>
 
     <!-- ------------------------------------------------- -->
+    <!-- Menu Multiple Select -->
+    <!-- ------------------------------------------------- -->
+
+    <section v-if="true" class="section multiple-selection-menu">
+      <div class="flex">
+        <div>
+          <menu-multiple-select
+            :width="toggleChecked ? 300 : 400"
+            v-model="selectedOptions"
+            :name="'Media Groups'"
+          >
+            <multiple-select-option
+              v-for="(item, index) in options"
+              :key="index"
+              :startIcon="item.startIcon"
+              :iconSize="28"
+              :hoverColor="'#F0F0F0'"
+              :pl="25"
+              :h="52"
+              :value="item"
+              class="multiple-select-option"
+            >
+              {{ item.text }}
+            </multiple-select-option>
+          </menu-multiple-select>
+
+          <pre> Selected Option : {{ selectedOptions }} </pre>
+
+          <button @click="randomizeSelectedOption">
+            Randomize Selected Option
+          </button>
+        </div>
+
+        <div class="mx-12">
+          <span> Selected Option 2: {{ selectedOption2 }} </span>
+          <menu-select v-model="selectedOption2" :openOnHover="true">
+            <select-option
+              v-for="(item, index) in options2"
+              :key="index"
+              :iconSize="28"
+              :hoverColor="'#F0F0F0'"
+              :pl="25"
+              :h="46"
+              :value="item"
+            >
+              {{ item }}
+            </select-option>
+          </menu-select>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------- -->
     <!-- Menu -->
     <!-- ------------------------------------------------- -->
 
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider
         class="menu-provider"
@@ -500,6 +554,8 @@ import ModalButton from './components/modals/ModalButton.vue';
 import Checkbox from './components/Checkbox.vue';
 import InputNumber from './components/InputNumber.vue';
 import { useDisclosure } from './composables/useDisclosure';
+import MenuMultipleSelect from './components/select/MenuMultipleSelect.vue';
+import MultipleSelectOption from './components/select/MultipleSelectOption.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -519,6 +575,8 @@ export default Vue.extend({
     ModalButton,
     Checkbox,
     InputNumber,
+    MenuMultipleSelect,
+    MultipleSelectOption,
   },
   data() {
     return {
@@ -554,6 +612,11 @@ export default Vue.extend({
       selectedOption: {
         text: 'Option 4',
       },
+      selectedOptions: [
+        {
+          text: 'Option 4',
+        },
+      ],
       selectedOption2: null,
       darkMode: false,
       isOpen: false,
@@ -657,5 +720,10 @@ export default Vue.extend({
 
 .menu-icon-right {
   margin-left: 400px;
+}
+
+.multiple-select-option {
+  font-weight: 500;
+  font-size: 20px;
 }
 </style>

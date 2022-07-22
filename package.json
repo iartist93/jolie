@@ -18,6 +18,7 @@
     "/lib"
   ],
   "dependencies": {
+    "@types/lodash": "^4.14.182",
     "@vue/composition-api": "^1.4.4",
     "lodash": "^4.17.21",
     "vue": "^2.6.14",

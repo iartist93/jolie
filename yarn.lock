@@ -1264,6 +1264,11 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
   integrity sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==
 
+"@types/lodash@^4.14.182":
+  version "4.14.182"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.182.tgz#05301a4d5e62963227eaafe0ce04dd77c54ea5c2"
+  integrity sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==
+
 "@types/mime@^1":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"
@@ -7184,21 +7189,6 @@ joi@^11.1.1:
     hoek "4.x.x"
     isemail "3.x.x"
     topo "2.x.x"
-
-jolie@^0.2.2:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/jolie/-/jolie-0.2.6.tgz#a19bc4998af448a94c0006c83d1114ff72366d5d"
-  integrity sha512-LFWtvD8GKfnleKnAbo4UtDx9IFJ0cTDtGHJr0DzycY9ZXsbieGVGXVFDo28j+b17CjONGUrrFca5Co31dugewQ==
-  dependencies:
-    "@tailwindcss/postcss7-compat" "^2.2.17"
-    "@vue/composition-api" "^1.4.4"
-    autoprefixer "^9"
-    jolie "^0.2.2"
-    lodash "^4.17.21"
-    postcss "^7"
-    tailwindcss "npm:@tailwindcss/postcss7-compat@^2.2.17"
-    vue "^2.6.14"
-    vue-typed-mixins "^0.2.0"
 
 js-base64@^2.1.9, js-base64@^2.4.3:
   version "2.6.4"
