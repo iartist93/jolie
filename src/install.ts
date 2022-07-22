@@ -9,6 +9,8 @@ import MenuProvider from './components/menu/MenuProvider.vue';
 import MenuList from './components/menu/MenuList.vue';
 import MenuSelect from './components/select/MenuSelect.vue';
 import SelectOption from './components/select/SelectOption.vue';
+import MenuMultipleSelect from './components/select/MenuMultipleSelect.vue';
+import MultipleSelectOption from './components/select/MultipleSelectOption.vue';
 import Modal from './components/modals/Modal.vue';
 import ModalButton from './components/modals/ModalButton.vue';
 import ModalContent from './components/modals/ModalContent.vue';
@@ -32,6 +34,8 @@ export {
   MenuList,
   MenuSelect,
   SelectOption,
+  MenuMultipleSelect,
+  MultipleSelectOption,
   Modal,
   ModalButton,
   ModalContent,
