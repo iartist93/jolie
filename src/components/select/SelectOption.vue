@@ -101,7 +101,7 @@ export default {
     const alignValue = ref('flex-start');
 
     const menuContext = inject('menuContext') as UseMenuSelectType;
-    const { onClose, isOpen, onSelect, selected } = menuContext;
+    const { onClose, isOpen, onSelect, selected, closeOnSelect } = menuContext;
 
     const isSelected = computed(() => {
       return selected.value === null
@@ -115,7 +115,7 @@ export default {
     });
 
     const elementStyle = useStyledSystem(
-      props as unknown as useStyledSystemType
+      props as unknown as useStyledSystemType,
     );
 
     elementStyle.value['--jolie-select-option-hover-color'] = props.hoverColor;
@@ -126,7 +126,10 @@ export default {
 
     const onItemClicked = () => {
       onSelect(props.value as optionValueType);
-      onClose();
+
+      if (closeOnSelect) {
+        onClose();
+      }
     };
 
     const maxIconSize =

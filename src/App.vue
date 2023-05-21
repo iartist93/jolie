@@ -81,7 +81,7 @@
     <!-- Menu Select -->
     <!-- ------------------------------------------------- -->
 
-    <section v-if="false" class="section menu">
+    <section v-if="true" class="section menu">
       <div class="flex">
         <div>
           <span> Selected Option : {{ selectedOption }} </span>
@@ -89,6 +89,7 @@
           <menu-select
             :width="toggleChecked ? 300 : 400"
             v-model="selectedOption"
+            :closeOnSelect="true"
           >
             <select-option
               v-for="(item, index) in options"

@@ -56,6 +56,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    closeOnSelect: {
+      type: Boolean,
+      default: true,
+    },
     width: {
       type: [Number, String],
       default: '100%',
