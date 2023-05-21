@@ -2,7 +2,7 @@
   <div
     ref="rootRef"
     class="jolie-menu-item"
-    :class="{ header: variant === 'header', show: isOpen, disabled }"
+    :class="{ header: variant === 'header', show: isOpen, disabled, selected }"
     :id="variant === 'header' ? 'header' : ''"
     @click="onItemClicked"
   >
@@ -48,6 +48,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
     startIcon: {
       type: String,
     },
@@ -67,6 +71,10 @@ export default {
       default: 'black',
     },
     hoverColor: {
+      type: String,
+      default: '#e2e2cb',
+    },
+    selectedColor: {
       type: String,
       default: '#e2e2cb',
     },
@@ -104,10 +112,12 @@ export default {
     const { onClose, isOpen } = menuContext;
 
     const elementStyle = useStyledSystem(
-      props as unknown as useStyledSystemType
+      props as unknown as useStyledSystemType,
     );
 
     elementStyle.value['--jolie-menu-item-hover-color'] = props.hoverColor;
+    elementStyle.value['--jolie-menu-item-selected-color'] =
+      props.selectedColor;
     elementStyle.value['--jolie-transition-property-background'] =
       'background-color, background-image, background-position';
 
@@ -148,6 +158,10 @@ export default {
   &:not(.header):not(.disabled) {
     &:hover {
       background-color: var(--jolie-menu-item-hover-color);
+    }
+
+    &.selected {
+      background-color: var(--jolie-menu-item-selected-color);
     }
   }
 
