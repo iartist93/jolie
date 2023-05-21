@@ -17,6 +17,7 @@ export interface UseMenuSelectType {
   onClose(): void;
   onToggle(): void;
   closeOnBlur?: boolean;
+  closeOnSelect?: boolean;
   openOnHover?: boolean;
   onSelect(value: optionValueType): void;
   selected: Ref<optionValueType>;
@@ -24,12 +25,13 @@ export interface UseMenuSelectType {
 
 export interface UseMenuSelectProps {
   closeOnBlur?: boolean;
+  closeOnSelect?: boolean;
   openOnHover?: boolean;
   value?: optionValueType;
 }
 
 export function useMenuSelect(props: UseMenuSelectProps): UseMenuSelectType {
-  const { closeOnBlur, openOnHover } = props;
+  const { closeOnSelect, closeOnBlur, openOnHover } = props;
 
   const isOpen = ref(false);
   const selected = ref<optionValueType>(props.value);
@@ -56,6 +58,7 @@ export function useMenuSelect(props: UseMenuSelectProps): UseMenuSelectType {
     onClose,
     onToggle,
     closeOnBlur,
+    closeOnSelect,
     openOnHover,
     onSelect,
     selected,

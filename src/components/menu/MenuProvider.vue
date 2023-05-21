@@ -18,6 +18,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    closeOnSelect: {
+      type: Boolean,
+      default: true,
+    },
   },
   setup(props, { emit }) {
     const rootRef = ref(null);

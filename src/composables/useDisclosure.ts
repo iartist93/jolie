@@ -6,17 +6,19 @@ export interface UseDisclosureType {
   onClose(): void;
   onToggle(): void;
   closeOnBlur?: boolean;
+  closeOnSelect?: boolean;
   openOnHover?: boolean;
 }
 
 export interface UseDisclosureProps {
   closeOnBlur?: boolean;
+  closeOnSelect?: boolean;
   openOnHover?: boolean;
   isOpen?: boolean;
 }
 
 export function useDisclosure(props: UseDisclosureProps): UseDisclosureType {
-  const { closeOnBlur, openOnHover } = props;
+  const { closeOnBlur, openOnHover, closeOnSelect } = props;
 
   const isOpen = ref(props.isOpen as boolean);
 
@@ -24,7 +26,7 @@ export function useDisclosure(props: UseDisclosureProps): UseDisclosureType {
     () => props.isOpen,
     (newIsOpen) => {
       isOpen.value = newIsOpen as boolean;
-    }
+    },
   );
 
   const onOpen = () => {
@@ -47,6 +49,7 @@ export function useDisclosure(props: UseDisclosureProps): UseDisclosureType {
     onClose,
     onToggle,
     closeOnBlur,
+    closeOnSelect,
     openOnHover,
   };
 }

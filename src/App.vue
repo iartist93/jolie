@@ -132,7 +132,7 @@
     <!-- Menu Multiple Select -->
     <!-- ------------------------------------------------- -->
 
-    <section v-if="true" class="section multiple-selection-menu">
+    <section v-if="false" class="section multiple-selection-menu">
       <div class="flex">
         <div>
           <menu-multiple-select
@@ -185,7 +185,7 @@
     <!-- Menu -->
     <!-- ------------------------------------------------- -->
 
-    <section v-if="false" class="section menu">
+    <section v-if="true" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider
         class="menu-provider"
@@ -216,6 +216,45 @@
             :pl="25"
             :h="46"
             :disabled="index === 1"
+            @click="onMenuItemClicked(index)"
+            >Menu item {{ index + 1 }}
+          </menu-item>
+        </menu-list>
+      </menu-provider>
+
+      <!-- Don't close the menu when item is selected  -->
+      <menu-provider
+        class="menu-provider"
+        @onOpen="onMenuOpen"
+        @onClose="onMenuClose"
+        :closeOnSelect="false"
+      >
+        <menu-button>
+          <icon-button :size="'lg'">Don't close on select</icon-button>
+        </menu-button>
+        <menu-list :backgroundColor="'white'" :width="264" :borderRadius="6">
+          <template #header>
+            <menu-item
+              :pl="36"
+              :variant="'header'"
+              :h="48"
+              :backgroundColor="'#185A76'"
+              :color="'white'"
+              >This is the header</menu-item
+            >
+          </template>
+          <menu-item
+            v-for="(item, index) in 10"
+            :key="index"
+            :startIcon="require('@/assets/icons/description-icon.svg')"
+            :iconSize="28"
+            :hoverColor="'#F0F0F0'"
+            :selectedColor="'#e2e2cb'"
+            :textAlign="'center'"
+            :pl="25"
+            :h="46"
+            :disabled="index === 1"
+            :selected="selectedMenuItemIndex === index"
             @click="onMenuItemClicked(index)"
             >Menu item {{ index + 1 }}
           </menu-item>
@@ -620,6 +659,7 @@ export default Vue.extend({
       selectedOption2: null,
       darkMode: false,
       isOpen: false,
+      selectedMenuItemIndex: null,
     };
   },
 
@@ -643,6 +683,7 @@ export default Vue.extend({
     },
     onMenuItemClicked(index) {
       console.log('============> on Menu Item Clicked ', index);
+      this.selectedMenuItemIndex = index;
     },
     randomizeSelectedOption() {
       const rand = Math.round(Math.random() * 3);

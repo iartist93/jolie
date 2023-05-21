@@ -52,6 +52,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    closeOnSelect: {
+      type: Boolean,
+      default: true,
+    },
     startIcon: {
       type: String,
     },
@@ -109,7 +113,7 @@ export default {
 
     // TODO: Create a seperate composable for this
     const menuContext = inject('menuContext') as UseDisclosureType;
-    const { onClose, isOpen } = menuContext;
+    const { onClose, isOpen, closeOnSelect } = menuContext;
 
     const elementStyle = useStyledSystem(
       props as unknown as useStyledSystemType,
@@ -126,7 +130,12 @@ export default {
     const onItemClicked = () => {
       if (props.variant === 'header' || props.disabled) return;
       emit('click');
-      onClose();
+
+      console.log('-----------> close on selected = ', closeOnSelect);
+
+      if (closeOnSelect) {
+        onClose();
+      }
     };
 
     const maxIconSize =
