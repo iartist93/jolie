@@ -100,7 +100,7 @@ export default {
     const { onOpen, onClose, isOpen, selected, onSelect } = menuContext;
 
     const elementStyle = useStyledSystem(
-      props as unknown as useStyledSystemType
+      props as unknown as useStyledSystemType,
     );
 
     useInjectStyle(selectButtonRef as Ref<HTMLElement>, elementStyle);
@@ -128,7 +128,7 @@ export default {
 
     const setSelectedText = () => {
       selectedtext.value = (rootRef.value as HTMLElement).querySelector(
-        '.jolie-select-option[data-selected="1"]'
+        '.jolie-select-option[data-selected="1"]',
       )?.innerHTML as string;
 
       emit('change', selected.value);
@@ -150,7 +150,7 @@ export default {
         } else {
           console.log('props value changed !== ', newValue);
         }
-      }
+      },
     );
 
     onMounted(() => {
@@ -166,7 +166,7 @@ export default {
       if (!props.value) {
         // set selected to the first item in the list or to the placeholder
         const firstItem = (rootRef.value as HTMLElement).querySelector(
-          '.jolie-select-option'
+          '.jolie-select-option',
         ) as HTMLElement;
 
         firstItem.dataset['selected'] = '1';
@@ -184,7 +184,7 @@ export default {
         (rootRef.value as HTMLElement).removeEventListener('mouseover', onOpen);
         (rootRef.value as HTMLElement).removeEventListener(
           'mouseleave',
-          onClose
+          onClose,
         );
       }
     });
