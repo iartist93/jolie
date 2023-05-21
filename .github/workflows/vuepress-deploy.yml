@@ -9,7 +9,7 @@ jobs:
 
       - name: checkout to gp-pages and merge master
         run: |
-          git fetch gp-pages
+          git fetch origin/gp-pages
           git fetch origin/docs
           git checkout gp-pages || git checkout -b gp-pages
           git branch -a # list all branches
