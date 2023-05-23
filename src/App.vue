@@ -84,6 +84,33 @@
     <section v-if="true" class="section menu">
       <div class="flex">
         <div>
+          <span> Selected Option : {{ selectedOption3 }} </span>
+
+          <menu-select
+            :width="toggleChecked ? 300 : 400"
+            v-model="selectedOption3"
+            :closeOnSelect="true"
+          >
+            <select-option
+              v-for="(item, index) in options"
+              :key="index"
+              :startIcon="item.startIcon"
+              :iconSize="28"
+              :hoverColor="'#F0F0F0'"
+              :pl="25"
+              :h="46"
+              :value="item"
+            >
+              {{ item.value }}
+            </select-option>
+          </menu-select>
+
+          <button @click="randomizeSelectedOption">
+            Randomize Selected Option
+          </button>
+        </div>
+
+        <div>
           <span> Selected Option : {{ selectedOption }} </span>
 
           <menu-select
@@ -636,21 +663,29 @@ export default Vue.extend({
         {
           text: 'Option 1',
           startIcon: require('@/assets/icons/description-icon.svg'),
+          value: 'option 1 value',
         },
         {
           text: 'Option 2',
           startIcon: require('@/assets/icons/description-icon.svg'),
+          value: 'option 2 value',
         },
         {
           text: 'Option 3',
+          value: 'option 3 value',
         },
         {
           text: 'Option 4',
+          value: 'option 4 value',
         },
       ],
       options2: ['option 2.1', 'option 2.2', 'option 2.3', 'option 2.4'],
-      selectedOption: {
+      selectedOptionValue: {
         text: 'Option 4',
+      },
+      selectedOption3Value: {
+        text: 'Option 4',
+        value: 'Option 4 value',
       },
       selectedOptions: [
         {
@@ -667,6 +702,24 @@ export default Vue.extend({
   computed: {
     pageColor() {
       return this.darkMode ? '#26282C' : '#f5f5f5';
+    },
+    selectedOption: {
+      get() {
+        return this.selectedOptionValue;
+      },
+      set(value) {
+        this.selectedOptionValue = value;
+        console.log('---------> selected option changed ', value);
+      },
+    },
+    selectedOption3: {
+      get() {
+        return this.selectedOption3Value;
+      },
+      set(value) {
+        this.selectedOption3Value = value;
+        console.log('---------> selected option changed ', value);
+      },
     },
   },
   methods: {

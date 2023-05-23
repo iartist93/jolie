@@ -145,17 +145,20 @@ export default {
       setSelectedText();
     });
 
+    /*
+    // disabled:@ahmed -- It cases an issue executing onSelect() on mount
     watch(
       () => props.value,
-      (newValue) => {
+      (newValue, oldValue) => {
         if (newValue) {
-          console.log('props value changed === ', newValue);
+          console.log('props value changed === ', newValue, oldValue);
           onSelect(newValue as optionValueType);
         } else {
-          console.log('props value changed !== ', newValue);
+          console.log('props value changed !== ', newValue, oldValue);
         }
       },
     );
+    */
 
     onMounted(() => {
       menuListWidth.value = (
