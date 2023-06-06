@@ -144,7 +144,10 @@ export default {
     };
 
     const onRemoveLabel = (label) => {
-      onRemoveFromSelection(label);
+      onRemoveFromSelection(label as menuOptionType);
+
+      emit('change', selectedList.value);
+      emit('input', selectedList.value);
     };
 
     useResizeObserver(menuButtonRef as Ref<ComponentInstance>, calcWidth);
