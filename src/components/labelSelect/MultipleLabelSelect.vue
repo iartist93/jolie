@@ -7,7 +7,14 @@
           :key="label.text"
           class="label-item"
         >
-          {{ label.text }}
+          <span>{{ label.text }} </span>
+          <button @click.stop="onRemoveLabel(label)">
+            <img
+              src="@/assets/icons/close-4.svg"
+              alt="close"
+              class="close-icon"
+            />
+          </button>
         </span>
       </button>
     </menu-button>
@@ -96,13 +103,18 @@ export default {
     const selectButtonRef = ref<HTMLElement | null>(null);
     const menuButtonRef = ref<ComponentInstance | null>(null);
     const menuListWidth = ref<widthType>(props.width as widthType);
-    const selectedtext = ref<string>('');
 
     const menuContext = useMenuSelect(props as unknown as UseMenuSelectProps);
     provide('menuContext', menuContext);
 
-    const { onOpen, onClose, isOpen, selectedList, onSelectionChange } =
-      menuContext;
+    const {
+      onOpen,
+      onClose,
+      isOpen,
+      selectedList,
+      onSelectionChange,
+      onRemoveFromSelection,
+    } = menuContext;
 
     const elementStyle = useStyledSystem(
       props as unknown as useStyledSystemType,
@@ -131,22 +143,11 @@ export default {
       }
     };
 
-    const setSelectedText = () => {
-      selectedtext.value = (rootRef.value as HTMLElement).querySelector(
-        '.jolie-select-option[data-selected="1"]',
-      )?.innerHTML as string;
-
-      console.log('-------> set selected text = ', selectedList.value);
-
-      emit('change', selectedList.value);
-      emit('input', selectedList.value);
+    const onRemoveLabel = (label) => {
+      onRemoveFromSelection(label);
     };
 
     useResizeObserver(menuButtonRef as Ref<ComponentInstance>, calcWidth);
-
-    watch(selectedList, () => {
-      setSelectedText();
-    });
 
     watch(
       () => props.value,
@@ -177,12 +178,10 @@ export default {
         ) as HTMLElement;
 
         firstItem.dataset['selected'] = '1';
-        selectedtext.value = firstItem?.innerHTML as string;
 
         onSelectionChange(JSON.parse(firstItem.dataset['value'] as string));
       } else {
         onSelectionChange(props.value as menuOptionType[]);
-        setSelectedText();
       }
     });
 
@@ -202,8 +201,8 @@ export default {
       menuButtonRef,
       isOpen,
       menuListWidth,
-      selectedtext,
       selectedList,
+      onRemoveLabel,
     };
   },
 };
@@ -233,8 +232,15 @@ export default {
   .label-item {
     background: rgb(189, 192, 201);
     border-radius: 20px;
-    padding: 0.4rem 0.8rem;
+    padding: 0.3rem 0.8rem;
     color: black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .close-icon {
+      width: 25px;
+    }
   }
 }
 </style>

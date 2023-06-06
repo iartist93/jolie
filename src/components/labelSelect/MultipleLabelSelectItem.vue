@@ -131,7 +131,12 @@ export default {
     const onItemClicked = (event: Event) => {
       //   onAddToSel   ection(props.value as menuOptionType);
 
-      console.log('on item clicked ', isSelected.value, event.target);
+      console.log(
+        'on item clicked ',
+        isSelected.value,
+        event.target,
+        props.value as menuOptionType,
+      );
       if (isSelected.value) {
         onRemoveFromSelection(props.value as menuOptionType);
       } else {
