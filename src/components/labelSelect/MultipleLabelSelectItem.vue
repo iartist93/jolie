@@ -1,17 +1,17 @@
 <template>
   <label
     ref="rootRef"
-    class="jolie-multiple-select-option"
+    class="jolie-multiple-label-select-item"
     :class="{ show: isOpen }"
     :data-selected="isSelected ? 1 : 0"
     :data-value="JSON.stringify(value)"
+    @click="onItemClicked"
   >
-    <input
-      type="checkbox"
-      name="multiple-select"
-      class="multiple-select"
-      :checked="isSelected"
-      @click="onItemClicked"
+    <img
+      v-if="isSelected"
+      src="@/assets/icons/check-mark-2.svg"
+      alt="checkmark"
+      class="checkmark-icon"
     />
 
     <span
@@ -25,7 +25,7 @@
       v-if="endIcon"
       :src="endIcon"
       alt="end-icon"
-      class="icon end-icon"
+      class="item-icon end-icon"
       :style="{ width: maxIconSize }"
     />
   </label>
@@ -121,7 +121,7 @@ export default {
       props as unknown as useStyledSystemType,
     );
 
-    elementStyle.value['--jolie-multiple-select-option-hover-color'] =
+    elementStyle.value['--jolie-multiple-label-select-item-hover-color'] =
       props.hoverColor;
     elementStyle.value['--jolie-transition-property-background'] =
       'background-color, background-image, background-position';
@@ -164,7 +164,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.jolie-multiple-select-option {
+.jolie-multiple-label-select-item {
   width: 100%;
   display: flex;
   align-items: center;
@@ -173,24 +173,22 @@ export default {
   transition: all 50ms cubic-bezier(0.4, 0, 1, 1);
 
   &:hover {
-    background-color: var(--jolie-multiple-select-option-hover-color);
+    background-color: var(--jolie-multiple-label-select-item-hover-color);
   }
 
   span {
     flex: 1;
     justify-content: var(--menu-item-text-align);
   }
-
-  .multiple-select {
-    width: 18px;
-    height: 18px;
-    margin-right: 20px;
+  .item-icon {
+    &.end-icon {
+      margin-left: 16px;
+    }
   }
-}
 
-.icon {
-  &.end-icon {
-    margin-left: 16px;
+  .checkmark-icon {
+    width: 20px;
+    margin-right: 20px;
   }
 }
 </style>

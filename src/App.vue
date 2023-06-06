@@ -81,7 +81,7 @@
     <!-- Menu Select -->
     <!-- ------------------------------------------------- -->
 
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <div class="flex">
         <div>
           <span> Selected Option : {{ selectedOption3 }} </span>
@@ -184,10 +184,6 @@
           </menu-multiple-select>
 
           <pre> Selected Option : {{ selectedOptions }} </pre>
-
-          <button @click="randomizeSelectedOption">
-            Randomize Selected Option
-          </button>
         </div>
 
         <div class="mx-12">
@@ -210,10 +206,41 @@
     </section>
 
     <!-- ------------------------------------------------- -->
+    <!-- Mltiple Label Select -->
+    <!-- ------------------------------------------------- -->
+
+    <section v-if="true" class="section multiple-label-select">
+      <div class="flex">
+        <div>
+          <multiple-label-select
+            :width="400"
+            v-model="selectedLabels"
+            :name="'Labels'"
+          >
+            <multiple-label-select-item
+              v-for="(item, index) in options"
+              :key="index"
+              :startIcon="item.startIcon"
+              :iconSize="28"
+              :hoverColor="'#F0F0F0'"
+              :pl="25"
+              :h="52"
+              :value="item"
+              class="multiple-select-option"
+              >{{ item.text }}
+            </multiple-label-select-item>
+          </multiple-label-select>
+
+          <pre> Selected Option : {{ selectedLabels }} </pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------- -->
     <!-- Menu -->
     <!-- ------------------------------------------------- -->
 
-    <section v-if="true" class="section menu">
+    <section v-if="false" class="section menu">
       <h1>Menu Component</h1>
       <menu-provider
         class="menu-provider"
@@ -622,7 +649,8 @@ import Checkbox from './components/Checkbox.vue';
 import InputNumber from './components/InputNumber.vue';
 import { useDisclosure } from './composables/useDisclosure';
 import MenuMultipleSelect from './components/select/MenuMultipleSelect.vue';
-import MultipleSelectOption from './components/select/MultipleSelectOption.vue';
+import MultipleLabelSelect from './components/labelSelect/MultipleLabelSelect.vue';
+import MultipleLabelSelectItem from './components/labelSelect/MultipleLabelSelectItem.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -643,7 +671,8 @@ export default Vue.extend({
     Checkbox,
     InputNumber,
     MenuMultipleSelect,
-    MultipleSelectOption,
+    MultipleLabelSelect,
+    MultipleLabelSelectItem,
   },
   data() {
     return {
@@ -692,6 +721,7 @@ export default Vue.extend({
           text: 'Option 4',
         },
       ],
+      selectedLabels: [],
       selectedOption2: null,
       darkMode: false,
       isOpen: false,
