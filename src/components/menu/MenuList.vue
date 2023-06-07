@@ -64,7 +64,8 @@ export default {
       menu.value = rootRef.value.parentElement;
 
       toggleButton.value =
-        menu.value.getElementsByClassName('jolie-menu-button')[0];
+        menu.value.getElementsByClassName('jolie-menu-button')[0] ||
+        menu.value.getElementsByClassName('menu-anchor-el')[0];
 
       const menuPositionY = toggleButton.value.getBoundingClientRect().y;
       const totalViewportHeight = document.documentElement.clientHeight;
@@ -95,6 +96,7 @@ export default {
     };
 
     onMounted(() => {
+      console.log('------> mounted rootRef.value =  ', rootRef.value);
       updateMenuPosition();
       document.addEventListener('scroll', updateMenuPosition);
     });

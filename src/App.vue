@@ -213,12 +213,14 @@
       <div class="flex">
         <div>
           <multiple-label-select
-            :width="400"
             v-model="selectedLabels"
+            :width="400"
             :name="'Labels'"
+            :list="allLabels"
+            @add-new="onAddNewLabel"
           >
             <multiple-label-select-item
-              v-for="(item, index) in options"
+              v-for="(item, index) in allLabels"
               :key="index"
               :startIcon="item.startIcon"
               :iconSize="28"
@@ -708,6 +710,26 @@ export default Vue.extend({
           value: 'option 4 value',
         },
       ],
+      allLabels: [
+        {
+          text: 'Option 1',
+          startIcon: require('@/assets/icons/description-icon.svg'),
+          value: 'option 1 value',
+        },
+        {
+          text: 'Option 2',
+          startIcon: require('@/assets/icons/description-icon.svg'),
+          value: 'option 2 value',
+        },
+        {
+          text: 'Option 3',
+          value: 'option 3 value',
+        },
+        {
+          text: 'Option 4',
+          value: 'option 4 value',
+        },
+      ],
       options2: ['option 2.1', 'option 2.2', 'option 2.3', 'option 2.4'],
       selectedOptionValue: {
         text: 'Option 4',
@@ -776,6 +798,9 @@ export default Vue.extend({
     },
     onDisabledClicked() {
       console.log('on disabled clicked');
+    },
+    onAddNewLabel(newLabel) {
+      this.allLabels.push(newLabel);
     },
   },
 });

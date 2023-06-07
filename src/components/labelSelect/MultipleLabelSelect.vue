@@ -1,23 +1,37 @@
 <template>
   <div ref="rootRef" class="jolie-multiple-label-select">
-    <menu-button ref="menuButtonRef">
-      <button ref="selectButtonRef" class="label-list">
-        <span
-          v-for="label in selectedList"
-          :key="label.text"
-          class="label-item"
-        >
-          <span>{{ label.text }} </span>
-          <button @click.stop="onRemoveLabel(label)">
-            <img
-              src="@/assets/icons/close-4.svg"
-              alt="close"
-              class="close-icon"
-            />
-          </button>
-        </span>
-      </button>
-    </menu-button>
+    <!-- <menu-button ref="menuButtonRef" class="label-list"> -->
+    <!-- <button ref="selectButtonRef" class="label-list"> -->
+    <div
+      @focus="onTextareaFocus"
+      tabindex="-1"
+      class="label-list menu-anchor-el"
+    >
+      <span
+        v-for="label in selectedList"
+        :key="label.text"
+        class="label-item"
+        contenteditable="false"
+      >
+        <span class="label-text">{{ label.text }} </span>
+        <button @click.stop="onRemoveLabel(label)" class="close-btn">
+          <img
+            src="@/assets/icons/close-4.svg"
+            alt="close"
+            class="close-icon"
+          />
+        </button>
+      </span>
+      <input
+        ref="newLabelInput"
+        type="text"
+        name="new-label"
+        id="new-label"
+        @change="onAddNewLabel"
+      />
+    </div>
+    <!-- </button> -->
+    <!-- </menu-button> -->
 
     <menu-list :width="menuListWidth">
       <slot></slot>
@@ -31,27 +45,39 @@ import {
   onMounted,
   provide,
   ref,
-  Ref,
-  ComponentInstance,
+  // Ref,
+  // ComponentInstance,
   watch,
 } from '@vue/composition-api';
-import {
-  useStyledSystem,
-  useStyledSystemType,
-} from '@/composables/useStyledSystem';
-import { useInjectStyle } from '@/composables/useInjectStyle';
+
+// import {
+//   useStyledSystem,
+//   useStyledSystemType,
+// } from '@/composables/useStyledSystem';
+// import { useInjectStyle } from '@/composables/useInjectStyle';
+
 import {
   menuOptionType,
   useMenuSelect,
   UseMenuSelectProps,
+  menuOptionObjectType,
 } from '@/composables/select/useMenuMultipleSelect';
-import { useResizeObserver } from '@/composables/useReszieObserver';
+
+// import { useResizeObserver } from '@/composables/useReszieObserver';
+
 import MenuList from '../menu/MenuList.vue';
-import MenuButton from '../menu/MenuButton.vue';
+// import MenuButton from '../menu/MenuButton.vue';
 
 export default {
-  components: { MenuList, MenuButton },
+  components: {
+    MenuList,
+    // MenuButton
+  },
   props: {
+    list: {
+      type: Array,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -100,8 +126,10 @@ export default {
     type widthType = number | string;
 
     const rootRef = ref<HTMLElement | null>(null);
-    const selectButtonRef = ref<HTMLElement | null>(null);
-    const menuButtonRef = ref<ComponentInstance | null>(null);
+    const newLabelInput = ref<HTMLElement | null>(null);
+
+    // const selectButtonRef = ref<HTMLElement | null>(null);
+    // const menuButtonRef = ref<ComponentInstance | null>(null);
     const menuListWidth = ref<widthType>(props.width as widthType);
 
     const menuContext = useMenuSelect(props as unknown as UseMenuSelectProps);
@@ -114,34 +142,35 @@ export default {
       selectedList,
       onSelectionChange,
       onRemoveFromSelection,
+      onAddToSelection,
     } = menuContext;
 
-    const elementStyle = useStyledSystem(
-      props as unknown as useStyledSystemType,
-    );
+    // const elementStyle = useStyledSystem(
+    //   props as unknown as useStyledSystemType,
+    // );
 
-    useInjectStyle(selectButtonRef as Ref<HTMLElement>, elementStyle);
+    // useInjectStyle(selectButtonRef as Ref<HTMLElement>, elementStyle);
 
-    const calcWidth = (entries) => {
-      for (let entry of entries) {
-        if (entry.borderBoxSize) {
-          if (entry.borderBoxSize[0]) {
-            const newSize = Math.round(entry.borderBoxSize[0].inlineSize);
-            const oldSize =
-              (selectButtonRef.value as HTMLElement).getBoundingClientRect()
-                .width || 0;
+    // const calcWidth = (entries) => {
+    //   for (let entry of entries) {
+    //     if (entry.borderBoxSize) {
+    //       if (entry.borderBoxSize[0]) {
+    //         const newSize = Math.round(entry.borderBoxSize[0].inlineSize);
+    //         const oldSize =
+    //           (selectButtonRef.value as HTMLElement).getBoundingClientRect()
+    //             .width || 0;
 
-            const threshold = Math.round(oldSize * 0.01);
+    //         const threshold = Math.round(oldSize * 0.01);
 
-            if (Math.abs(newSize - oldSize) > threshold) {
-              menuListWidth.value = newSize;
-            } else {
-              menuListWidth.value = oldSize;
-            }
-          }
-        }
-      }
-    };
+    //         if (Math.abs(newSize - oldSize) > threshold) {
+    //           menuListWidth.value = newSize;
+    //         } else {
+    //           menuListWidth.value = oldSize;
+    //         }
+    //       }
+    //     }
+    //   }
+    // };
 
     const onRemoveLabel = (label) => {
       onRemoveFromSelection(label as menuOptionType);
@@ -150,7 +179,58 @@ export default {
       emit('input', selectedList.value);
     };
 
-    useResizeObserver(menuButtonRef as Ref<ComponentInstance>, calcWidth);
+    const onTextareaFocus = () => {
+      onOpen();
+      newLabelInput.value?.focus();
+    };
+
+    const isLabelInList = (label) => {
+      if (typeof (props.list as menuOptionType[])[0] === 'object') {
+        return (props.list as menuOptionObjectType[]).find(
+          (item) => item.text === label,
+        );
+      } else if (typeof (props.list as menuOptionType[])[0] === 'string') {
+        return (props.list as string[]).find((item) => item === label);
+      }
+    };
+
+    const isLabelSelected = (label) => {
+      if (typeof (props.list as menuOptionType[])[0] === 'object') {
+        return (selectedList.value as menuOptionObjectType[]).find(
+          (item) => item.text === label,
+        );
+      } else if (typeof (props.list as menuOptionType[])[0] === 'string') {
+        return (selectedList.value as string[]).find((item) => item === label);
+      }
+    };
+
+    const onAddNewLabel = (ev) => {
+      const value = ev.target.value;
+      ev.target.value = '';
+
+      // already on the label list?
+      const foundLabel = isLabelInList(value);
+
+      // already selected?
+      const isSelected = isLabelSelected(value);
+
+      if (foundLabel) {
+        if (isSelected) return;
+
+        onAddToSelection(foundLabel);
+        return;
+      }
+
+      const newLabel = {
+        text: value,
+        value,
+      };
+
+      emit('add-new', newLabel);
+      onAddToSelection(newLabel);
+    };
+
+    // useResizeObserver(menuButtonRef as Ref<ComponentInstance>, calcWidth);
 
     watch(
       () => props.value,
@@ -165,10 +245,6 @@ export default {
     );
 
     onMounted(() => {
-      menuListWidth.value = (
-        menuButtonRef.value as ComponentInstance
-      ).$el.getBoundingClientRect().width;
-
       if (props.openOnHover) {
         (rootRef.value as HTMLElement).addEventListener('mouseover', onOpen);
         (rootRef.value as HTMLElement).addEventListener('mouseleave', onClose);
@@ -200,12 +276,15 @@ export default {
 
     return {
       rootRef,
-      selectButtonRef,
-      menuButtonRef,
+      // selectButtonRef,
+      // menuButtonRef,
       isOpen,
       menuListWidth,
       selectedList,
       onRemoveLabel,
+      onTextareaFocus,
+      newLabelInput,
+      onAddNewLabel,
     };
   },
 };
@@ -219,6 +298,10 @@ export default {
   // width: fit-content;
 
   .label-list {
+    width: 500px;
+    min-height: 100px;
+    padding: 20px;
+
     display: flex;
     gap: 15px;
 
@@ -240,6 +323,15 @@ export default {
     display: flex;
     align-items: center;
     gap: 10px;
+
+    .label-text {
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .close-btn {
+      cursor: pointer;
+    }
 
     .close-icon {
       width: 25px;
