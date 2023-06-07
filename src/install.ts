@@ -16,6 +16,8 @@ import ModalButton from './components/modals/ModalButton.vue';
 import ModalContent from './components/modals/ModalContent.vue';
 import Checkbox from './components/Checkbox.vue';
 import InputNumber from './components/InputNumber.vue';
+import MultipleLabelSelect from './components/labelSelect/MultipleLabelSelect.vue';
+import MultipleLabelSelectItem from './components/labelSelect/MultipleLabelSelectItem.vue';
 
 // Composables
 import { useIsDescendent } from './composables/useIsDescendent';
@@ -41,6 +43,8 @@ export {
   ModalContent,
   Checkbox,
   InputNumber,
+  MultipleLabelSelect,
+  MultipleLabelSelectItem,
   useIsDescendent,
   useClickOutside,
   useInjectStyle,

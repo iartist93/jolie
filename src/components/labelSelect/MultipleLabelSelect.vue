@@ -6,6 +6,7 @@
       @focus="onTextareaFocus"
       tabindex="-1"
       class="label-list menu-anchor-el"
+      ref="labelsList"
     >
       <span
         v-for="label in selectedList"
@@ -27,6 +28,7 @@
         type="text"
         name="new-label"
         id="new-label"
+        class="new-label-input"
         @change="onAddNewLabel"
       />
     </div>
@@ -45,16 +47,16 @@ import {
   onMounted,
   provide,
   ref,
-  // Ref,
+  Ref,
   // ComponentInstance,
   watch,
 } from '@vue/composition-api';
 
-// import {
-//   useStyledSystem,
-//   useStyledSystemType,
-// } from '@/composables/useStyledSystem';
-// import { useInjectStyle } from '@/composables/useInjectStyle';
+import {
+  useStyledSystem,
+  useStyledSystemType,
+} from '@/composables/useStyledSystem';
+import { useInjectStyle } from '@/composables/useInjectStyle';
 
 import {
   menuOptionType,
@@ -127,6 +129,7 @@ export default {
 
     const rootRef = ref<HTMLElement | null>(null);
     const newLabelInput = ref<HTMLElement | null>(null);
+    const labelsList = ref<HTMLElement | null>(null);
 
     // const selectButtonRef = ref<HTMLElement | null>(null);
     // const menuButtonRef = ref<ComponentInstance | null>(null);
@@ -145,11 +148,11 @@ export default {
       onAddToSelection,
     } = menuContext;
 
-    // const elementStyle = useStyledSystem(
-    //   props as unknown as useStyledSystemType,
-    // );
+    const elementStyle = useStyledSystem(
+      props as unknown as useStyledSystemType,
+    );
 
-    // useInjectStyle(selectButtonRef as Ref<HTMLElement>, elementStyle);
+    useInjectStyle(labelsList as Ref<HTMLElement>, elementStyle);
 
     // const calcWidth = (entries) => {
     //   for (let entry of entries) {
@@ -284,6 +287,7 @@ export default {
       onRemoveLabel,
       onTextareaFocus,
       newLabelInput,
+      labelsList,
       onAddNewLabel,
     };
   },
@@ -298,12 +302,10 @@ export default {
   // width: fit-content;
 
   .label-list {
-    width: 500px;
-    min-height: 100px;
-    padding: 20px;
+    padding: 10px;
 
     display: flex;
-    gap: 15px;
+    gap: 10px;
 
     align-items: center;
     background-color: white;
@@ -327,6 +329,7 @@ export default {
     .label-text {
       user-select: none;
       pointer-events: none;
+      font-size: 14px;
     }
 
     .close-btn {
@@ -334,8 +337,17 @@ export default {
     }
 
     .close-icon {
-      width: 25px;
+      width: 22px;
     }
+  }
+
+  .new-label-input {
+    outline: 0;
+    border: 0;
+    flex: 1;
+    width: 10px;
+    color: black;
+    font-weight: 500;
   }
 }
 </style>
