@@ -29,14 +29,28 @@
         name="new-label"
         id="new-label"
         class="new-label-input"
+        placeholder="new label"
         @change="onAddNewLabel"
+        @focus="onTextareaFocus"
+        @input="onLabelSearch"
       />
     </div>
     <!-- </button> -->
     <!-- </menu-button> -->
 
     <menu-list :width="menuListWidth">
-      <slot></slot>
+      <multiple-label-select-item
+        v-for="(item, index) in filteredList"
+        :key="index"
+        :startIcon="item.startIcon"
+        :iconSize="28"
+        :hoverColor="'#F0F0F0'"
+        :pl="25"
+        :h="52"
+        :value="item"
+        class="multiple-select-option"
+        >{{ item.text }}
+      </multiple-label-select-item>
     </menu-list>
   </div>
 </template>
@@ -65,14 +79,18 @@ import {
   menuOptionObjectType,
 } from '@/composables/select/useMenuMultipleSelect';
 
+import MultipleLabelSelectItem from './MultipleLabelSelectItem.vue';
+
 // import { useResizeObserver } from '@/composables/useReszieObserver';
 
 import MenuList from '../menu/MenuList.vue';
+
 // import MenuButton from '../menu/MenuButton.vue';
 
 export default {
   components: {
     MenuList,
+    MultipleLabelSelectItem,
     // MenuButton
   },
   props: {
@@ -131,6 +149,8 @@ export default {
     const newLabelInput = ref<HTMLElement | null>(null);
     const labelsList = ref<HTMLElement | null>(null);
 
+    const filteredList = ref(props.list);
+
     // const selectButtonRef = ref<HTMLElement | null>(null);
     // const menuButtonRef = ref<ComponentInstance | null>(null);
     const menuListWidth = ref<widthType>(props.width as widthType);
@@ -175,6 +195,24 @@ export default {
     //   }
     // };
 
+    const onLabelSearch = (ev) => {
+      const value = ev.target.value;
+      let newList;
+
+      if (typeof (props.list as menuOptionType[])[0] === 'object') {
+        newList = (props.list as menuOptionObjectType[]).filter((item) =>
+          item.text.includes(value),
+        );
+      } else if (typeof (props.list as menuOptionType[])[0] === 'string') {
+        newList = (props.list as string[]).find((item) => item.includes(value));
+      }
+
+      filteredList.value = newList;
+      console.log('----------> Filtered List = ', filteredList.value);
+
+      return newList;
+    };
+
     const onRemoveLabel = (label) => {
       onRemoveFromSelection(label as menuOptionType);
 
@@ -183,6 +221,7 @@ export default {
     };
 
     const onTextareaFocus = () => {
+      filteredList.value = props.list;
       onOpen();
       newLabelInput.value?.focus();
     };
@@ -210,6 +249,7 @@ export default {
     const onAddNewLabel = (ev) => {
       const value = ev.target.value;
       ev.target.value = '';
+      filteredList.value = props.list;
 
       // already on the label list?
       const foundLabel = isLabelInList(value);
@@ -289,6 +329,8 @@ export default {
       newLabelInput,
       labelsList,
       onAddNewLabel,
+      onLabelSearch,
+      filteredList,
     };
   },
 };
@@ -302,7 +344,7 @@ export default {
   // width: fit-content;
 
   .label-list {
-    padding: 10px;
+    padding: 10px 14px;
 
     display: flex;
     gap: 10px;
@@ -345,9 +387,10 @@ export default {
     outline: 0;
     border: 0;
     flex: 1;
-    width: 10px;
+    width: 80px;
     color: black;
     font-weight: 500;
+    padding: 0 8px;
   }
 }
 </style>

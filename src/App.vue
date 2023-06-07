@@ -220,21 +220,9 @@
             :list="allLabels"
             @add-new="onAddNewLabel"
           >
-            <multiple-label-select-item
-              v-for="(item, index) in allLabels"
-              :key="index"
-              :startIcon="item.startIcon"
-              :iconSize="28"
-              :hoverColor="'#F0F0F0'"
-              :pl="25"
-              :h="52"
-              :value="item"
-              class="multiple-select-option"
-              >{{ item.text }}
-            </multiple-label-select-item>
           </multiple-label-select>
 
-          <pre> Selected Option : {{ selectedLabels }} </pre>
+          <!-- <pre> Selected Option : {{ selectedLabels }} </pre> -->
         </div>
       </div>
     </section>
@@ -653,7 +641,6 @@ import InputNumber from './components/InputNumber.vue';
 import { useDisclosure } from './composables/useDisclosure';
 import MenuMultipleSelect from './components/select/MenuMultipleSelect.vue';
 import MultipleLabelSelect from './components/labelSelect/MultipleLabelSelect.vue';
-import MultipleLabelSelectItem from './components/labelSelect/MultipleLabelSelectItem.vue';
 
 export default Vue.extend({
   name: 'App',
@@ -675,7 +662,6 @@ export default Vue.extend({
     InputNumber,
     MenuMultipleSelect,
     MultipleLabelSelect,
-    MultipleLabelSelectItem,
   },
   data() {
     return {
