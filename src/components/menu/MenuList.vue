@@ -86,7 +86,12 @@ export default {
           ? -menuListWidth.value / 2 + menuButtonWidth.value / 2
           : 0;
 
-      dropup.value = totalMenuHeight + menuPositionY > totalViewportHeight;
+      const menuOverflowBottom =
+        totalMenuHeight + menuPositionY > totalViewportHeight;
+
+      const menuOverflowTop = menuPositionY - totalMenuHeight < 0;
+
+      dropup.value = menuOverflowBottom && !menuOverflowTop;
 
       const offsetY = openOnHover ? 0 : props.offset;
 
@@ -96,7 +101,6 @@ export default {
     };
 
     onMounted(() => {
-      console.log('------> mounted rootRef.value =  ', rootRef.value);
       updateMenuPosition();
       document.addEventListener('scroll', updateMenuPosition);
     });
