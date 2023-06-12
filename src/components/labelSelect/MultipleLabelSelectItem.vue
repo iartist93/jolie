@@ -1,15 +1,17 @@
 <template>
   <label
     ref="rootRef"
-    class="jolie-multiple-label-select-item"
+    tabindex="-1"
+    class="jolie-menu-list-item jolie-multiple-label-select-item"
     :class="{ show: isOpen }"
     :data-selected="isSelected ? 1 : 0"
     :data-value="JSON.stringify(value)"
     @click="onItemClicked"
+    @keypress.space="onItemClicked"
   >
     <img
       v-if="isSelected"
-      src="@/assets/icons/check-mark-2.svg"
+      src="@/assets/icons/check-mark.svg"
       alt="checkmark"
       class="checkmark-icon"
     />
@@ -94,7 +96,7 @@ export default {
       default: 'start', // 'start', 'end', 'center'
     },
   },
-  setup(props, { emit }) {
+  setup(props) {
     const rootRef = ref<HTMLElement | null>(null);
     const alignValue = ref('flex-start');
 
@@ -103,8 +105,6 @@ export default {
       menuContext;
 
     const isSelected = computed(() => {
-      console.log(selectedList.value, typeof props.value);
-
       return selectedList.value === null
         ? false
         : typeof props.value === 'string'
@@ -123,20 +123,13 @@ export default {
 
     elementStyle.value['--jolie-multiple-label-select-item-hover-color'] =
       props.hoverColor;
+
     elementStyle.value['--jolie-transition-property-background'] =
       'background-color, background-image, background-position';
 
     useInjectStyle(rootRef as Ref<HTMLElement>, elementStyle);
 
-    const onItemClicked = (event: Event) => {
-      //   onAddToSel   ection(props.value as menuOptionType);
-
-      console.log(
-        'on item clicked ',
-        isSelected.value,
-        event.target,
-        props.value as menuOptionType,
-      );
+    const onItemClicked = () => {
       if (isSelected.value) {
         onRemoveFromSelection(props.value as menuOptionType);
       } else {
@@ -178,6 +171,10 @@ export default {
   transition: all 50ms cubic-bezier(0.4, 0, 1, 1);
 
   &:hover {
+    background-color: var(--jolie-multiple-label-select-item-hover-color);
+  }
+
+  &.focus {
     background-color: var(--jolie-multiple-label-select-item-hover-color);
   }
 

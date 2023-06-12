@@ -214,10 +214,10 @@
         <div>
           <multiple-label-select
             v-model="selectedLabels"
+            :list="allLabels"
             :width="400"
             :minHeight="50"
             :name="'Labels'"
-            :list="allLabels"
             @add-new="onAddNewLabel"
           >
           </multiple-label-select>

@@ -30,15 +30,20 @@
         id="new-label"
         class="new-label-input"
         placeholder="new label"
-        @change="onAddNewLabel"
+        @change="onNewLabelChange"
         @focus="onTextareaFocus"
-        @input="onLabelSearch"
+        @input="onNewLabelInput"
+        @keypress.space="onSpacebar"
       />
     </div>
     <!-- </button> -->
     <!-- </menu-button> -->
 
-    <menu-list :width="menuListWidth">
+    <menu-list
+      :list="filteredList"
+      :width="menuListWidth"
+      @focus-change="onNewFocusItem"
+    >
       <multiple-label-select-item
         v-for="(item, index) in filteredList"
         :key="index"
@@ -48,7 +53,6 @@
         :pl="25"
         :h="52"
         :value="item"
-        class="multiple-select-option"
         >{{ item.text }}
       </multiple-label-select-item>
     </menu-list>
@@ -148,12 +152,9 @@ export default {
     const rootRef = ref<HTMLElement | null>(null);
     const newLabelInput = ref<HTMLElement | null>(null);
     const labelsList = ref<HTMLElement | null>(null);
-
     const filteredList = ref(props.list);
-
-    // const selectButtonRef = ref<HTMLElement | null>(null);
-    // const menuButtonRef = ref<ComponentInstance | null>(null);
     const menuListWidth = ref<widthType>(props.width as widthType);
+    const currentFocusItem = ref<menuOptionType | null>(null);
 
     const menuContext = useMenuSelect(props as unknown as UseMenuSelectProps);
     provide('menuContext', menuContext);
@@ -195,8 +196,40 @@ export default {
     //   }
     // };
 
-    const onLabelSearch = (ev) => {
+    const filterList = (newList) => {
+      if (typeof (props.list as menuOptionType[])[0] === 'object') {
+        console.log(
+          '--------> is object === ',
+          (newList as menuOptionObjectType[]).filter(
+            (item) => item.text !== 'Option 1',
+          ),
+
+          (selectedList.value as menuOptionObjectType[]).find(
+            (item) => item.text === 'Option 1',
+          ),
+        );
+
+        return (newList as menuOptionObjectType[]).filter(
+          (item) =>
+            !(selectedList.value as menuOptionObjectType[]).find(
+              (selection) => selection.text === item.text,
+            ),
+        );
+      } else if (typeof (props.list as menuOptionType[])[0] === 'string') {
+        return (newList as string[]).filter(
+          (item) =>
+            !(selectedList.value as string[]).find(
+              (selection) => selection === item,
+            ),
+        );
+      }
+    };
+
+    const onNewLabelInput = (ev) => {
       const value = ev.target.value;
+
+      if (value.trim().length === 0) return;
+
       let newList;
 
       if (typeof (props.list as menuOptionType[])[0] === 'object') {
@@ -207,10 +240,14 @@ export default {
         newList = (props.list as string[]).find((item) => item.includes(value));
       }
 
-      filteredList.value = newList;
-      console.log('----------> Filtered List = ', filteredList.value);
+      filteredList.value = filterList(newList);
 
       return newList;
+    };
+
+    const onNewFocusItem = (item) => {
+      console.log('--------> 😂😂😂😂😂😂 ', item.text);
+      currentFocusItem.value = item;
     };
 
     const onRemoveLabel = (label) => {
@@ -221,7 +258,7 @@ export default {
     };
 
     const onTextareaFocus = () => {
-      filteredList.value = props.list;
+      filteredList.value = filterList(props.list);
       onOpen();
       newLabelInput.value?.focus();
     };
@@ -246,11 +283,7 @@ export default {
       }
     };
 
-    const onAddNewLabel = (ev) => {
-      const value = ev.target.value;
-      ev.target.value = '';
-      filteredList.value = props.list;
-
+    const onAddNewLabel = (value) => {
       // already on the label list?
       const foundLabel = isLabelInList(value);
 
@@ -273,6 +306,23 @@ export default {
       onAddToSelection(newLabel);
     };
 
+    const onNewLabelChange = (ev) => {
+      const value = ev.target.value;
+      ev.target.value = '';
+      filteredList.value = filterList(props.list);
+      onAddNewLabel(value);
+    };
+
+    const onSpacebar = (ev) => {
+      if (ev.target.value.trim()) {
+        console.log('----------> onSpacebar = has value ');
+      } else {
+        const label = currentFocusItem.value as menuOptionType;
+        console.log('------> on spacebar label = ', label);
+        onAddNewLabel((label as menuOptionObjectType).text);
+      }
+    };
+
     // useResizeObserver(menuButtonRef as Ref<ComponentInstance>, calcWidth);
 
     watch(
@@ -284,6 +334,16 @@ export default {
         } else {
           console.log('props value changed !== ', newValue);
         }
+      },
+    );
+
+    watch(
+      selectedList,
+      () => {
+        filteredList.value = filterList(filteredList.value);
+      },
+      {
+        immediate: true,
       },
     );
 
@@ -329,8 +389,12 @@ export default {
       newLabelInput,
       labelsList,
       onAddNewLabel,
-      onLabelSearch,
+      onNewLabelInput,
       filteredList,
+      onSpacebar,
+      onNewFocusItem,
+      onNewLabelChange,
+      currentFocusItem,
     };
   },
 };

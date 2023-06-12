@@ -1,7 +1,7 @@
 <template>
   <label
     ref="rootRef"
-    class="jolie-multiple-select-option"
+    class="jolie-menu-list-item jolie-multiple-select-option"
     :class="{ show: isOpen }"
     :data-selected="isSelected ? 1 : 0"
     :data-value="JSON.stringify(value)"
@@ -35,10 +35,12 @@
 import _ from 'lodash';
 import { computed, inject, ref, Ref } from '@vue/composition-api';
 import { useInjectStyle } from '@/composables/useInjectStyle';
+
 import {
   useStyledSystem,
   useStyledSystemType,
 } from '@/composables/useStyledSystem';
+
 import {
   UseMenuMultipleSelectType,
   menuOptionObjectType,

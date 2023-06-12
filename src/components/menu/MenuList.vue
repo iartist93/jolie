@@ -19,10 +19,21 @@
 
 <script>
 import { useMenuList } from '@/composables/menu/useMenuList';
-import { onMounted, onUnmounted, onUpdated, ref } from '@vue/composition-api';
+
+import {
+  onMounted,
+  onUnmounted,
+  onUpdated,
+  ref,
+  watch,
+} from '@vue/composition-api';
 
 export default {
   props: {
+    list: {
+      type: Array,
+      required: true,
+    },
     backgroundColor: {
       type: String,
       default: 'white',
@@ -43,22 +54,28 @@ export default {
       type: String,
       default: 'left', // left, right, middle
     },
+    focusFirst: {
+      type: Boolean,
+      default: true,
+    },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const rootRef = ref(null);
     const menu = ref(null);
-    const dropup = ref(false);
+    const dropup = ref(false); // open direction - to bottom (default) or to top (when overflow the viewport height)
     const menuListHeight = ref(0);
     const menuListWidth = ref(0);
-
     const menuButtonHeight = ref(0);
     const menuButtonWidth = ref(0);
     const transformX = ref(0);
     const transformY = ref(0);
-
     const toggleButton = ref(null);
 
-    const { isOpen, openOnHover } = useMenuList(rootRef, toggleButton);
+    const { isOpen, openOnHover, currentFocusItem } = useMenuList(
+      rootRef,
+      props,
+      toggleButton,
+    );
 
     const updateMenuPosition = () => {
       menu.value = rootRef.value.parentElement;
@@ -99,6 +116,10 @@ export default {
         ? -(menuListHeight.value + offsetY)
         : menuButtonHeight.value + offsetY;
     };
+
+    watch(currentFocusItem, (newItem) => {
+      emit('focus-change', newItem);
+    });
 
     onMounted(() => {
       updateMenuPosition();
