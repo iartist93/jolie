@@ -44,8 +44,6 @@ export function useMenuList(
       el.value.getElementsByClassName(listItemClass),
     );
 
-    console.log('---- ((((((((( List Items ', listItems);
-
     for (const item of listItems) {
       item.classList.remove(focusClass);
     }
@@ -67,6 +65,8 @@ export function useMenuList(
   };
 
   const onFocusChange = (ev: KeyboardEvent) => {
+    ev.stopPropagation();
+
     if (!(ev.key === 'ArrowDown' || ev.key === 'ArrowUp')) {
       return;
     }

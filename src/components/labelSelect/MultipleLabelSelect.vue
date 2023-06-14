@@ -33,7 +33,8 @@
         @change="onNewLabelChange"
         @focus="onTextareaFocus"
         @input="onNewLabelInput"
-        @keypress.space="onSpacebar"
+        @keypress.space.stop="onSpacebar"
+        @keydown="onKeydown"
       />
     </div>
     <!-- </button> -->
@@ -198,16 +199,16 @@ export default {
 
     const filterList = (newList) => {
       if (typeof (props.list as menuOptionType[])[0] === 'object') {
-        console.log(
-          '--------> is object === ',
-          (newList as menuOptionObjectType[]).filter(
-            (item) => item.text !== 'Option 1',
-          ),
+        // console.log(
+        //   '--------> is object === ',
+        //   (newList as menuOptionObjectType[]).filter(
+        //     (item) => item.text !== 'Option 1',
+        //   ),
 
-          (selectedList.value as menuOptionObjectType[]).find(
-            (item) => item.text === 'Option 1',
-          ),
-        );
+        //   (selectedList.value as menuOptionObjectType[]).find(
+        //     (item) => item.text === 'Option 1',
+        //   ),
+        // );
 
         return (newList as menuOptionObjectType[]).filter(
           (item) =>
@@ -246,7 +247,6 @@ export default {
     };
 
     const onNewFocusItem = (item) => {
-      console.log('--------> 😂😂😂😂😂😂 ', item.text);
       currentFocusItem.value = item;
     };
 
@@ -315,11 +315,17 @@ export default {
 
     const onSpacebar = (ev) => {
       if (ev.target.value.trim()) {
-        console.log('----------> onSpacebar = has value ');
+        // console.log('----------> onSpacebar = has value ');
       } else {
         const label = currentFocusItem.value as menuOptionType;
-        console.log('------> on spacebar label = ', label);
+        // console.log('------> on spacebar label = ', label);
         onAddNewLabel((label as menuOptionObjectType).text);
+      }
+    };
+
+    const onKeydown = (ev: KeyboardEvent) => {
+      if (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') {
+        ev.preventDefault();
       }
     };
 
@@ -329,10 +335,10 @@ export default {
       () => props.value,
       (newValue) => {
         if (newValue) {
-          console.log('props value changed === ', newValue);
+          // console.log('props value changed === ', newValue);
           onSelectionChange(newValue as menuOptionType[]);
         } else {
-          console.log('props value changed !== ', newValue);
+          // console.log('props value changed !== ', newValue);
         }
       },
     );
@@ -392,6 +398,7 @@ export default {
       onNewLabelInput,
       filteredList,
       onSpacebar,
+      onKeydown,
       onNewFocusItem,
       onNewLabelChange,
       currentFocusItem,
