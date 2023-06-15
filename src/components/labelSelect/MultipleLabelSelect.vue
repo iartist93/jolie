@@ -30,6 +30,7 @@
         id="new-label"
         class="new-label-input"
         placeholder="new label"
+        autocomplete="off"
         @change="onNewLabelChange"
         @focus="onTextareaFocus"
         @input="onNewLabelInput"
@@ -309,17 +310,23 @@ export default {
     const onNewLabelChange = (ev) => {
       const value = ev.target.value;
       ev.target.value = '';
+
+      if (value.trim().length === 0) return;
+
       filteredList.value = filterList(props.list);
       onAddNewLabel(value);
     };
 
     const onSpacebar = (ev) => {
+      ev.target.value = ev.target.value.trim();
+
       if (ev.target.value.trim()) {
         // console.log('----------> onSpacebar = has value ');
       } else {
         const label = currentFocusItem.value as menuOptionType;
         // console.log('------> on spacebar label = ', label);
         onAddNewLabel((label as menuOptionObjectType).text);
+        ev.target.value = '';
       }
     };
 
