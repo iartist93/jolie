@@ -67,6 +67,8 @@ export function useMenuList(
   const onFocusChange = (ev: KeyboardEvent) => {
     ev.stopPropagation();
 
+    if (!props.list) return;
+
     if (!(ev.key === 'ArrowDown' || ev.key === 'ArrowUp')) {
       return;
     }

@@ -32,7 +32,7 @@ export default {
   props: {
     list: {
       type: Array,
-      required: true,
+      default: () => [],
     },
     backgroundColor: {
       type: String,
