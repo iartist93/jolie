@@ -99,7 +99,9 @@ export function useMenuList(
 
   watch(
     () => props.list,
-    () => {
+    (newList) => {
+      if (!(newList && newList.length)) return;
+
       nextTick(() => {
         currentFocusIndex.value = 0;
         updateFocuedItem();

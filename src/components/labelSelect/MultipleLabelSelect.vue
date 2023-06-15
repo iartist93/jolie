@@ -199,18 +199,9 @@ export default {
     // };
 
     const filterList = (newList) => {
+      if (!newList) return [];
+
       if (typeof (props.list as menuOptionType[])[0] === 'object') {
-        // console.log(
-        //   '--------> is object === ',
-        //   (newList as menuOptionObjectType[]).filter(
-        //     (item) => item.text !== 'Option 1',
-        //   ),
-
-        //   (selectedList.value as menuOptionObjectType[]).find(
-        //     (item) => item.text === 'Option 1',
-        //   ),
-        // );
-
         return (newList as menuOptionObjectType[]).filter(
           (item) =>
             !(selectedList.value as menuOptionObjectType[]).find(
